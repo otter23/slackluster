@@ -1,42 +1,33 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Users', {
+    return queryInterface.createTable('Messages', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      email: {
-        type: Sequelize.STRING(100),
+      ownerId: {
         allowNull: false,
-        unique: true, //adds indexed constrain by default
+        type: Sequelize.INTEGER,
       },
-      hashedPassword: {
-        type: Sequelize.STRING.BINARY,
+      channelId: {
+        type: Sequelize.INTEGER,
+      },
+      groupId: {
+        type: Sequelize.INTEGER,
+      },
+      threadId: {
+        type: Sequelize.INTEGER,
+      },
+      content: {
         allowNull: false,
-      },
-      username: {
-        type: Sequelize.STRING(30),
-        allowNull: false,
-        unique: true, //adds indexed constrain by default
-      },
-      title: {
-        type: Sequelize.STRING(100),
-      },
-      onlineStatus: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        defaultValue: true,
-      },
-      imageUrl: {
         type: Sequelize.TEXT,
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        //creates default value for this column
         defaultValue: Sequelize.fn('now'),
       },
       updatedAt: {
@@ -47,6 +38,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Users');
+    return queryInterface.dropTable('Messages');
   },
 };

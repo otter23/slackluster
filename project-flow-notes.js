@@ -87,6 +87,7 @@ SEQUELIZE:
     https://sequelize.org/docs/v6/other-topics/scopes/
     -scopes help protect sensitive user information that should not be exposed to other users.
 //add User Model methods for API route interaction with User table into model file
+
 //migrate table
   ~$ npx dotenv sequelize db:migrate
 
@@ -103,7 +104,7 @@ SEQUELIZE:
 
 //repeat above for the following in order
 npx sequelize model:generate --name Users --attributes email:string,hashedPassword:string,username:string,title:string,onlineStatus:boolean,imageUrl:text
-npx sequelize model:generate --name Channels --attributes ownerId:integer,name:string,topic:string,description:string,private:boolean
+npx sequelize model:generate --name Channels --attributes ownerId:integer,name:string,topic:string,description:string,isPrivate:boolean
 npx sequelize model:generate --name Groups --attributes creatorId:integer
 npx sequelize model:generate --name Threads --attributes creatorId:integer
 npx sequelize model:generate --name Messages --attributes ownerId:integer,channelId:integer,groupId:integer,threadId:integer,content:text
