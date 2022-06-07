@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const UserGroups = sequelize.define(
-    'UserGroups',
+  const UserGroup = sequelize.define(
+    'UserGroup',
     {
       userId: { type: DataTypes.INTEGER, allowNull: false },
       groupId: { type: DataTypes.INTEGER, allowNull: false },
@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   );
-  UserGroups.associate = function (models) {
+  UserGroup.associate = function (models) {
     // associations can be defined here
   };
-  return UserGroups;
+  return UserGroup;
 };

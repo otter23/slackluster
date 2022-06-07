@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Users = sequelize.define(
-    'Users',
+  const User = sequelize.define(
+    'User',
     {
       email: {
         type: DataTypes.STRING,
@@ -56,9 +56,24 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   User.associate = function (models) {
-    // User.hasMany(models.Image, { foreignKey: 'userId' });
-    // User.hasMany(models.Album, { foreignKey: 'userId' });
-    // User.hasMany(models.Comment, { foreignKey: 'userId' });
+    User.hasMany(models.Message, { foreignKey: 'ownerId' });
+    User.hasMany(models.Channel, { foreignKey: 'ownerId' });
+    User.hasMany(models.Group, { foreignKey: 'creatorId' });
+    User.hasMany(models.Thread, { foreignKey: 'creatorId' });
+
+    const columnMapping = {
+      through: 'UserChannel',
+      otherKey: 'channelId',
+      foreignKey: 'userId',
+    };
+    User.belongsToMany(models.Channel, columnMapping);
+
+    const columnMapping3 = {
+      through: 'UserGroup',
+      otherKey: 'groupId',
+      foreignKey: 'userId',
+    };
+    User.belongsToMany(models.Group, columnMapping3);
   };
 
   //Define User Model Methods for use in API authentication flow

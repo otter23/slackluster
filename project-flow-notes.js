@@ -103,13 +103,13 @@ SEQUELIZE:
   `$ psql <database name> -c 'SELECT * FROM "Users"'
 
 //repeat above for the following in order
-npx sequelize model:generate --name Users --attributes email:string,hashedPassword:string,username:string,title:string,onlineStatus:boolean,imageUrl:text
-npx sequelize model:generate --name Channels --attributes ownerId:integer,name:string,topic:string,description:string,isPrivate:boolean
-npx sequelize model:generate --name Groups --attributes creatorId:integer
-npx sequelize model:generate --name Threads --attributes creatorId:integer
-npx sequelize model:generate --name Messages --attributes ownerId:integer,channelId:integer,groupId:integer,threadId:integer,content:text
-npx sequelize model:generate --name UserChannels --attributes userId:integer,channelId:integer
-npx sequelize model:generate --name UserGroups --attributes userId:integer,groupId:integer,hidden:boolean
+npx sequelize model:generate --name User --attributes email:string,hashedPassword:string,username:string,title:string,onlineStatus:boolean,imageUrl:text
+npx sequelize model:generate --name Channel --attributes ownerId:integer,name:string,topic:string,description:string,isPrivate:boolean
+npx sequelize model:generate --name Group --attributes creatorId:integer
+npx sequelize model:generate --name Thread --attributes creatorId:integer
+npx sequelize model:generate --name Message --attributes ownerId:integer,channelId:integer,groupId:integer,threadId:integer,content:text
+npx sequelize model:generate --name UserChannel --attributes userId:integer,channelId:integer
+npx sequelize model:generate --name UserGroup --attributes userId:integer,groupId:integer,hidden:boolean
 
 npx sequelize seed:generate --name demo-user-data &&
 npx sequelize seed:generate --name channel-data &&

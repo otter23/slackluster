@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Channels = sequelize.define(
-    'Channels',
+  const Channel = sequelize.define(
+    'Channel',
     {
       ownerId: { type: DataTypes.INTEGER, allowNull: false },
       name: {
@@ -30,8 +30,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   );
-  Channels.associate = function (models) {
-    // associations can be defined here
+  Channel.associate = function (models) {
+    Channel.belongsTo(models.User, { foreignKey: 'ownerId' });
+    Channel.hasMany(models.Message, { foreignKey: 'channelId' });
+
+    const columnMapping2 = {
+      through: 'UserChannel',
+      otherKey: 'userId',
+      foreignKey: 'channelId',
+    };
+    Channel.belongsToMany(models.User, columnMapping2);
   };
-  return Channels;
+  return Channel;
 };
