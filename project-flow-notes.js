@@ -321,9 +321,33 @@ Create sign up component
 Create log ou component
   -create thunk action to handle logout request
 
+//week 15 - Authenticate Me Part 3: Deploy
 
 //setup root with package.json to communicate with heroku
     //backend will serve the static frontend build
+
+//Setup connection with Heroku
+  ~$ heroku login
+  heroku git:remote -a <name-of-Heroku-app>
+    ~$ heroku git:remote -a slackluster
+
+  Add enviro vars to heroku
+    JWT_SECRET=xxxx
+    JWT_EXPIRES_IN=604800
+  //when ready for first build
+    ~$ git push heroku main
+    ~$ heroku run npm run sequelize db:migrate
+    ~$ heroku run npm run sequelize db:seed:all
+    ~$ heroku bash - open a shell if want
+
+socket.io
+backend: ~$ npm install socket.io
+      -update .config/index.js with cors_origin .env variable
+      -add a socket-io.js file to instantiate the socket server
+      -connect the express app and socketio in the /bin/www file
+frontend: ~$ npm install socket.io-client
+      -import { io } from 'socket.io-client' and instantiate it then can start using it
+
 */
 /*
 
@@ -331,17 +355,16 @@ Challenges:
 
 
 TO DO:
-
+setup socket.io
 change app load to be only depended on isLoaded, and then route specific waiting for other slices of redux state
-add get one photos api thunk
-
+redux toolkit?
 
 //SPA where only clicks can navigate
     //represent userId with a UUID
     //each URL is just a reference to something else under the hood
     //this gets parsed under the hood, so people can't just randomly peruse your site
     //that or you don't have urls at all
-    //click handler in the img map list and dont user url param, pass down imageUrl form image object as prop
+    //click handler in the img map list and don't user url param, pass down imageUrl form image object as prop
 
 
 utilize context

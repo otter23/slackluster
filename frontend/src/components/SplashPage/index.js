@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 // import { useSelector } from 'react-redux';
 
 import Footer from '../Footer';
+import Chat from '../Chat';
 import NavBarSplash from '../NavBarSplash';
 // import image from '../../images/splash-bg-alt.jpg';
 
@@ -19,6 +20,9 @@ export default function SplashPage({ isLoaded }) {
         // style={{ backgroundImage: `url(${image})` }}
       >
         <div className='splash-body-container'>
+          <div>
+            <Chat />
+          </div>
           <h1 className='splash-find-inspiration'> Find your inspiration.</h1>
           <h2>Join the millions</h2>
           <Link to='/get-started' className='splash-start-for-free'>

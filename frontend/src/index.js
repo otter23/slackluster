@@ -8,6 +8,9 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
+//load socket io() instance into global space in react build
+// import socket from './socket';
+
 import { restoreCSRF, csrfFetch } from './store/utils/csrf';
 
 import * as sessionActions from './store/session';
