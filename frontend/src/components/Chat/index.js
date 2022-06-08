@@ -1,26 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useSelector } from 'react-redux';
-import { io } from 'socket.io-client';
-let socket;
 
-const Chat = () => {
+import { SocketContext } from '../../context/SocketContext';
+
+export default function Chat() {
   const [chatInput, setChatInput] = useState('');
   const [messages, setMessages] = useState([]);
   const user = useSelector((state) => state.session.user);
 
-  useEffect(() => {
-    // open socket connection, connects immediately upon creation by default
-    // create websocket
-    socket = io();
+  //prettier-ignore
+  const { socket: { current: socket }} = useContext(SocketContext);
 
+  //when component first mounts add braodcast listener
+  useEffect(() => {
     //listen for chat events
+    console.log('CHAT SOCKET', socket);
     socket.on('chat', (chat) => {
       // when we receive a chat, add it to messages array in state
-      console.log(chat);
       setMessages((messages) => [...messages, chat]);
     });
-    // when component unmounts, disconnect from socket
-    return () => socket.disconnect();
   }, []);
 
   const updateChatInput = (e) => {
@@ -32,6 +30,7 @@ const Chat = () => {
     e.preventDefault();
     //.emit(event name,data)
     socket.emit('chat', { user: user.username, msg: chatInput });
+
     //add your message to the chat list
     // setMessages((messages) => [
     //   ...messages,
@@ -60,6 +59,4 @@ const Chat = () => {
       </div>
     )
   );
-};
-
-export default Chat;
+}
