@@ -114,8 +114,8 @@ npx sequelize model:generate --name UserGroup --attributes userId:integer,groupI
 npx sequelize seed:generate --name demo-user-data &&
 npx sequelize seed:generate --name channel-data &&
 npx sequelize seed:generate --name group-data &&
-npx sequelize seed:generate --name message-data &&
 npx sequelize seed:generate --name thread-data &&
+npx sequelize seed:generate --name message-data &&
 npx sequelize seed:generate --name usersChannels-data
 npx sequelize seed:generate --name usersGroups-data
 
