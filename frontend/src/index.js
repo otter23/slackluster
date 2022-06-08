@@ -1,15 +1,12 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 // import './reset.css';
 import './index.css';
 
-import ReactDOM from 'react-dom';
-
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-
-//load socket io() instance into global space in react build
-// import socket from './socket';
+import { SocketProvider } from './context/SocketContext';
 
 import { restoreCSRF, csrfFetch } from './store/utils/csrf';
 
@@ -32,15 +29,16 @@ if (process.env.NODE_ENV !== 'production') {
   window.usersActions = usersActions; //test users redux state
 }
 
-//TODO SET UP CONTEXT PROVIDER
-
 //root wrapper used to wrap <App/>  in various provider components
 function Root() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      {/* socket connects when app mounted and user logs in */}
+      <SocketProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </SocketProvider>
     </Provider>
   );
 }

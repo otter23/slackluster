@@ -17,7 +17,7 @@ db.sequelize
       console.log('a user connected');
 
       //upon first connect, emit to the user who connected:
-      socket.emit('chat', { msg: 'Welcome to Slackluster' });
+      socket.emit('welcome', 'Welcome to Slackluster!');
 
       //upon first connect, broadcast to everyone but user who connected:
       socket.broadcast.emit('chat', { msg: 'A user has joined the chat' });
@@ -28,10 +28,10 @@ db.sequelize
       //Listens for incoming 'chat' events:
       socket.on('chat', (data) => {
         //Broadcasts to all users including the originator of the event:
-        // io.emit('chat', data);
+        io.emit('chat', data);
 
         //Broadcast to everyone but the originator of the event:
-        socket.broadcast.emit('chat', data);
+        // socket.broadcast.emit('chat', data);
       });
 
       socket.on('disconnect', () => {
