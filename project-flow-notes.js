@@ -120,7 +120,7 @@ npx sequelize seed:generate --name usersChannels-data
 npx sequelize seed:generate --name usersGroups-data
 
 
-//Associations
+//Slackluster Associations
 
 //Users:
   * User hasMany Messages  /  Message belongsTo Users *
@@ -345,5 +345,8 @@ add get one photos api thunk
 
 
 utilize context
+
+
+//updated user signup route  to include extra db fields
 
 */

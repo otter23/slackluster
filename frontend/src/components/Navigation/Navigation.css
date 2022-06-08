@@ -1,0 +1,447 @@
+/* Main NAV */
+
+.main-nav {
+  background-color: var(--nav);
+  height: 48px;
+  position: sticky;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 2000;
+}
+
+.main-nav-inner {
+  display: flex;
+  align-items: center;
+  height: 50px;
+
+  width: 80%;
+  margin: auto;
+}
+.main-nav-left {
+  display: flex;
+  align-items: center;
+}
+
+/* for mobile optimization */
+/* .main-nav-menu {
+  width: 46px;
+} */
+
+.main-nav-link {
+  display: flex;
+}
+
+.main-nav-logo {
+  /* width: 98px; */
+  height: 21.6px;
+  /* height: 24px; */
+}
+
+.main-nav-photostream {
+  padding: 0px 15px;
+  padding-top: 12px;
+  width: 155px;
+}
+
+.main-nav-photostream a {
+  text-decoration: none;
+  /* cursor: pointer; */
+  color: var(--mid4);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.main-nav-right {
+  width: 100%;
+}
+
+.main-nav-right-list {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 23px;
+
+  list-style: none;
+  width: 100%;
+  margin: 0px;
+  padding: 0px 20px;
+}
+
+.main-nav-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-nav-search-icon,
+.main-nav-upload-icon,
+.main-nav-upload-icon {
+  height: 24px;
+  width: 24px;
+}
+
+.nav-user-icon-container {
+  position: relative;
+  border-radius: 28px;
+  height: 28px;
+  width: 28px;
+  background-position: center;
+  background-size: contain;
+  border-radius: 100px;
+  cursor: pointer;
+}
+.nav-user-dropdown-container {
+  position: absolute;
+  background-color: #fff;
+  bottom: -121px;
+  right: 0px;
+  z-index: 2006;
+
+  width: 200px;
+  max-height: 400px;
+
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 30%), 0 1px 4px 0 rgb(0 0 0 / 20%);
+  cursor: default;
+}
+
+.nav-user-dropdown-arrow {
+  position: absolute;
+  background-color: #fff;
+  bottom: -35px;
+  right: 5px;
+
+  /* .fluid .droparound .droparrow:after { */
+  display: block;
+  content: '';
+  width: 20px;
+  height: 20px;
+  margin-top: 7px;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 30%), 0 1px 4px 0 rgb(0 0 0 / 20%);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.nav-user-dropdown-upper {
+  padding: 15px;
+}
+
+.nav-user-logout {
+  padding: 0px 15px;
+  padding-bottom: 15px;
+}
+
+.nav-user-logout-btn {
+  padding: 10px 15px;
+  border: 1px solid var(--mid1);
+  border-radius: 4px;
+  width: 100%;
+
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: 200;
+  color: white;
+  background-color: var(--mid1);
+
+  cursor: pointer;
+  /* transition: border 0.5s, background-color 0.5s, color 0.5s; */
+  transition-property: background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+}
+
+.nav-user-logout-btn:hover {
+  background-color: rgb(81, 136, 224);
+}
+
+.main-nav-login a {
+  text-decoration: none;
+  color: white;
+}
+
+.main-nav-login a:hover {
+  color: var(--mid4);
+}
+
+.main-nav-signup-btn {
+  padding: 0px 20px;
+  border: 1px solid var(--mid1);
+  border-radius: 4px;
+  width: 100%;
+  height: 32px;
+
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: 200;
+  color: white;
+  background-color: var(--mid1);
+
+  cursor: pointer;
+  /* transition: border 0.5s, background-color 0.5s, color 0.5s; */
+  transition-property: background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+}
+
+.main-nav-signup-btn:hover {
+  background-color: rgb(81, 136, 224);
+}
+.main-nav-signup-btn a {
+  text-decoration: none;
+  color: white;
+}
+
+/*  */
+/*  */
+/*  */
+/* AUTH NAV */
+
+.upload-nav {
+  /* TO DO UPDATE TO STICKY */
+  background-color: rgb(249, 249, 249);
+  height: 48px;
+  width: 100%;
+}
+
+.upload-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px;
+  height: 43px;
+  /* margin: auto; */
+}
+
+.upload-nav-logo {
+  /* when imported image link doesn't need resizing */
+  height: 21.6px;
+  /* width: 98px; */
+  /* height: 24px; */
+}
+
+.upload-nav-inner li {
+  list-style-type: none;
+}
+
+.upload-nav-right-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.upload-nav-left {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.upload-nav-right {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.upload-nav-link {
+  display: flex;
+}
+
+.upload-nav-photostream,
+.upload-nav-create,
+.upload-nav-oldUploadr,
+.upload-nav-newHere {
+  color: rgb(102, 102, 102);
+  text-decoration: none;
+  cursor: text;
+}
+
+.upload-nav-photostream {
+  cursor: pointer;
+  color: var(--mid3);
+  font-weight: 600;
+}
+
+/*  */
+/*  */
+/*  */
+/* AUTH NAV */
+.auth-nav {
+  background-color: var(--nav);
+  height: 48px;
+  width: 100%;
+}
+
+.auth-nav-inner {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  width: 80%;
+  margin: auto;
+}
+
+.auth-nav-link {
+  display: flex;
+}
+
+.auth-nav-logo {
+  /* width: 98px; */
+  height: 21.6px;
+  /* height: 24px; */
+}
+
+/*  */
+/*  */
+/*  */
+/* SPLASH  NAVIGATION CSS*/
+
+.splash-nav {
+  background-color: rgba(0, 0, 0, 0.25);
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 2000;
+
+  display: flex;
+}
+
+.splash-nav-inner {
+  display: inline-flex;
+  align-items: center;
+  /* justify-content: center; */
+  height: 64px;
+  width: 100%;
+  padding: 0px 24px;
+}
+
+.splash-nav-logo {
+  /* width: 98px; */
+  /* original doesn't need height set */
+  height: 21.6px;
+  /* height: 24px; */
+}
+
+.splash-nav-right {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.splash-nav-search-div {
+  flex-grow: 1;
+  text-decoration: none;
+}
+
+.splash-nav-search-form {
+  display: flex;
+  padding: 0px 100px;
+  margin-left: 23px;
+  /* grow to fit rest of container */
+  flex-grow: 1;
+}
+
+.splash-nav-search-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+
+.splash-search-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  padding-left: 11px;
+  padding-right: 5px;
+  color: rgb(94, 94, 94);
+  width: 37px;
+  height: 29px;
+}
+
+.splash-nav-search-form input {
+  width: 100%;
+  padding: 6px 10px 6px 0px;
+  background-color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+  border: none;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  outline: none;
+
+  cursor: pointer;
+  height: 29px;
+}
+
+.splash-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 96px;
+  height: 32px;
+  padding: 0px 20px;
+
+  color: white;
+
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.splash-signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 96px;
+  height: 32px;
+  padding: 0px 20px;
+
+  background-color: white;
+  border-radius: 3px;
+  color: black;
+
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 1080px) {
+  .splash-nav-search-form {
+    padding: 0px 50px;
+    margin-left: 23px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .splash-login {
+    width: 67px;
+    height: 34px;
+    padding: 5px 10px;
+    margin: 0 8px;
+    border: 2px solid white;
+  }
+
+  .splash-signup {
+    display: none;
+  }
+
+  /* TO DO add class that updates search input and hides flickr logo upon focus */
+
+  .splash-nav-search-form {
+    padding: 0px 25px;
+    margin-left: 23px;
+  }
+}

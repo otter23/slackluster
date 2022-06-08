@@ -1,4 +1,7 @@
 'use strict';
+const { Validator } = require('sequelize');
+const bcrypt = require('bcryptjs');
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     'User',
@@ -117,12 +120,13 @@ module.exports = (sequelize, DataTypes) => {
 
   //create user based on submitted credentials, hash password before sending to db
   //return created User with scope currentUser
-  User.signup = async function ({ username, email, password }) {
+  User.signup = async function ({ username, email, password, onlineStatus }) {
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({
       username,
       email,
       hashedPassword,
+      onlineStatus,
     });
     return await User.scope('currentUser').findByPk(user.id);
   };

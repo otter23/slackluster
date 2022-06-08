@@ -41,7 +41,12 @@ router.post(
 
     //throws sequelize validation error(s) if user not successfully created
     //this error gets passed on to the next error handling middleware
-    const user = await User.signup({ email, username, password });
+    const user = await User.signup({
+      email,
+      username,
+      password,
+      onlineStatus: true,
+    });
 
     await setTokenCookie(res, user);
 
@@ -104,23 +109,6 @@ router.get(
     });
 
     return res.json(images);
-  })
-);
-
-//GET ALL USER COMMENTS by userId
-router.get(
-  '/:userId(\\d+)/comments',
-  asyncHandler(async (req, res) => {
-    //grab id of user
-    const userId = req.params.userId;
-
-    //query db for all comments that belong to user
-    const comments = await Comment.findAll({
-      where: { userId },
-      order: [['createdAt', 'DESC']],
-    });
-
-    return res.json(comments);
   })
 );
 
