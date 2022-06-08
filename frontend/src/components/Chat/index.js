@@ -11,11 +11,11 @@ export default function Chat() {
   //prettier-ignore
   const { socket: { current: socket }} = useContext(SocketContext);
 
-  //when component first mounts add braodcast listener
+  //when component first mounts add broadcast listener
   useEffect(() => {
     //listen for chat events
     console.log('CHAT SOCKET', socket);
-    socket.on('chat', (chat) => {
+    socket?.on('chat', (chat) => {
       // when we receive a chat, add it to messages array in state
       setMessages((messages) => [...messages, chat]);
     });

@@ -347,6 +347,7 @@ backend: ~$ npm install socket.io
       -connect the express app and socketio in the /bin/www file
 frontend: ~$ npm install socket.io-client
       -import { io } from 'socket.io-client' and instantiate it then can start using it
+      -create context to house socket instance and protect instantiation with auth
 
 */
 /*
