@@ -13,7 +13,7 @@ import { restoreCSRF, csrfFetch } from './store/utils/csrf';
 import * as sessionActions from './store/session';
 import * as usersActions from './store/users';
 import * as channelsActions from './store/channels';
-// import * as messagesActions from './store/messages';
+import * as messagesActions from './store/messages';
 
 //create the redux store
 import { Provider } from 'react-redux';
@@ -30,7 +30,7 @@ if (process.env.NODE_ENV !== 'production') {
   window.sessionActions = sessionActions; //test session redux state
   window.usersActions = usersActions; //test users redux state
   window.channelsActions = channelsActions; //test users redux state
-  // window.messagesActions = messagesActions; //test users redux state
+  window.messagesActions = messagesActions; //test users redux state
 }
 
 //root wrapper used to wrap <App/>  in various provider components

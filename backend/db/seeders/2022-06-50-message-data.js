@@ -1,16 +1,17 @@
 'use strict';
 
-// new Date(2022, 06, 07, 5,40).valueOf()
-const date1 = new Date(1657197000000);
-const date2 = new Date(1657197000000 + 1000);
-const date3 = new Date(1657197000000 + 1000 * 2);
-const date4 = new Date(1657197000000 + 1000 * 3);
-const date5 = new Date(1657197000000 + 1000 * 4);
-const date6 = new Date(1657197000000 + 1000 * 5);
-const date7 = new Date(1657197000000 + 1000 * 6);
-const date8 = new Date(1657197000000 + 1000 * 7);
-const date9 = new Date(1657197000000 + 1000 * 8);
-const date10 = new Date(1657197000000 + 1000 * 9);
+//new Date(year, monthIndex, day, hours, minutes, seconds, milliseconds)
+// new Date(2021, 5, 6, 5, 30).valueOf()
+const date1 = new Date(1622982600000);
+const date2 = new Date(1622982600000 + 1000);
+const date3 = new Date(1622982600000 + 1000 * 2);
+const date4 = new Date(1622982600000 + 1000 * 3);
+const date5 = new Date(1622982600000 + 1000 * 4);
+const date6 = new Date(1622982600000 + 1000 * 5);
+const date7 = new Date(1622982600000 + 1000 * 6);
+const date8 = new Date(1622982600000 + 1000 * 7);
+const date9 = new Date(1622982600000 + 1000 * 8);
+const date10 = new Date(1622982600000 + 1000 * 9);
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
