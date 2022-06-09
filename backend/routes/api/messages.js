@@ -16,7 +16,13 @@ router.get(
   '/',
   asyncHandler(async (req, res) => {
     const messages = await Message.findAll({ order: [['createdAt', 'ASC']] });
-    return res.json(messages);
+
+    let messageByMessageId = {};
+    messages.forEach((message) => {
+      messageByMessageId[message.id] = message;
+    });
+
+    return res.json({ allMessages: messages, messageByMessageId });
   })
 );
 

@@ -4,10 +4,14 @@ import thunk from 'redux-thunk';
 //import slices of state:
 import sessionReducer from './session';
 import usersReducer from './users';
+import channelsReducer from './channels';
+// import messagesReducer from './messages';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   users: usersReducer,
+  channels: channelsReducer,
+  // messages: messagesReducer,
 });
 
 let enhancer;

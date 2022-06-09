@@ -16,9 +16,14 @@ router.get(
   '/',
   asyncHandler(async (req, res) => {
     //query db for all channels
-    const channels = await Channel.findAll({ order: [['name', 'DESC']] });
+    const channels = await Channel.findAll({ order: [['name', 'asc']] });
 
-    return res.json(channels);
+    let channelByChannelId = {};
+    channels.forEach((channel) => {
+      channelByChannelId[channel.id] = channel;
+    });
+
+    return res.json({ allChannels: channels, channelByChannelId });
   })
 );
 
@@ -74,10 +79,12 @@ router.post(
     //user not allowed to update isPrivate for now
     const { ownerId, name, topic, description } = req.body;
 
+    const lowerName = name.toLowerCase();
+
     if (sessionUserId === ownerId) {
       const newChannel = await Channel.create({
         ownerId,
-        name,
+        name: lowerName,
         topic,
         description,
         // isPrivate: false,
@@ -112,14 +119,15 @@ router.patch(
       return res.json({ errors: 'Channel not found' });
     }
 
-    const { ownerId, name, topic, description } = req.body;
+    const { name, topic, description } = req.body;
     //user not allowed to update isPrivate for now
+
+    const lowerName = name.toLowerCase();
 
     //check if channel belongs to signed in user
     if (sessionUserId === channelToUpdate.ownerId) {
       const updatedChannel = await channelToUpdate.update({
-        ownerId,
-        name,
+        name: lowerName,
         topic,
         description,
       });
@@ -233,7 +241,6 @@ module.exports = router;
 //   method: 'PATCH',
 //   headers: { 'Content-Type': 'application/json' },
 //   body: JSON.stringify({
-//     ownerId: 1,
 //     name: 'UPDATED-channel',
 //     topic: 'UPDATED',
 //     description: 'UPDATED',
