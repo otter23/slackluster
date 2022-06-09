@@ -3,7 +3,7 @@ const { port } = require('../config');
 const db = require('../db/models');
 // const app = require('../app');
 
-const { server, io } = require('../socket-io');
+const { server, io, onConnection } = require('../socket');
 
 // Check the database connection before starting the app
 db.sequelize
@@ -11,35 +11,8 @@ db.sequelize
   .then(() => {
     console.log('Database connection success! Sequelize is ready to use...');
 
-    // Start listening for connections
-    //listen on the connection event for incoming sockets and log it to the console.
-    io.on('connection', (socket) => {
-      console.log('a user connected');
-
-      //upon first connect, emit to the user who connected:
-      socket.emit('welcome', 'Welcome to Slackluster!');
-      socket.emit('chat', { msg: 'Welcome to Slackluster!' });
-
-      //upon first connect, broadcast to everyone but user who connected:
-      socket.broadcast.emit('chat', { msg: 'A user has joined the chat' });
-
-      //upon first connect, broadcasts to all clients:
-      // io.emit('chat', { msg: 'Now its a party' });
-
-      //Listens for incoming 'chat' events:
-      socket.on('chat', (data) => {
-        //Broadcasts to all users including the originator of the event:
-        io.emit('chat', data);
-
-        //Broadcast to everyone but the originator of the event:
-        // socket.broadcast.emit('chat', data);
-      });
-
-      socket.on('disconnect', () => {
-        console.log('user disconnected');
-        io.emit('chat', { msg: 'A user has left the chat' });
-      });
-    });
+    // Start listening for websocket connections
+    io.on('connection', onConnection);
 
     // app.listen(port, () => console.log(`Listening on port ${port}...`));
     server.listen(port, () => console.log(`Listening on port ${port}...`));
