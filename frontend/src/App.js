@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import SplashPage from './components/SplashPage';
 import LoginFormPage from './components/LoginFormPage';
@@ -8,6 +8,8 @@ import SignupFormPage from './components/SignupFormPage';
 
 import * as sessionActions from './store/session';
 import * as usersActions from './store/users';
+import * as channelsActions from './store/channels';
+import * as messagesActions from './store/messages';
 
 export default function App() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -30,11 +32,24 @@ export default function App() {
         setIsAuthLoaded(true);
       })();
     }
+  }, [dispatch, sessionUser]);
+
+  //eager load resources
+  useEffect(() => {
     //eager load all users in db into state
     dispatch(usersActions.getAllUsersThunk()).then(() =>
       setIsUsersLoaded(true)
     );
-  }, [dispatch, sessionUser]);
+
+    //eager load all channels in db into state
+    dispatch(channelsActions.getAllChannelsThunk()).catch((res) =>
+      console.log(res)
+    );
+    //eager load all channels in db into state
+    dispatch(messagesActions.getAllMessagesThunk()).catch((res) =>
+      console.log(res)
+    );
+  }, [dispatch]);
 
   //load userId to state once userSession is loaded
   // useEffect(() => {

@@ -22,7 +22,21 @@ router.get(
       messageByMessageId[message.id] = message;
     });
 
-    return res.json({ allMessages: messages, messageByMessageId });
+    let messagesByChannelId = {};
+    messages.forEach((message) => {
+      if (message.channelId in messagesByChannelId) {
+        messagesByChannelId[message.channelId].push(message);
+      } else {
+        messagesByChannelId[message.channelId] = [];
+        messagesByChannelId[message.channelId].push(message);
+      }
+    });
+
+    return res.json({
+      allMessages: messages,
+      messageByMessageId,
+      messagesByChannelId,
+    });
   })
 );
 
@@ -34,6 +48,20 @@ router.get(
     const message = await Message.findByPk(messageId);
 
     return res.json(message);
+  })
+);
+
+//GET MESSAGES BY CHANNEL_ID
+router.get(
+  '/channels/:channelId(\\d+)',
+  asyncHandler(async (req, res) => {
+    const channelId = req.params.channelId;
+    const channelMessages = await Message.findAll({
+      where: { channelId: channelId },
+      order: [['createdAt', 'ASC']],
+    });
+
+    return res.json(channelMessages);
   })
 );
 
@@ -69,8 +97,7 @@ router.post(
       // io.emit('chat', { msg: 'NEW MESSAGE ADDED' });
       // io.sockets.emit('chat', { msg: 'NEW MESSAGE ADDED' });
       const socket = req.app.get('socket');
-      socket.emit('chat', { msg: 'MESSAGE ADDED' });
-      socket.emit('message:add', { payload: newMessage });
+      socket.emit('message:add', { newMessage });
 
       return res.json(newMessage);
       // return res.redirect(`${req.baseUrl}/${newMessage.id}`);
@@ -111,8 +138,7 @@ router.patch(
       });
 
       const socket = req.app.get('socket');
-      socket.emit('chat', { msg: 'MESSAGE UPDATED' });
-      socket.emit('message:update', { payload: updatedMessage });
+      socket.emit('message:update', { updatedMessage });
 
       return res.json(updatedMessage);
     } else {
@@ -147,8 +173,11 @@ router.delete(
       await Message.destroy({ where: { id: messageId } });
 
       const socket = req.app.get('socket');
-      socket.emit('chat', { msg: 'MESSAGE DELETED' });
-      socket.emit('message:delete', { message: 'Success' });
+      socket.emit('message:delete', {
+        message: 'Success',
+        ownerId: messageToDelete.ownerId,
+        messageId,
+      });
 
       return res.json({ message: 'Success' });
     } else {

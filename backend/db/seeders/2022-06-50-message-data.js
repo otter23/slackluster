@@ -31,6 +31,17 @@ module.exports = {
         { ownerId: 1, channelId: 1, groupId: null, threadId: null, content: '8 message in the channel', createdAt: date8 },
         { ownerId: 1, channelId: 1, groupId: null, threadId: null, content: '9 message in the channel', createdAt: date9 },
         { ownerId: 1, channelId: 1, groupId: null, threadId: null, content: '10 message in the channel',createdAt: date10 },
+
+        { ownerId: 1, channelId: 2, groupId: null, threadId: null, content: '2 message in the channel', createdAt: date1 },
+        { ownerId: 2, channelId: 2, groupId: null, threadId: null, content: '2 message in the channel', createdAt: date2 },
+        { ownerId: 1, channelId: 2, groupId: null, threadId: null, content: '2 message in the channel', createdAt: date3 },
+        { ownerId: 2, channelId: 2, groupId: null, threadId: null, content: '2 message in the channel', createdAt: date4 },
+        { ownerId: 1, channelId: 2, groupId: null, threadId: null, content: '2 message in the channel', createdAt: date5 },
+        { ownerId: 2, channelId: 2, groupId: null, threadId: null, content: '2 message in the channel', createdAt: date6 },
+        { ownerId: 1, channelId: 2, groupId: null, threadId: null, content: '2 message in the channel', createdAt: date7 },
+        { ownerId: 1, channelId: 2, groupId: null, threadId: null, content: '2 message in the channel', createdAt: date8 },
+        { ownerId: 1, channelId: 2, groupId: null, threadId: null, content: '2 message in the channel', createdAt: date9 },
+        { ownerId: 1, channelId: 2, groupId: null, threadId: null, content: '20 message in the channel',createdAt: date10 },
       ],
       {}
     );

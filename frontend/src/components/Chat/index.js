@@ -6,9 +6,12 @@ import { useSelector } from 'react-redux';
 import { SocketContext } from '../../context/SocketContext';
 
 export default function Chat() {
+  const sessionUser = useSelector((state) => state.session.user);
+  // const channel1 = useSelector((state) => state.channels.channelByChannelId[1]);
+
+  //controlled inputs
   const [chatInput, setChatInput] = useState('');
   const [messages, setMessages] = useState([]);
-  const sessionUser = useSelector((state) => state.session.user);
 
   //prettier-ignore
   const { socket: { current: socket }} = useContext(SocketContext);
@@ -46,7 +49,7 @@ export default function Chat() {
       <div className='chat-main-container'>
         <div className='chat-main-container-inner'>
           {/* map over the messages array and print our the username and message for each chat. */}
-          {messages.map((message, ind) => (
+          {messages?.map((message, ind) => (
             <div className='chat-message-container' key={ind}>
               {`${message.user ? `${message.user}:` : ''} ${message.msg}`}
             </div>
