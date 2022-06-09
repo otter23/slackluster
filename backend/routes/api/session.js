@@ -19,6 +19,9 @@ const validateLogin = [
   check('password')
     .exists({ checkFalsy: true })
     .withMessage('Please provide a password.'),
+  // check('email')
+  //   .exists({ checkFalsy: true })
+  //   .withMessage('Please provide a value for Email Address'),
   handleValidationErrors,
 ];
 
@@ -63,7 +66,7 @@ router.post(
 );
 
 // LOG OUT
-router.delete('/', (_req, res) => {
+router.delete('/logout', (_req, res) => {
   //sends request to remove JWT from the browser's cookies
   //method updates the  "Set-Cookie": HTTP response header
   //sets cookie with name 'token' to an empty value

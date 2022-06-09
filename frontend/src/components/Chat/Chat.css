@@ -1,0 +1,18 @@
+.chat-main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.chat-main-container-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.chat-message-container {
+  overflow-wrap: break-word;
+  word-break: break-all;
+  padding: 5px;
+}

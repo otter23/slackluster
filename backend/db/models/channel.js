@@ -26,7 +26,11 @@ module.exports = (sequelize, DataTypes) => {
           len: [0, 250],
         },
       },
-      isPrivate: { type: DataTypes.BOOLEAN, allowNull: false },
+      isPrivate: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
     },
     {}
   );

@@ -60,7 +60,7 @@ export const signup = (user) => async (dispatch) => {
 
 //request to backend to logout user (remove JWT token)
 export const logout = () => async (dispatch) => {
-  const response = await csrfFetch('/api/session', {
+  const response = await csrfFetch('/api/session/logout', {
     method: 'DELETE',
   });
   dispatch(removeUser());

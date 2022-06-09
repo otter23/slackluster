@@ -1,3 +1,5 @@
+import './Chat.css';
+
 import React, { useState, useEffect, useContext } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -6,7 +8,7 @@ import { SocketContext } from '../../context/SocketContext';
 export default function Chat() {
   const [chatInput, setChatInput] = useState('');
   const [messages, setMessages] = useState([]);
-  const user = useSelector((state) => state.session.user);
+  const sessionUser = useSelector((state) => state.session.user);
 
   //prettier-ignore
   const { socket: { current: socket }} = useContext(SocketContext);
@@ -29,7 +31,7 @@ export default function Chat() {
   const sendChat = (e) => {
     e.preventDefault();
     //.emit(event name,data)
-    socket.emit('chat', { user: user.username, msg: chatInput });
+    socket.emit('chat', { user: sessionUser.username, msg: chatInput });
 
     //add your message to the chat list
     // setMessages((messages) => [
@@ -39,20 +41,19 @@ export default function Chat() {
     // clear the input field after the message is sent
     setChatInput('');
   };
-
   return (
-    user && (
-      <div>
-        <div>
+    sessionUser && (
+      <div className='chat-main-container'>
+        <div className='chat-main-container-inner'>
           {/* map over the messages array and print our the username and message for each chat. */}
           {messages.map((message, ind) => (
-            <div key={ind}>{`${message.user ? `${message.user}:` : ''} ${
-              message.msg
-            }`}</div>
+            <div className='chat-message-container' key={ind}>
+              {`${message.user ? `${message.user}:` : ''} ${message.msg}`}
+            </div>
             // <div key={ind}>{`${message}`}</div>
           ))}
         </div>
-        <form onSubmit={sendChat}>
+        <form onSubmit={sendChat} className='chat-form'>
           <input value={chatInput} onChange={updateChatInput} />
           <button type='submit'>Send</button>
         </form>

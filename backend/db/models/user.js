@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           len: [3, 100],
-          //added isemail validation
+          //added isEmail validation
           isEmail: true,
         },
       },
@@ -36,7 +36,8 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       title: { type: DataTypes.STRING, validate: { len: [3, 100] } },
-      onlineStatus: { type: DataTypes.BOOLEAN, allowNull: false },
+      state: { type: DataTypes.STRING, validate: { len: [0, 100] } },
+      status: { type: DataTypes.STRING, validate: { len: [0, 100] } },
       imageUrl: { type: DataTypes.TEXT },
     },
     {
