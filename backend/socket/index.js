@@ -63,4 +63,4 @@ const onConnection = (socket) => {
 //https://stackoverflow.com/questions/53238655/how-to-socket-broadcast-emit-within-an-express-route-handler
 //stackoverflow.com/questions/18856190/use-socket-io-inside-a-express-routes-file/31277123#31277123
 
-https: module.exports = { server, io, onConnection };
+module.exports = { server, io, onConnection };
