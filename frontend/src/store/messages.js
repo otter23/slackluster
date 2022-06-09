@@ -6,22 +6,34 @@ import { csrfFetch } from './utils/csrf'; //restoreCSRF
 const GET_ALL_MESSAGES = 'messages/GetAllMessages';
 
 const GET_USER_MESSAGES = 'messages/getUserMessages';
+const GET_CHANNEL_MESSAGES = 'messages/getChannelMessages';
 const ADD_MESSAGE = 'messages/addMessage';
 const UPDATE_MESSAGE = 'messages/updateMessage';
 const DELETE_MESSAGE = 'messages/deleteMessage';
+const DELETE_CHANNEL_MESSAGES = 'messages/deleteChannelMessages';
 
 //REGULAR ACTION CREATORS (implicit returns)
 
 //payload: array of message objects
-export const getAllMessages = ({ allMessages, messageByMessageId }) => ({
+export const getAllMessages = ({
+  allMessages,
+  messageByMessageId,
+  messagesByChannelId,
+}) => ({
   type: GET_ALL_MESSAGES,
-  payload: { allMessages, messageByMessageId },
+  payload: { allMessages, messageByMessageId, messagesByChannelId },
 });
 
 //payload: array of user message objects
 export const getUserMessages = (userMessages, ownerId) => ({
   type: GET_USER_MESSAGES,
   payload: { userMessages, ownerId },
+});
+
+//payload: array of user message objects
+export const getChannelMessages = (channelMessages, channelId) => ({
+  type: GET_CHANNEL_MESSAGES,
+  payload: { channelMessages, channelId },
 });
 
 //Payload: one message object
@@ -40,6 +52,12 @@ export const updateMessage = (updatedMessage) => ({
 export const deleteMessage = (ownerId, messageId) => ({
   type: DELETE_MESSAGE,
   payload: { ownerId, messageId },
+});
+
+//Payload: ownerId and messageId to key into messageByMessageId  user object
+export const deleteChannelMessages = (channelId) => ({
+  type: DELETE_CHANNEL_MESSAGES,
+  payload: { channelId },
 });
 
 //THUNK ACTION CREATORS:
@@ -72,6 +90,18 @@ export const getUserMessagesThunk = (userId) => async (dispatch) => {
     });
 
     dispatch(getUserMessages(userMessages, userId));
+    return response;
+  } else throw response;
+};
+
+//request to backend for all messages belonging to a channel
+//messages are pre-sorted by alphabetical order in backend
+export const getChannelMessagesThunk = (channelId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/messages/channels/${channelId}`);
+
+  if (response.ok) {
+    const channelMessages = await response.json();
+    dispatch(getChannelMessages(channelMessages, channelId));
     return response;
   } else throw response;
 };
@@ -140,9 +170,11 @@ export const deleteMessageThunk = (ownerId, messageId) => async (dispatch) => {
 const initialState = {
   allMessages: [],
   messageByMessageId: {},
+  messagesByChannelId: {},
   // messageByOwnerId: {},
 };
 // messageByMessageId = { messageId1:  {messageObj1}, messageId2: {messageObj1}}
+// messagesByChannelId =  {channelId: [msgObj1, msgObj2, msgObj3]},
 //in scalable version each userId object would also have a property:    allUserMessages:[]
 //When map over user obj, need to first make it an array with Object.array in component
 
@@ -153,6 +185,7 @@ export default function messagesReducer(state = initialState, action) {
   Object.freeze(state);
   Object.freeze(state.allMessages);
   Object.freeze(state.messageByMessageId);
+  Object.freeze(state.messagesByChannelId);
   // Object.freeze(state.messageByOwnerId);
 
   //Deep Clone State:
@@ -161,36 +194,48 @@ export default function messagesReducer(state = initialState, action) {
     allMessages.push({ ...message });
   });
 
-  // let messageByOwnerId = {};
-  // Object.keys(state.messageByOwnerId).forEach((key) => {
-  //   let message = state.messageByOwnerId[key];
-  //   messagesByOwnerId[message.id] = { ...message };
-  // });
-
   let messageByMessageId = {};
   Object.keys(state.messageByMessageId).forEach((key) => {
     let message = state.messageByMessageId[key];
     messageByMessageId[message.id] = { ...message };
   });
 
+  let messagesByChannelId = {};
+  Object.keys(state.messagesByChannelId).forEach((key) => {
+    let messageArr = [];
+    state.messagesByChannelId[key].forEach((message) => {
+      messageArr.push({ ...message });
+    });
+    messagesByChannelId[key] = messageArr;
+  });
+
+  // let messageByOwnerId = {};
+  // Object.keys(state.messageByOwnerId).forEach((key) => {
+  //   let message = state.messageByOwnerId[key];
+  //   messagesByOwnerId[message.id] = { ...message };
+  // });
+
   const newState = {
     ...state,
     allMessages,
     messageByMessageId,
+    messagesByChannelId,
     // messagesByOwnerId,
   };
 
   // optional chaining that works in transpiler, ?. doesn't work
   // const testVar = action || {}.payload || {}.allMessages;
 
-  let ownerId;
+  // let ownerId;
   let messageId;
+  let channelId;
   let index;
 
   switch (action.type) {
     case GET_ALL_MESSAGES:
       newState.allMessages = action.payload.allMessages;
       newState.messageByMessageId = action.payload.messageByMessageId;
+      newState.messagesByChannelId = action.payload.messagesByChannelId;
 
       return newState;
 
@@ -199,8 +244,14 @@ export default function messagesReducer(state = initialState, action) {
     //   newState.messagesByOwnerId[ownerId] = action.payload.userMessages;
     //   return newState;
 
+    case GET_CHANNEL_MESSAGES:
+      channelId = action.payload.channelId;
+      newState.messagesByChannelId[channelId] = action.payload.channelMessages;
+
+      return newState;
+
     case ADD_MESSAGE:
-      ownerId = action.payload.newMessage.ownerId;
+      // ownerId = action.payload.newMessage.ownerId;
       messageId = action.payload.newMessage.id;
       //add message to end of array sorted by "name"
       newState.allMessages.push(action.payload.newMessage);
@@ -247,6 +298,14 @@ export default function messagesReducer(state = initialState, action) {
       delete newState.messageByMessageId[messageId];
 
       return newState;
+
+    case DELETE_CHANNEL_MESSAGES:
+      channelId = action.payload.channelId;
+
+      //remove channel from messagesByChannelId
+      delete newState.messagesByChannelId[channelId];
+      return newState;
+
     default:
       return state;
   }
@@ -261,6 +320,9 @@ export default function messagesReducer(state = initialState, action) {
 
 //GET ALL MESSAGES OWNED BY A USER - NOT IMPLEMENTED
 // window.store.dispatch(window.messagesActions.getUserMessagesThunk(1))
+
+//GET ALL MESSAGES IN A CHANNEL
+// window.store.dispatch(window.messagesActions.getChannelMessagesThunk(2))
 
 //Test unauthorized ids as well, e.g. messages not owned by the logged in user
 
@@ -286,4 +348,5 @@ export default function messagesReducer(state = initialState, action) {
 //   })
 // ).catch(async (res) => { const resBody= await res.json(); console.log(res,resBody)})
 
+// DELETE MESSAGE
 // window.store.dispatch(window.messagesActions.deleteMessageThunk(1, 11)).catch(async (res) => { const resBody= await res.json(); console.log(res,resBody)})

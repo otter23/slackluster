@@ -91,8 +91,7 @@ router.post(
       });
 
       const socket = req.app.get('socket');
-      socket.emit('chat', { msg: 'CHANNEL ADDED' });
-      socket.emit('channel:add', { payload: newChannel });
+      socket.emit('channel:add', { newChannel });
 
       return res.json(newChannel);
       // return res.redirect(`${req.baseUrl}/${newChannel.id}`);
@@ -133,8 +132,7 @@ router.patch(
       });
 
       const socket = req.app.get('socket');
-      socket.emit('chat', { msg: 'CHANNEL UPDATED' });
-      socket.emit('channel:update', { payload: updatedChannel });
+      socket.emit('channel:update', { updatedChannel });
 
       return res.json(updatedChannel);
     } else {
@@ -181,8 +179,11 @@ router.delete(
       await Channel.destroy({ where: { id: channelId } });
 
       const socket = req.app.get('socket');
-      socket.emit('chat', { msg: 'CHANNEL DELETED' });
-      socket.emit('channel:delete', { message: 'Success' });
+      socket.emit('channel:delete', {
+        message: 'Success',
+        ownerId: channelToDelete.ownerId,
+        channelId,
+      });
 
       return res.json({ message: 'Success' });
     } else {
@@ -249,7 +250,7 @@ module.exports = router;
 //   .then((res) => res.json())
 //   .then((data) => console.log(data));
 
-// DELETE
+// DELETE CHANNEL
 // csrfFetch('/api/channels/5', {
 //   method: 'DELETE',
 // })

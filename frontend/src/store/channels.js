@@ -1,10 +1,10 @@
 //Redux state slice to hold channels from db
 
 import { csrfFetch } from './utils/csrf'; //restoreCSRF
+import { deleteChannelMessages } from './messages'; //restoreCSRF
 
 //ACTION TYPES:
 const GET_ALL_CHANNELS = 'channels/getAllChannels';
-
 const GET_USER_CHANNELS = 'channels/getUserChannels';
 const ADD_CHANNEL = 'channels/addChannel';
 const UPDATE_CHANNEL = 'channels/updateChannel';
@@ -129,6 +129,8 @@ export const deleteChannelThunk = (ownerId, channelId) => async (dispatch) => {
     const resBody = await response.json();
     if (resBody.message === 'Success') {
       dispatch(deleteChannel(ownerId, channelId));
+      //remove channel from messageByChannelId
+      dispatch(deleteChannelMessages(channelId));
     }
     return response;
   } else throw response;
@@ -181,7 +183,7 @@ export default function channelsReducer(state = initialState, action) {
   // optional chaining that works in transpiler, ?. doesn't work
   // const testVar = action || {}.payload || {}.allChannells;
 
-  let ownerId;
+  // let ownerId;
   let channelId;
   let index;
 
@@ -198,7 +200,7 @@ export default function channelsReducer(state = initialState, action) {
     //   return newState;
 
     case ADD_CHANNEL:
-      ownerId = action.payload.newChannel.ownerId;
+      // ownerId = action.payload.newChannel.ownerId;
       channelId = action.payload.newChannel.id;
       //add channel to end of array sorted by "name"
       newState.allChannels.push(action.payload.newChannel);
@@ -214,7 +216,7 @@ export default function channelsReducer(state = initialState, action) {
       return newState;
 
     case UPDATE_CHANNEL:
-      ownerId = action.payload.updatedChannel.ownerId;
+      // ownerId = action.payload.updatedChannel.ownerId;
       channelId = action.payload.updatedChannel.id;
 
       //find index of channel to update
@@ -282,4 +284,7 @@ export default function channelsReducer(state = initialState, action) {
 //   })
 // ).catch(async (res) => { const resBody= await res.json(); console.log(res,resBody)})
 
+//DELETE CHANNEL
 // window.store.dispatch(window.channelsActions.deleteChannelThunk(1, 8)).catch(async (res) => { const resBody= await res.json(); console.log(res,resBody)})
+
+//DELETE CHANNEL MESSAGES
