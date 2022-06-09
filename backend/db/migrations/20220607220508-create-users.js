@@ -18,17 +18,18 @@ module.exports = {
         allowNull: false,
       },
       username: {
-        type: Sequelize.STRING(30),
+        type: Sequelize.STRING(80),
         allowNull: false,
         unique: true, //adds indexed constrain by default
       },
       title: {
         type: Sequelize.STRING(100),
       },
-      onlineStatus: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        defaultValue: true,
+      state: {
+        type: Sequelize.STRING(100),
+      },
+      status: {
+        type: Sequelize.STRING(100),
       },
       imageUrl: {
         type: Sequelize.TEXT,

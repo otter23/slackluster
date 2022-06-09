@@ -4,7 +4,7 @@ const router = require('express').Router();
 const asyncHandler = require('express-async-handler');
 
 const { setTokenCookie } = require('../../utils/auth.js');
-const { User, Image, Comment } = require('../../db/models');
+const { User, Channel } = require('../../db/models');
 
 //error validation functions
 const { check } = require('express-validator');
@@ -15,20 +15,54 @@ const { handleValidationErrors } = require('../../utils/validation');
 const validateSignup = [
   check('email')
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a value.')
+    .withMessage('Please provide an email.')
+    .isLength({ max: 100 })
+    .withMessage('Usernames can’t be longer than 100 characters.')
     .isEmail()
-    .withMessage('Please provide a valid email.'),
+    .withMessage('Please provide a valid email.')
+    .custom((value) => {
+      return User.findOne({ where: { email: value } }).then((user) => {
+        if (user) return Promise.reject('Email already exists.');
+      });
+    }),
   check('username')
     .exists({ checkFalsy: true })
     .withMessage('Please provide a username.')
     .isLength({ min: 4 })
-    .withMessage('Please provide a username with at least 4 characters.'),
-  check('username').not().isEmail().withMessage('Username cannot be an email.'),
+    .withMessage('Please provide a username with at least 4 characters.')
+    .isLength({ max: 80 })
+    .withMessage('Usernames can’t be longer than 80 characters.')
+    .not()
+    .isEmail()
+    .withMessage('Username cannot be an email.')
+    .custom((value) => {
+      return User.findOne({ where: { username: value } }).then((user) => {
+        if (user) return Promise.reject('Username already exists.');
+      });
+    }),
   check('password')
     .exists({ checkFalsy: true })
     .withMessage('Please provide a password.')
     .isLength({ min: 6 })
-    .withMessage('Password must be 6 characters or more.'),
+    .withMessage('Password must be 6 characters or more.')
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, 'g')
+    .withMessage(
+      'Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*").'
+    ),
+  // check('confirmPassword')
+  //   .exists({ checkFalsy: true })
+  //   .withMessage('Please confirm password')
+  //   .custom((value, { req }) => {
+  //     if (value !== req.body.password) {
+  //       throw new Error('Password and Confirm Password do not match.');
+  //     }
+  //     return true;
+  //   }),
+  // check('imageUrl')
+  //   .exists({ checkFalsy: true })
+  //   .withMessage('Please provide an ImageUrl'),
+  //.matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, 'g')
+  // .withMessage('imagUrl must be  (i.e. "!@#$%^&*").'),
   handleValidationErrors, //evaluates result of check() middlewares
 ];
 
@@ -95,22 +129,24 @@ router.get(
   })
 );
 
-//GET ALL USER IMAGES by userId
+//GET ALL USER CHANNELS by ownerId
 router.get(
-  '/:userId(\\d+)/images',
+  '/:userId(\\d+)/channels',
   asyncHandler(async (req, res) => {
     //grab id of user
     const userId = req.params.userId;
 
-    //query db for all images that belong to user
-    const images = await Image.findAll({
-      where: { userId },
-      order: [['createdAt', 'DESC']],
+    //query db for all channels that belong to user
+    const channels = await Channel.findAll({
+      where: { ownerId: userId },
+      order: [['name', 'ASC']],
     });
 
-    return res.json(images);
+    return res.json(channels);
   })
 );
+
+//GET ALL USER MESSAGES by ownerId
 
 module.exports = router;
 

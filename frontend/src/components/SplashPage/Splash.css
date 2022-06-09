@@ -33,9 +33,9 @@
 }
 
 .splash-find-inspiration {
-  color: white;
+  color: black;
   text-align: center;
-  font-size: 56px;
+  font-size: 44px;
   margin-top: 38px;
   margin-bottom: 30px;
   font-weight: 600;
@@ -44,7 +44,7 @@
 }
 
 .splash-find-inspiration + h2 {
-  color: white;
+  color: black;
   text-align: center;
   margin: 0px;
   margin-bottom: 50px;

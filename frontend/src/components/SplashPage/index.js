@@ -23,10 +23,15 @@ export default function SplashPage({ isLoaded }) {
           <div>
             <Chat />
           </div>
-          <h1 className='splash-find-inspiration'> Find your inspiration.</h1>
-          <h2>Join the millions</h2>
+          <h1 className='splash-find-inspiration'>
+            Slackluster is your digital HQ
+          </h1>
+          <h2>
+            Transform the way you work with one place for everyone and
+            everything you need to get stuff done.
+          </h2>
           <Link to='/get-started' className='splash-start-for-free'>
-            Start for free
+            Try for free
           </Link>
         </div>
 

@@ -18,12 +18,13 @@ db.sequelize
 
       //upon first connect, emit to the user who connected:
       socket.emit('welcome', 'Welcome to Slackluster!');
+      socket.emit('chat', { msg: 'Welcome to Slackluster!' });
 
       //upon first connect, broadcast to everyone but user who connected:
       socket.broadcast.emit('chat', { msg: 'A user has joined the chat' });
 
       //upon first connect, broadcasts to all clients:
-      io.emit('chat', { msg: 'Now its a party' });
+      // io.emit('chat', { msg: 'Now its a party' });
 
       //Listens for incoming 'chat' events:
       socket.on('chat', (data) => {
