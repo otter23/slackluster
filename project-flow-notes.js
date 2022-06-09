@@ -343,8 +343,8 @@ Create log ou component
 socket.io
 backend: ~$ npm install socket.io
       -update .config/index.js with cors_origin .env variable
-      -add a socket-io.js file to instantiate the socket server
-      -connect the express app and socketio in the /bin/www file
+      -add a socket folder and setup a index.js file to instantiate the socket server
+      -connect the express app and socketio in the /bin/www file and turn the connection on
 frontend: ~$ npm install socket.io-client
       -import { io } from 'socket.io-client' and instantiate it then can start using it
       -create context to house socket instance and protect instantiation with auth

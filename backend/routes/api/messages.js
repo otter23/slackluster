@@ -59,6 +59,13 @@ router.post(
         content,
       });
 
+      // const io = req.app.get('socketio');
+      // io.emit('chat', { msg: 'NEW MESSAGE ADDED' });
+      // io.sockets.emit('chat', { msg: 'NEW MESSAGE ADDED' });
+      const socket = req.app.get('socket');
+      socket.emit('chat', { msg: 'MESSAGE ADDED' });
+      socket.emit('message:add', { payload: newMessage });
+
       return res.json(newMessage);
       // return res.redirect(`${req.baseUrl}/${newMessage.id}`);
     } else {
@@ -96,6 +103,11 @@ router.patch(
         threadId,
         content,
       });
+
+      const socket = req.app.get('socket');
+      socket.emit('chat', { msg: 'MESSAGE UPDATED' });
+      socket.emit('message:update', { payload: updatedMessage });
+
       return res.json(updatedMessage);
     } else {
       res.status(401);
@@ -127,6 +139,10 @@ router.delete(
 
       // once dependencies destroyed, delete message from database
       await Message.destroy({ where: { id: messageId } });
+
+      const socket = req.app.get('socket');
+      socket.emit('chat', { msg: 'MESSAGE DELETED' });
+      socket.emit('message:delete', { message: 'Success' });
 
       return res.json({ message: 'Success' });
     } else {

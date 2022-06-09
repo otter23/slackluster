@@ -83,6 +83,10 @@ router.post(
         // isPrivate: false,
       });
 
+      const socket = req.app.get('socket');
+      socket.emit('chat', { msg: 'CHANNEL ADDED' });
+      socket.emit('channel:add', { payload: newChannel });
+
       return res.json(newChannel);
       // return res.redirect(`${req.baseUrl}/${newChannel.id}`);
     } else {
@@ -119,6 +123,11 @@ router.patch(
         topic,
         description,
       });
+
+      const socket = req.app.get('socket');
+      socket.emit('chat', { msg: 'CHANNEL UPDATED' });
+      socket.emit('channel:update', { payload: updatedChannel });
+
       return res.json(updatedChannel);
     } else {
       res.status(401);
@@ -162,6 +171,10 @@ router.delete(
 
       // once dependencies destroyed, delete Channel from database
       await Channel.destroy({ where: { id: channelId } });
+
+      const socket = req.app.get('socket');
+      socket.emit('chat', { msg: 'CHANNEL DELETED' });
+      socket.emit('channel:delete', { message: 'Success' });
 
       return res.json({ message: 'Success' });
     } else {
