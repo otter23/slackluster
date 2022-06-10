@@ -158,7 +158,7 @@ export default function channelsReducer(state = initialState, action) {
   //Deep Clone State:
   let allChannels = [];
   state.allChannels.forEach((channel) => {
-    allChannels.push({ ...channel });
+    allChannels?.push({ ...channel });
   });
 
   // let channelsByOwnerId = {};
@@ -203,10 +203,10 @@ export default function channelsReducer(state = initialState, action) {
       // ownerId = action.payload.newChannel.ownerId;
       channelId = action.payload.newChannel.id;
       //add channel to end of array sorted by "name"
-      newState.allChannels.push(action.payload.newChannel);
+      newState.allChannels?.push(action.payload.newChannel);
 
       //re-sort channel array based on name in ASC order
-      newState.allChannels.sort((a, b) => {
+      newState.allChannels?.sort((a, b) => {
         return b.name - a.name;
       });
 
@@ -220,7 +220,7 @@ export default function channelsReducer(state = initialState, action) {
       channelId = action.payload.updatedChannel.id;
 
       //find index of channel to update
-      index = newState.allChannels.findIndex(
+      index = newState.allChannels?.findIndex(
         (channel) => channel.id === parseInt(channelId)
       );
 
@@ -237,11 +237,11 @@ export default function channelsReducer(state = initialState, action) {
       channelId = action.payload.channelId;
 
       //find index of channel to delete
-      index = newState.allChannels.findIndex(
+      index = newState.allChannels?.findIndex(
         (channel) => channel.id === parseInt(channelId)
       );
       //remove channel from allChannels array
-      newState.allChannels.splice(index, 1);
+      newState.allChannels?.splice(index, 1);
 
       //remove channel in channelByChannelId
       delete newState.channelByChannelId[channelId];

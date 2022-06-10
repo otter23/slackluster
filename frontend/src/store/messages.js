@@ -257,7 +257,7 @@ export default function messagesReducer(state = initialState, action) {
       channelId = action.payload.newMessage.channelId;
 
       //add message to end of array sorted by "name"
-      newState.allMessages.push(action.payload.newMessage);
+      newState.allMessages?.push(action.payload.newMessage);
 
       //re-sort message array based on name in ASC order
       newState.allMessages.sort((a, b) => {
@@ -268,7 +268,7 @@ export default function messagesReducer(state = initialState, action) {
       newState.messageByMessageId[messageId] = action.payload.newMessage;
 
       //add message to messagesByChannelId
-      newState.messagesByChannelId[channelId].push(action.payload.newMessage);
+      newState.messagesByChannelId[channelId]?.push(action.payload.newMessage);
 
       return newState;
 
@@ -278,7 +278,7 @@ export default function messagesReducer(state = initialState, action) {
       channelId = action.payload.updatedMessage.channelId;
 
       //find index of message to update
-      index = newState.allMessages.findIndex(
+      index = newState.allMessages?.findIndex(
         (message) => message.id === parseInt(messageId)
       );
       //replace message in allMessages array
@@ -288,7 +288,7 @@ export default function messagesReducer(state = initialState, action) {
       newState.messageByMessageId[messageId] = action.payload.updatedMessage;
 
       //find index of message to update
-      index = newState.messagesByChannelId[channelId].findIndex(
+      index = newState.messagesByChannelId[channelId]?.findIndex(
         (message) => message.id === parseInt(messageId)
       );
       //replaced message in messagesByChannelId
@@ -303,21 +303,21 @@ export default function messagesReducer(state = initialState, action) {
       channelId = action.payload.channelId;
 
       //find index of message to delete
-      index = newState.allMessages.findIndex(
+      index = newState.allMessages?.findIndex(
         (message) => message.id === parseInt(messageId)
       );
       //remove message from allMessages array
-      newState.allMessages.splice(index, 1);
+      newState.allMessages?.splice(index, 1);
 
       //remove message in messageByMessageId
       delete newState.messageByMessageId[messageId];
 
       //find index of message to delete
-      index = newState.messagesByChannelId[channelId].findIndex(
+      index = newState.messagesByChannelId[channelId]?.findIndex(
         (message) => message.id === parseInt(messageId)
       );
       //remove message from messagesByChannelId array
-      newState.messagesByChannelId[channelId].splice(index, 1);
+      newState.messagesByChannelId[channelId]?.splice(index, 1);
 
       return newState;
 
@@ -371,4 +371,5 @@ export default function messagesReducer(state = initialState, action) {
 // ).catch(async (res) => { const resBody= await res.json(); console.log(res,resBody)})
 
 // DELETE MESSAGE
-// window.store.dispatch(window.messagesActions.deleteMessageThunk(1, 11)).catch(async (res) => { const resBody= await res.json(); console.log(res,resBody)})
+// window.store.dispatch(window.messagesActions.deleteMessageThunk(1, 1)).catch(async (res) => { const resBody= await res.json(); console.log(res,resBody)})
+// window.store.dispatch(window.messagesActions.deleteMessageThunk(1, 5,1)).catch(async (res) => { console.log(res)})
