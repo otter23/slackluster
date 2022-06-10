@@ -49,9 +49,9 @@ export const updateMessage = (updatedMessage) => ({
 });
 
 //Payload: ownerId and messageId to key into messageByMessageId  user object
-export const deleteMessage = (ownerId, messageId) => ({
+export const deleteMessage = (ownerId, messageId, channelId) => ({
   type: DELETE_MESSAGE,
-  payload: { ownerId, messageId },
+  payload: { ownerId, messageId, channelId },
 });
 
 //Payload: ownerId and messageId to key into messageByMessageId  user object
@@ -152,19 +152,20 @@ export const updateMessageThunk = (formData) => async (dispatch) => {
 };
 
 //request to backend to delete a message
-export const deleteMessageThunk = (ownerId, messageId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/messages/${messageId}`, {
-    method: 'DELETE',
-  });
+export const deleteMessageThunk =
+  (ownerId, messageId, channelId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/messages/${messageId}`, {
+      method: 'DELETE',
+    });
 
-  if (response.ok) {
-    const resBody = await response.json();
-    if (resBody.message === 'Success') {
-      dispatch(deleteMessage(ownerId, messageId));
-    }
-    return response;
-  } else throw response;
-};
+    if (response.ok) {
+      const resBody = await response.json();
+      if (resBody.message === 'Success') {
+        dispatch(deleteMessage(ownerId, messageId, channelId));
+      }
+      return response;
+    } else throw response;
+  };
 
 //MESSAGE REDUCER:
 const initialState = {
@@ -253,6 +254,8 @@ export default function messagesReducer(state = initialState, action) {
     case ADD_MESSAGE:
       // ownerId = action.payload.newMessage.ownerId;
       messageId = action.payload.newMessage.id;
+      channelId = action.payload.newMessage.channelId;
+
       //add message to end of array sorted by "name"
       newState.allMessages.push(action.payload.newMessage);
 
@@ -264,28 +267,40 @@ export default function messagesReducer(state = initialState, action) {
       //add message to messageByMessageId
       newState.messageByMessageId[messageId] = action.payload.newMessage;
 
+      //add message to messagesByChannelId
+      newState.messagesByChannelId[channelId].push(action.payload.newMessage);
+
       return newState;
 
     case UPDATE_MESSAGE:
       // ownerId = action.payload.updatedMessage.ownerId;
       messageId = action.payload.updatedMessage.id;
+      channelId = action.payload.updatedMessage.channelId;
 
       //find index of message to update
       index = newState.allMessages.findIndex(
         (message) => message.id === parseInt(messageId)
       );
-
       //replace message in allMessages array
       newState.allMessages[index] = action.payload.updatedMessage;
 
       //replace message in messageByMessageId
       newState.messageByMessageId[messageId] = action.payload.updatedMessage;
 
+      //find index of message to update
+      index = newState.messagesByChannelId[channelId].findIndex(
+        (message) => message.id === parseInt(messageId)
+      );
+      //replaced message in messagesByChannelId
+      newState.messagesByChannelId[channelId][index] =
+        action.payload.updatedMessage;
+
       return newState;
 
     case DELETE_MESSAGE:
       // ownerId = action.payload.ownerId;
       messageId = action.payload.messageId;
+      channelId = action.payload.channelId;
 
       //find index of message to delete
       index = newState.allMessages.findIndex(
@@ -296,6 +311,13 @@ export default function messagesReducer(state = initialState, action) {
 
       //remove message in messageByMessageId
       delete newState.messageByMessageId[messageId];
+
+      //find index of message to delete
+      index = newState.messagesByChannelId[channelId].findIndex(
+        (message) => message.id === parseInt(messageId)
+      );
+      //remove message from messagesByChannelId array
+      newState.messagesByChannelId[channelId].splice(index, 1);
 
       return newState;
 

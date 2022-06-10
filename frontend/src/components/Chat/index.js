@@ -1,13 +1,20 @@
 import './Chat.css';
 
 import React, { useState, useEffect, useContext } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { SocketContext } from '../../context/SocketContext';
 
+import * as messagesActions from '../../store/messages';
+
 export default function Chat() {
+  const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  // const channel1 = useSelector((state) => state.channels.channelByChannelId[1]);
+  const channels = useSelector((state) => state.messages.messagesByChannelId);
+
+  useEffect(() => {
+    console.log('MESSAGES', channels[1]);
+  }, [channels]);
 
   //controlled inputs
   const [chatInput, setChatInput] = useState('');
@@ -16,25 +23,33 @@ export default function Chat() {
   //prettier-ignore
   const { socket: { current: socket }} = useContext(SocketContext);
 
-  //when component first mounts add broadcast listener
-  useEffect(() => {
-    //listen for chat events
-    console.log('CHAT SOCKET', socket);
-    socket?.on('chat', (chat) => {
-      // when we receive a chat, add it to messages array in state
-      setMessages((messages) => [...messages, chat]);
-    });
-  }, []);
-
   const updateChatInput = (e) => {
     setChatInput(e.target.value);
   };
 
   //on form submit emit message through websocket
-  const sendChat = (e) => {
+  const sendChat = async (e) => {
     e.preventDefault();
-    //.emit(event name,data)
-    socket.emit('chat', { user: sessionUser.username, msg: chatInput });
+    // setErrors([]); //reset error state
+
+    try {
+      //could add a prev state holder, and then only send request if prev and current don't match
+      const response = await dispatch(
+        messagesActions.addMessageThunk({
+          ownerId: sessionUser.id,
+          channelId: 1,
+          content: chatInput,
+        })
+      );
+
+      if (response.ok) {
+        return;
+      }
+    } catch (errorResponse) {
+      const data = await errorResponse.json();
+      console.log(data);
+      // if (data && data.errors) setErrors(data.errors);
+    }
 
     //add your message to the chat list
     // setMessages((messages) => [
@@ -49,11 +64,12 @@ export default function Chat() {
       <div className='chat-main-container'>
         <div className='chat-main-container-inner'>
           {/* map over the messages array and print our the username and message for each chat. */}
-          {messages?.map((message, ind) => (
+          {channels[1]?.map((message, ind) => (
             <div className='chat-message-container' key={ind}>
-              {`${message.user ? `${message.user}:` : ''} ${message.msg}`}
+              {`${message.ownerId ? `User ${message.ownerId} - ` : ''}${
+                message.content
+              }`}
             </div>
-            // <div key={ind}>{`${message}`}</div>
           ))}
         </div>
         <form onSubmit={sendChat} className='chat-form'>

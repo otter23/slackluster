@@ -353,7 +353,7 @@ frontend: ~$ npm install socket.io-client
 /*
 
 Challenges:
-socket.io - getting working in global react context (useRef)
+socket.io - getting working in global react context (useRef) and getting working with express routes
 
 
 

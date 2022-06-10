@@ -177,6 +177,7 @@ router.delete(
         message: 'Success',
         ownerId: messageToDelete.ownerId,
         messageId,
+        channelId: messageToDelete.channelId,
       });
 
       return res.json({ message: 'Success' });
