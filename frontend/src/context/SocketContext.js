@@ -26,6 +26,7 @@ export const SocketProvider = ({ children }) => {
       socket.current = io();
       console.log('CONNECTED', socket);
 
+      // socket.current.emit('join', sessionUser);
       // socket.current.on('welcome', (msg) => console.log(msg));
 
       //channel event listeners to update redux state
@@ -78,7 +79,7 @@ SOCKET DATA FLOW:
       If error, display error,
       If response is ok:
         Server broadcasts a message/channel was added/updated/deleted event (and includes the data needed)
-        Other Users receive broadcast and update redux state based on that data using regular redux actions
+        All Users receive broadcast and update redux state based on that data using regular redux actions
         channel's messages auto re-renders because channel component is subscribed to state
 
   Note: only ever looking at one channel at a time, when you click a channel, it will do a getChannelMEssagesThunk

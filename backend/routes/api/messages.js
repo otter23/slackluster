@@ -96,7 +96,7 @@ router.post(
       const io = req.app.get('socketio');
       io.emit('message:add', { newMessage });
       // io.sockets.emit('message:add', { newMessage });
-      // const socket = req.app.get('socket');
+      // const socket = req.app.get(`socket-${sessionUserId}`);
       // socket.broadcast.emit('message:add', { newMessage });
 
       return res.json(newMessage);
@@ -139,7 +139,7 @@ router.patch(
 
       const io = req.app.get('socketio');
       io.emit('message:update', { updatedMessage });
-      // const socket = req.app.get('socket');
+      // const socket = req.app.get(`socket-${sessionUserId}`);
       // socket.broadcast.emit('message:update', { updatedMessage });
 
       return res.json(updatedMessage);
@@ -182,13 +182,13 @@ router.delete(
         channelId: messageToDelete.channelId,
       });
 
-      const socket = req.app.get('socket');
-      socket.broadcast.emit('message:delete', {
-        message: 'Success',
-        ownerId: messageToDelete.ownerId,
-        messageId,
-        channelId: messageToDelete.channelId,
-      });
+      // const socket = req.app.get(`socket-${sessionUserId}`);
+      // socket.broadcast.emit('message:delete', {
+      //   message: 'Success',
+      //   ownerId: messageToDelete.ownerId,
+      //   messageId,
+      //   channelId: messageToDelete.channelId,
+      // });
 
       return res.json({ message: 'Success' });
     } else {

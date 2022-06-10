@@ -26,8 +26,12 @@ app.set('socketio', io);
 const { registerChannelHandlers } = require('./channelRoutes');
 
 const onConnection = (socket) => {
-  // add socket to app global space as key value pair
-  app.set('socket', socket);
+  // Add socket to express app's global space as unique key value pair
+  // Only happens once on instantiation of the socket when a user first connects
+  // Thus need a unique identifier to set multiple socket instances.
+  // socket.on('join', (sessionUser) => {
+  //   app.set(`socket-${sessionUser.id}`, socket);
+  // });
 
   //listen on the connection event for incoming sockets and log it to the console.
   console.log('a user connected');
