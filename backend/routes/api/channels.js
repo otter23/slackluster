@@ -90,8 +90,10 @@ router.post(
         // isPrivate: false,
       });
 
-      const socket = req.app.get('socket');
-      socket.broadcast.emit('channel:add', { newChannel });
+      const io = req.app.get('socketio');
+      io.emit('channel:add', { newChannel });
+      // const socket = req.app.get('socket');
+      // socket.broadcast.emit('channel:add', { newChannel });
 
       return res.json(newChannel);
       // return res.redirect(`${req.baseUrl}/${newChannel.id}`);
@@ -131,8 +133,10 @@ router.patch(
         description,
       });
 
-      const socket = req.app.get('socket');
-      socket.broadcast.emit('channel:update', { updatedChannel });
+      const io = req.app.get('socketio');
+      io.emit('channel:update', { updatedChannel });
+      // const socket = req.app.get('socket');
+      // socket.broadcast.emit('channel:update', { updatedChannel });
 
       return res.json(updatedChannel);
     } else {
@@ -178,12 +182,18 @@ router.delete(
       // once dependencies destroyed, delete Channel from database
       await Channel.destroy({ where: { id: channelId } });
 
-      const socket = req.app.get('socket');
-      socket.broadcast.emit('channel:delete', {
+      const io = req.app.get('socketio');
+      io.emit('channel:delete', {
         message: 'Success',
         ownerId: channelToDelete.ownerId,
         channelId,
       });
+      // const socket = req.app.get('socket');
+      // socket.broadcast.emit('channel:delete', {
+      //   message: 'Success',
+      //   ownerId: channelToDelete.ownerId,
+      //   channelId,
+      // });
 
       return res.json({ message: 'Success' });
     } else {

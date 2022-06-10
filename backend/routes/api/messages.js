@@ -93,11 +93,11 @@ router.post(
         content,
       });
 
-      // const io = req.app.get('socketio');
-      // io.emit('chat', { msg: 'NEW MESSAGE ADDED' });
-      // io.sockets.emit('chat', { msg: 'NEW MESSAGE ADDED' });
-      const socket = req.app.get('socket');
-      socket.broadcast.emit('message:add', { newMessage });
+      const io = req.app.get('socketio');
+      io.emit('message:add', { newMessage });
+      // io.sockets.emit('message:add', { newMessage });
+      // const socket = req.app.get('socket');
+      // socket.broadcast.emit('message:add', { newMessage });
 
       return res.json(newMessage);
       // return res.redirect(`${req.baseUrl}/${newMessage.id}`);
@@ -137,8 +137,10 @@ router.patch(
         content,
       });
 
-      const socket = req.app.get('socket');
-      socket.broadcast.emit('message:update', { updatedMessage });
+      const io = req.app.get('socketio');
+      io.emit('message:update', { updatedMessage });
+      // const socket = req.app.get('socket');
+      // socket.broadcast.emit('message:update', { updatedMessage });
 
       return res.json(updatedMessage);
     } else {
@@ -171,6 +173,14 @@ router.delete(
 
       // once dependencies destroyed, delete message from database
       await Message.destroy({ where: { id: messageId } });
+
+      const io = req.app.get('socketio');
+      io.emit('message:delete', {
+        message: 'Success',
+        ownerId: messageToDelete.ownerId,
+        messageId,
+        channelId: messageToDelete.channelId,
+      });
 
       const socket = req.app.get('socket');
       socket.broadcast.emit('message:delete', {
