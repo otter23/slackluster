@@ -62,6 +62,13 @@ textarea {
   --mid3: rgb(36, 101, 212);
   --mid4: rgb(60, 145, 214);
 
+  /* Dark Theme */
+  --darkText: rgba(209, 210, 211, 0.7);
+  --darkBg1: rgb(26, 29, 33);
+  --darkBg2: rgb(25, 23, 29);
+
+  /* Other */
+
   --btn: rgb(63, 143, 214);
   --btnTrue: rgb(18, 143, 220);
   --btnHover: rgb(66, 150, 225);

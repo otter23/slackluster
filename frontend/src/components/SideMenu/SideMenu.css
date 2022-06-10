@@ -1,13 +1,84 @@
 .sideMenu-main-container {
   height: 100%;
   width: 300px;
+  background-color: var(--darkBg2);
+}
+
+.sideMenu-main-container-inner {
+  /* padding-left: 16px; */
+}
+
+.sideMenu-header-container {
+  display: flex;
+  align-items: center;
+  height: 50px;
+
+  color: var(--darkText);
+  font-size: 18px;
+  font-weight: 900;
+
+  padding: 0px 54px 0px 16px;
+  border-top: 1px solid rgb(42, 43, 47);
+  border-bottom: 1px solid rgb(42, 43, 47);
+}
+
+.sideMenu-channel-title-btn-container {
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  height: 32px;
+  font-size: 15px;
+  color: var(--darkText);
+}
+
+.sideMenu-channel-add-btn {
+  padding: 6px;
+  cursor: pointer;
+}
+
+.sideMenu-channel-add-btn:hover {
+  background-color: rgb(38, 46, 43);
 }
 
 .sideMenu-channel-container {
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: var(--darkText);
+
+  width: 100%;
+  padding: 5px 0px;
+}
+
+.sideMenu-channel-list-item {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  font-size: 15px;
+
+  padding: 0px 54px 0px 16px;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.sideMenu-channel-list-item:hover {
+  background-color: rgb(38, 46, 43);
+}
+
+.sideMenu-channel-hash-icon {
+  width: 15px;
+  height: 15px;
 }
 
 .sideMenu-channel-title-btn-container {
   display: flex;
   justify-content: space-between;
+}
+
+.selected {
+  background-color: rgb(76, 150, 137);
+  color: white;
+  font-weight: 400;
+  pointer-events: none;
 }

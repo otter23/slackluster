@@ -91,7 +91,7 @@ router.post(
       });
 
       const socket = req.app.get('socket');
-      socket.emit('channel:add', { newChannel });
+      socket.broadcast.emit('channel:add', { newChannel });
 
       return res.json(newChannel);
       // return res.redirect(`${req.baseUrl}/${newChannel.id}`);
@@ -132,7 +132,7 @@ router.patch(
       });
 
       const socket = req.app.get('socket');
-      socket.emit('channel:update', { updatedChannel });
+      socket.broadcast.emit('channel:update', { updatedChannel });
 
       return res.json(updatedChannel);
     } else {
@@ -179,7 +179,7 @@ router.delete(
       await Channel.destroy({ where: { id: channelId } });
 
       const socket = req.app.get('socket');
-      socket.emit('channel:delete', {
+      socket.broadcast.emit('channel:delete', {
         message: 'Success',
         ownerId: channelToDelete.ownerId,
         channelId,
