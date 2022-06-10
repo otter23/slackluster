@@ -1,0 +1,41 @@
+.add-artist-header {
+  text-align: center;
+  margin: 0px;
+  margin-top: 10px;
+  /* margin-bottom: 40px; */
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 400;
+  color: rgb(33, 33, 36);
+  text-size-adjust: 100%;
+  padding-bottom: 36px;
+  border-bottom: 2px dotted rgb(204, 204, 204);
+}
+
+.edit-artist {
+  height: 765px;
+  border: 1px solid rgb(126, 126, 126);
+  background-color: rgb(243, 243, 243);
+}
+
+.textareaForArtistEdit {
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  width: 300px;
+  border: 1px solid rgb(126, 126, 126);
+  padding-left: 10px;
+  max-height: 300px;
+}
+
+.edit-artist-htag {
+  padding-bottom: 20px;
+}
+
+.edit-artist-error-div {
+  margin-left: 120px;
+}
+
+.ptagErrorMessage {
+  color: red;
+}

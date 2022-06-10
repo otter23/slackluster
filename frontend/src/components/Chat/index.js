@@ -1,27 +1,19 @@
 import './Chat.css';
 
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { SocketContext } from '../../context/SocketContext';
+// import { SocketContext } from '../../context/SocketContext';
+// const { socket: { current: socket }} = useContext(SocketContext);
 
 import * as messagesActions from '../../store/messages';
 
-export default function Chat() {
+export default function Chat({ channelId }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const channels = useSelector((state) => state.messages.messagesByChannelId);
-
-  useEffect(() => {
-    console.log('MESSAGES', channels[1]);
-  }, [channels]);
 
   //controlled inputs
   const [chatInput, setChatInput] = useState('');
-  const [messages, setMessages] = useState([]);
-
-  //prettier-ignore
-  const { socket: { current: socket }} = useContext(SocketContext);
 
   const updateChatInput = (e) => {
     setChatInput(e.target.value);
@@ -37,12 +29,14 @@ export default function Chat() {
       const response = await dispatch(
         messagesActions.addMessageThunk({
           ownerId: sessionUser.id,
-          channelId: 1,
+          channelId,
           content: chatInput,
         })
       );
 
       if (response.ok) {
+        // clear the input field after the message is sent
+        setChatInput('');
         return;
       }
     } catch (errorResponse) {
@@ -50,33 +44,17 @@ export default function Chat() {
       console.log(data);
       // if (data && data.errors) setErrors(data.errors);
     }
-
-    //add your message to the chat list
-    // setMessages((messages) => [
-    //   ...messages,
-    //   { user: user.username, msg: chatInput },
-    // ]);
-    // clear the input field after the message is sent
-    setChatInput('');
   };
   return (
-    sessionUser && (
-      <div className='chat-main-container'>
-        <div className='chat-main-container-inner'>
-          {/* map over the messages array and print our the username and message for each chat. */}
-          {channels[1]?.map((message, ind) => (
-            <div className='chat-message-container' key={ind}>
-              {`${message.ownerId ? `User ${message.ownerId} - ` : ''}${
-                message.content
-              }`}
-            </div>
-          ))}
-        </div>
-        <form onSubmit={sendChat} className='chat-form'>
-          <input value={chatInput} onChange={updateChatInput} />
-          <button type='submit'>Send</button>
-        </form>
-      </div>
-    )
+    <div className='chat-main-container'>
+      <form onSubmit={sendChat} className='chat-form'>
+        <input
+          value={chatInput}
+          onChange={updateChatInput}
+          className='chat-form-input'
+        />
+        <button type='submit'>Send</button>
+      </form>
+    </div>
   );
 }

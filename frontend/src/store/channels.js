@@ -9,6 +9,7 @@ const GET_USER_CHANNELS = 'channels/getUserChannels';
 const ADD_CHANNEL = 'channels/addChannel';
 const UPDATE_CHANNEL = 'channels/updateChannel';
 const DELETE_CHANNEL = 'channels/deleteChannel';
+const SET_CURRENT_CHANNEL = 'channels/setCurrentChannel';
 
 //REGULAR ACTION CREATORS (implicit returns)
 
@@ -40,6 +41,12 @@ export const updateChannel = (updatedChannel) => ({
 export const deleteChannel = (ownerId, channelId) => ({
   type: DELETE_CHANNEL,
   payload: { ownerId, channelId },
+});
+
+//Payload: ownerId and channelId to key into channelByChannelId  user object
+export const setCurrentChannel = (channelId) => ({
+  type: SET_CURRENT_CHANNEL,
+  payload: { channelId },
 });
 
 //THUNK ACTION CREATORS:
@@ -138,6 +145,7 @@ export const deleteChannelThunk = (ownerId, channelId) => async (dispatch) => {
 
 //CHANNEL REDUCER:
 const initialState = {
+  currentChannelId: 1, //default channel to display
   allChannels: [],
   channelByChannelId: {},
   // channelsByOwnerId: {},
@@ -151,6 +159,7 @@ const initialState = {
 
 export default function channelsReducer(state = initialState, action) {
   Object.freeze(state);
+  Object.freeze(state.currentChannelId);
   Object.freeze(state.allChannels);
   Object.freeze(state.channelByChannelId);
   // Object.freeze(state.channelsByOwnerId);
@@ -247,6 +256,13 @@ export default function channelsReducer(state = initialState, action) {
       delete newState.channelByChannelId[channelId];
 
       return newState;
+
+    case SET_CURRENT_CHANNEL:
+      channelId = action.payload.channelId;
+      newState.currentChannelId = channelId;
+
+      return newState;
+
     default:
       return state;
   }
