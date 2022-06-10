@@ -97,7 +97,7 @@ router.post(
       // io.emit('chat', { msg: 'NEW MESSAGE ADDED' });
       // io.sockets.emit('chat', { msg: 'NEW MESSAGE ADDED' });
       const socket = req.app.get('socket');
-      socket.emit('message:add', { newMessage });
+      socket.broadcast.emit('message:add', { newMessage });
 
       return res.json(newMessage);
       // return res.redirect(`${req.baseUrl}/${newMessage.id}`);
@@ -138,7 +138,7 @@ router.patch(
       });
 
       const socket = req.app.get('socket');
-      socket.emit('message:update', { updatedMessage });
+      socket.broadcast.emit('message:update', { updatedMessage });
 
       return res.json(updatedMessage);
     } else {
@@ -173,7 +173,7 @@ router.delete(
       await Message.destroy({ where: { id: messageId } });
 
       const socket = req.app.get('socket');
-      socket.emit('message:delete', {
+      socket.broadcast.emit('message:delete', {
         message: 'Success',
         ownerId: messageToDelete.ownerId,
         messageId,

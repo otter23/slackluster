@@ -1,6 +1,28 @@
 .channel-main-container {
   width: 100%;
-  padding: 20px;
+
+  background-color: var(--darkBg1);
+}
+
+.channel-name-bar {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+
+  color: white;
+  font-size: 18px;
+  font-weight: 900;
+
+  gap: 5px;
+
+  padding: 0px 54px 0px 16px;
+  border-top: 1px solid rgb(42, 43, 47);
+  border-bottom: 1px solid rgb(42, 43, 47);
+}
+
+.channel-hash-icon {
+  color: white;
 }
 
 .channel-main-container-inner {
@@ -9,9 +31,12 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+
+  padding: 16px;
 }
 
 .chat-message-container {
   width: 100%;
   padding: 10px;
+  color: var(--darkText);
 }
