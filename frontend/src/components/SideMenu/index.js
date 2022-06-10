@@ -1,11 +1,12 @@
 import './SideMenu.css';
 
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // import { SocketContext } from '../../context/SocketContext';
 
 import * as channelsActions from '../../store/channels';
+import * as messagesActions from '../../store/messages';
 
 import hashIcon from '../../images/icons/hash-icon.svg';
 import plusIcon from '../../images/icons/plus-icon.svg';
@@ -16,6 +17,25 @@ export default function ChannelDisplay() {
   const currentChannelId = useSelector(
     (state) => state.channels.currentChannelId
   );
+
+  useEffect(() => {
+    (async () => {
+      try {
+        //could add a prev state holder, and then only send request if prev and current don't match
+        const response = await dispatch(
+          messagesActions.getChannelMessagesThunk(currentChannelId)
+        );
+
+        if (response.ok) {
+          return;
+        }
+      } catch (errorResponse) {
+        const data = await errorResponse.json();
+        console.log(data);
+        // if (data && data.errors) setErrors(data.errors);
+      }
+    })();
+  }, [dispatch, currentChannelId]);
 
   return (
     <>

@@ -123,7 +123,7 @@ export const addMessageThunk = (formData) => async (dispatch) => {
 
   if (response.ok) {
     const newMessage = await response.json();
-    dispatch(addMessage(newMessage));
+    // dispatch(addMessage(newMessage));
     response.newMessage = newMessage;
     return response;
   } else throw response;
@@ -145,7 +145,7 @@ export const updateMessageThunk = (formData) => async (dispatch) => {
 
   if (response.ok) {
     const updatedMessage = await response.json();
-    dispatch(updateMessage(updatedMessage));
+    // dispatch(updateMessage(updatedMessage));
     response.updatedMessage = updatedMessage;
     return response;
   } else throw response;
@@ -161,7 +161,7 @@ export const deleteMessageThunk =
     if (response.ok) {
       const resBody = await response.json();
       if (resBody.message === 'Success') {
-        dispatch(deleteMessage(ownerId, messageId, channelId));
+        // dispatch(deleteMessage(ownerId, messageId, channelId));
       }
       return response;
     } else throw response;

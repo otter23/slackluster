@@ -99,7 +99,7 @@ export const addChannelThunk = (formData) => async (dispatch) => {
 
   if (response.ok) {
     const newChannel = await response.json();
-    dispatch(addChannel(newChannel));
+    // dispatch(addChannel(newChannel));
     response.newChannel = newChannel;
     return response;
   } else throw response;
@@ -120,7 +120,7 @@ export const updateChannelThunk = (formData) => async (dispatch) => {
 
   if (response.ok) {
     const updatedChannel = await response.json();
-    dispatch(updateChannel(updatedChannel));
+    // dispatch(updateChannel(updatedChannel));
     response.updatedChannel = updatedChannel;
     return response;
   } else throw response;
@@ -135,9 +135,9 @@ export const deleteChannelThunk = (ownerId, channelId) => async (dispatch) => {
   if (response.ok) {
     const resBody = await response.json();
     if (resBody.message === 'Success') {
-      dispatch(deleteChannel(ownerId, channelId));
+      // dispatch(deleteChannel(ownerId, channelId));
       //remove channel from messageByChannelId
-      dispatch(deleteChannelMessages(channelId));
+      // dispatch(deleteChannelMessages(channelId));
     }
     return response;
   } else throw response;
