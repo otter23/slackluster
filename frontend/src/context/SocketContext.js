@@ -47,10 +47,12 @@ export const SocketProvider = ({ children }) => {
       socket.current.on('message:update', ({ updatedMessage }) => {
         dispatch(messagesActions.updateMessage(updatedMessage));
       });
-      socket.current.on('message:delete', ({ ownerId, messageId }) => {
-        dispatch(messagesActions.deleteMessage(ownerId, messageId));
+      //prettier-ignore
+      socket.current.on('message:delete', ({ ownerId, messageId, channelId }) => {
+        dispatch(messagesActions.deleteMessage(ownerId, messageId, channelId));
       });
     }
+
     // when component unmounts, disconnect from socket
     return () => {
       if (sessionUser) {
