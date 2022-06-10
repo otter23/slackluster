@@ -1,0 +1,13 @@
+.sideMenu-main-container {
+  height: 100%;
+  width: 300px;
+}
+
+.sideMenu-channel-container {
+  padding: 20px;
+}
+
+.sideMenu-channel-title-btn-container {
+  display: flex;
+  justify-content: space-between;
+}

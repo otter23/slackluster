@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import SplashPage from './components/SplashPage';
 import LoginFormPage from './components/LoginFormPage';
 import SignupFormPage from './components/SignupFormPage';
+import MainPage from './components/MainPage';
+import NavBarSplash from './components/NavBarSplash';
 
 import * as sessionActions from './store/session';
 import * as usersActions from './store/users';
@@ -73,8 +75,7 @@ export default function App() {
             {/* LAnding Page once logged in */}
             {sessionUser ? (
               // <LandingPage isLoaded={isLoaded} />
-              // <Redirect to='/explore'></Redirect>
-              <SplashPage isLoaded={isAuthLoaded} />
+              <Redirect to='/client/workspace'></Redirect>
             ) : (
               <SplashPage isLoaded={isAuthLoaded} />
             )}
@@ -86,6 +87,13 @@ export default function App() {
 
           <Route path='/get-started'>
             <SignupFormPage isLoaded={isAuthLoaded} />
+          </Route>
+
+          <Route path='/client/workspace'>
+            <>
+              <NavBarSplash />
+              <MainPage isLoaded={isAuthLoaded} />
+            </>
           </Route>
 
           <Route>

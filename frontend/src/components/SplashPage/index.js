@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 // import { useSelector } from 'react-redux';
 
 import Footer from '../Footer';
-import Chat from '../Chat';
 import NavBarSplash from '../NavBarSplash';
 // import image from '../../images/splash-bg-alt.jpg';
 
@@ -20,9 +19,6 @@ export default function SplashPage({ isLoaded }) {
         // style={{ backgroundImage: `url(${image})` }}
       >
         <div className='splash-body-container'>
-          <div>
-            <Chat />
-          </div>
           <h1 className='splash-find-inspiration'>
             Slackluster is your digital HQ
           </h1>
