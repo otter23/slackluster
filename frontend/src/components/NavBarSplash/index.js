@@ -1,9 +1,9 @@
-import './NavBar.css';
+import './NavBarSplash.css';
 
 import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
+import ProfileButton from '../ProfileButton';
 
 import navLogo from '../../images/Slack_RGB_logo.svg';
 // import searchIcon from '../../images/icons/search--black-icon.svg';

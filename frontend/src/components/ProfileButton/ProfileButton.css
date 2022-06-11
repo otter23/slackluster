@@ -1,0 +1,91 @@
+.nav-user-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  position: relative;
+  cursor: pointer;
+}
+
+.nav-user-image-container:hover {
+  background-color: var(--darkBg3);
+}
+
+.nav-user-image {
+  background: linear-gradient(to right, rgb(92, 84, 245), rgb(94, 150, 198));
+  height: 24px;
+  width: 24px;
+  border-radius: 24px;
+
+  background-position: center;
+  background-size: contain;
+}
+.nav-user-dropdown-container {
+  position: absolute;
+  background-color: rgb(35, 37, 35);
+  color: var(--darkText);
+  top: 39px;
+  right: 0px;
+  z-index: 2006;
+
+  width: 236px;
+  max-height: 400px;
+
+  border-radius: 3px;
+  border: 1px solid var(--darkBorder1);
+  /* box-shadow: 0 0 0 1px rgb(0 0 0 / 30%), 0 1px 4px 0 rgb(0 0 0 / 20%); */
+  cursor: default;
+}
+
+.nav-user-dropdown-welcome,
+.nav-user-dropdown-artist-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 15px;
+  text-decoration: none;
+  color: var(--darkText);
+}
+
+.nav-user-dropdown-welcome-text,
+.user-name-text-overflow {
+  /* max-width: 200px; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-user-dropdown-artist-link:hover {
+  background-color: rgb(243, 243, 243);
+}
+
+.nav-user-logout {
+  padding: 15px;
+  /* padding-bottom: 15px; */
+}
+
+.nav-user-logout-btn {
+  padding: 10px 15px;
+  border: 1px solid var(--mid1);
+  border-radius: 4px;
+  width: 100%;
+
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: 200;
+  color: var(--darkText);
+  background-color: var(--mid1);
+
+  cursor: pointer;
+  /* transition: border 0.5s, background-color 0.5s, color 0.5s; */
+  transition-property: background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+}
+
+.nav-user-logout-btn:hover {
+  background-color: rgb(81, 136, 224);
+}

@@ -6,7 +6,6 @@ import SplashPage from './components/SplashPage';
 import LoginFormPage from './components/LoginFormPage';
 import SignupFormPage from './components/SignupFormPage';
 import MainPage from './components/MainPage';
-import NavBarSplash from './components/NavBarSplash';
 
 import * as sessionActions from './store/session';
 import * as usersActions from './store/users';
@@ -15,85 +14,64 @@ import * as messagesActions from './store/messages';
 
 export default function App() {
   const sessionUser = useSelector((state) => state.session.user);
-  // const photos = useSelector((state) => state.photos);
   const dispatch = useDispatch();
 
   const [isAuthLoaded, setIsAuthLoaded] = useState(false);
-  const [isUsersLoaded, setIsUsersLoaded] = useState(false);
-  // const [sessionUserId, setSessionUserId] = useState(null);
 
-  //on first render, check whether jwt token credentials matches user in db,
-  //if so add user to Redux State
+  //restore user Sesssion
   useEffect(() => {
-    // dispatch(sessionActions.restoreUser()).then(() => setIsAuthLoaded(true));
+    //on first mount, check whether jwt token credentials matches user in db.
+    //if so add user to Redux State
+    dispatch(sessionActions.restoreUser())
+      .then(() => setIsAuthLoaded(true))
+      .catch((res) => console.log(res));
+    // (async () => {
+    //   await dispatch(sessionActions.restoreUser())
+    //   .catch((res) =>console.log(res));
+    //   setIsAuthLoaded(true);
+    // })();
+  }, [dispatch]);
+
+  //eager load db resources users, channels, messages into state
+  //Note this approach is not scalable as your db grows.
+  //Also load each channel's resources individually when a user joins a channel
+  useEffect(() => {
     if (!sessionUser) {
-      (async () => {
-        await dispatch(sessionActions.restoreUser()).catch((res) =>
-          console.log(res)
-        );
-        setIsAuthLoaded(true);
-      })();
+      dispatch(usersActions.getAllUsersThunk()).catch((res) =>
+        console.log(res)
+      );
+      //or just eager load default channel into state?
+      dispatch(channelsActions.getAllChannelsThunk()).catch((res) =>
+        console.log(res)
+      );
+      dispatch(messagesActions.getAllMessagesThunk()).catch((res) =>
+        console.log(res)
+      );
     }
   }, [dispatch, sessionUser]);
 
-  //eager load resources
-  useEffect(() => {
-    //eager load all users in db into state
-    dispatch(usersActions.getAllUsersThunk()).then(() =>
-      setIsUsersLoaded(true)
-    );
-
-    //eager load all channels in db into state
-    dispatch(channelsActions.getAllChannelsThunk()).catch((res) =>
-      console.log(res)
-    );
-    //eager load all channels in db into state
-    dispatch(messagesActions.getAllMessagesThunk()).catch((res) =>
-      console.log(res)
-    );
-  }, [dispatch]);
-
-  //load userId to state once userSession is loaded
-  // useEffect(() => {
-  //   if (sessionUser) setSessionUserId(sessionUser.id);
-  // }, [isAuthLoaded, sessionUser]);
-
-  //eager load default channel into state on first render or once userId is updated.
-
-  //ensure app rendering waits for sessionUser (if exists) to be loaded to state
-  //TO DO: can remove isLoaded props most likely except for Navigation.
-  // Or just make Navigation dependent on sessionUser only
-
-  //only load App after Session Cookie is checked
+  //only load App after Session Cookie is checked and user is loaded into redux
   if (!isAuthLoaded) return null;
 
-  if (isAuthLoaded && isUsersLoaded) {
+  if (isAuthLoaded) {
+    // prettier-ignore
     return (
       <>
         <Switch>
           <Route exact path='/'>
-            {/* LAnding Page once logged in */}
-            {sessionUser ? (
-              // <LandingPage isLoaded={isLoaded} />
-              <Redirect to='/client/workspace'></Redirect>
-            ) : (
-              <SplashPage isLoaded={isAuthLoaded} />
-            )}
+            {sessionUser ? <Redirect to='/client/workspace'></Redirect> : <SplashPage />}
           </Route>
 
           <Route path='/login'>
-            <LoginFormPage isLoaded={isAuthLoaded} />
+            <LoginFormPage />
           </Route>
 
           <Route path='/get-started'>
-            <SignupFormPage isLoaded={isAuthLoaded} />
+            <SignupFormPage />
           </Route>
 
           <Route path='/client/workspace'>
-            <>
-              <NavBarSplash />
-              <MainPage isLoaded={isAuthLoaded} />
-            </>
+            {sessionUser ? <MainPage /> : <Redirect to='/'></Redirect>}
           </Route>
 
           <Route>

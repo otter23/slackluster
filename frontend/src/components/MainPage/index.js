@@ -1,21 +1,19 @@
 import './MainPage.css';
 
 import React from 'react';
-import { useSelector } from 'react-redux';
 
+import NavBarMain from '../NavBarMain';
 import SideMenu from '../SideMenu';
 import ChannelDisplay from '../ChannelDisplay';
 
 export default function MainPage() {
-  const sessionUser = useSelector((state) => state.session.user);
-  const channelId = useSelector((state) => state.channels.currentChannel);
-
-  if (!sessionUser) return null;
-
   return (
-    <div className='mainPage-main-container'>
-      <SideMenu />
-      <ChannelDisplay channelId={channelId} />
-    </div>
+    <>
+      <NavBarMain />
+      <div className='mainPage-main-container'>
+        <SideMenu />
+        <ChannelDisplay />
+      </div>
+    </>
   );
 }
