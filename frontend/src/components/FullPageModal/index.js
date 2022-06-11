@@ -10,12 +10,13 @@ const FullPageModal = ({ showModal, closeModal, children }) => {
   //// const openModal = () => {
   //// if (showModal) return; // do nothing if modal already showing
   //// setShowModal(true); // else open modal
+  //// disable page scrolling:
   //// document.getElementById('root').classList.add('overflow');
   //// };
   //// const closeModal = () => {
   ////   if (!showModal) return; // do nothing if modal already closed
   ////   setShowModal(false); // else close modal
-  ////   disable page scrolling:
+  ////   enable page scrolling:
   ////   document.getElementById('root').classList.remove('overflow');
   //// };
 

@@ -1,32 +1,38 @@
 .sideMenu-main-container {
+  display: flex;
+  flex-direction: column;
+  /* flex-grow: 1; */
   height: 100%;
+  flex: 1;
+
   width: 300px;
   background-color: var(--darkBg2);
-}
-
-.sideMenu-main-container-inner {
-  /* padding-left: 16px; */
 }
 
 .sideMenu-header-container {
   display: flex;
   align-items: center;
-  height: 50px;
+  /* set min-height to prevent resizing on window resize */
+  min-height: 50px;
 
   color: var(--darkText);
   font-size: 18px;
   font-weight: 900;
 
   padding: 0px 54px 0px 16px;
-  border-top: 1px solid rgb(42, 43, 47);
-  border-bottom: 1px solid rgb(42, 43, 47);
+  border-top: 1px solid var(--darkBorder1);
+  border-bottom: 1px solid var(--darkBorder1);
 }
 
 .sideMenu-channel-title-btn-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding-left: 16px;
-  height: 32px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  min-height: 35px;
   font-size: 15px;
   color: var(--darkText);
 }
@@ -40,45 +46,149 @@
   background-color: rgb(38, 46, 43);
 }
 
+/* **************************************** */
+
+.sideMenu-main-container-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* flex-grow: 1; */
+  /* flex: 1; */
+  height: 100%;
+  width: 300px;
+}
+/* want to use height 100% in all parent's of scroller
+ because don't want them to be able to contain the overflow */
+.sideMenu-main-container-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* flex: 1; */
+  /* flex-grow: 1; */
+  /* height: 100%; */
+  height: calc(100% - 45px - 50px - 35px);
+  /* !important; */
+  width: 300px;
+
+  overflow-y: overlay;
+
+  padding-right: 10px;
+  padding-bottom: 56px;
+}
+
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/::-webkit-scrollbar */
+/* https://stackoverflow.com/questions/23200639/transparent-scrollbar-with-css */
+.sideMenu-main-container-inner::-webkit-scrollbar {
+  /*// manage scrollbar width here  */
+  width: 8px;
+}
+.sideMenu-main-container-inner::-webkit-scrollbar * {
+  /* // manage scrollbar background color here */
+  background: transparent;
+}
+
+.sideMenu-main-container-inner::-webkit-scrollbar-track {
+  box-shadow: none;
+}
+
+/* .sideMenu-main-container-inner:hover */
+.sideMenu-main-container-wrapper:hover
+  .sideMenu-main-container-inner::-webkit-scrollbar-thumb {
+  /* // manage scrollbar scroller background color here */
+  background: rgb(108, 108, 111) !important;
+  border-radius: 3px;
+  height: 200px;
+}
+
+/* alt solution to scrollbar length issue */
+/* .sideMenu-main-container-inner::-webkit-scrollbar-track {
+  margin-top: -10px;
+  margin-bottom: -10px;
+} */
+
+/* .sideMenu-nav-container{} */
+
 .sideMenu-channel-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* want this container to grow with the overflow */
+  flex-grow: 1;
+  /* height: 100%; */
 
   color: var(--darkText);
-
   width: 100%;
-  padding: 5px 0px;
 }
 
 .sideMenu-channel-list-item {
   display: flex;
   align-items: center;
-  height: 28px;
+  min-height: 28px;
+  width: 100%;
   font-size: 15px;
 
   padding: 0px 54px 0px 16px;
   gap: 8px;
   cursor: pointer;
+  position: relative;
 }
 
 .sideMenu-channel-list-item:hover {
-  background-color: rgb(38, 46, 43);
+  background-color: var(--darkBg2Hover);
+}
+
+.sideMenu-channel-list-item.selected {
+  background-color: rgb(76, 150, 137);
+  color: white;
+  font-weight: 400;
+  /* pointer-events: none; */
 }
 
 .sideMenu-channel-hash-icon {
+  background-image: url('../../images/icons/hash-icon.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
   width: 15px;
   height: 15px;
 }
 
-.sideMenu-channel-title-btn-container {
-  display: flex;
-  justify-content: space-between;
+.sideMenu-channel-hash-icon.selected {
+  background-image: url('../../images/icons/hash-icon-white.svg');
 }
 
-.selected {
-  background-color: rgb(76, 150, 137);
-  color: white;
-  font-weight: 400;
-  pointer-events: none;
+.sideMenu-channel-name {
+  color: inherit;
+}
+
+.sideMenu-channel-edit-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 28px;
+  width: 28px;
+
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  /* background-color: black; */
+}
+
+.sideMenu-channel-edit-icon div {
+  padding-top: 4px;
+  font-size: 15px;
+  text-align: center;
+  color: inherit;
+}
+
+.sideMenu-channel-edit-icon:hover {
+  background-color: black;
+}
+
+.sideMenu-footer {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  color: var(--darkText);
 }

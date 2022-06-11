@@ -3,7 +3,7 @@ import './Navigation.css';
 import React, { useEffect, useState } from 'react';
 import { NavLink, Link, Route, Switch, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
+import ProfileButton from '../ProfileButton';
 
 import flickrLogo from '../../images/n_flickr_logo.svg';
 import flickrLogoColored from '../../images/n_flickr_logo_colored.svg';

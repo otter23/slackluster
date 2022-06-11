@@ -1,11 +1,14 @@
+import './ProfileButton.css';
+
 import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+// import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session';
 
-import userIcon from '../../images/demoUser-icon-small.jpg';
-
-function ProfileButton({ user }) {
+export default function ProfileButton({ user }) {
   const dispatch = useDispatch();
+
+  const sessionUser = useSelector((state) => state.session.user);
 
   const menu = useRef(null);
   const [showMenu, setShowMenu] = useState(false);
@@ -39,45 +42,54 @@ function ProfileButton({ user }) {
   //logout click handler
   const logout = (e) => {
     e.preventDefault();
-
     //removes user from jwt cookie
     dispatch(sessionActions.logout());
+    alert("You've been successfully logged out.");
   };
 
   return (
-    <>
+    <div className='nav-user-image-container' onClick={openMenu}>
       <div
-        className='nav-user-icon-container'
-        onClick={openMenu}
-        style={{ backgroundImage: `url(${userIcon})` }}
+        className='nav-user-image'
+        style={
+          sessionUser?.profileImageUrl
+            ? {
+                backgroundImage: `url(${sessionUser?.profileImageUrl})`,
+              }
+            : { backgroundImage: '' }
+        }
       >
-        {/* <button className='nav-user-icon' onClick={openMenu}>
-          Welcome {user.username}
-        </button> */}
-        {/* <div class='material-symbols-outlined'>photo_camera</div> */}
-
         {showMenu && (
           <>
-            <div className='nav-user-dropdown-arrow'></div>
             <div className='nav-user-dropdown-container' ref={menu}>
-              <div className='nav-user-dropdown-upper'>
-                Welcome {user.username}!
+              <div className='nav-user-dropdown-welcome'>
+                <div className='nav-user-dropdown-welcome-text'>
+                  Welcome {user?.username}!
+                </div>
               </div>
+
+              {/* {sessionUser && (
+                <Link
+                  className='nav-user-dropdown-artist-link'
+                  to={`/${sessionUser?.artistUrl}`}
+                >
+                  <div>Artist Profile Page</div>
+                </Link>
+              )} */}
+
               <div className='nav-user-logout'>
                 <button
                   className='nav-user-logout-btn'
                   type='button'
                   onClick={logout}
                 >
-                  Log Out
+                  Sign Out of Workspace
                 </button>
               </div>
             </div>
           </>
         )}
       </div>
-    </>
+    </div>
   );
 }
-
-export default ProfileButton;

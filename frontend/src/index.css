@@ -17,19 +17,27 @@ body,
   /* only 100% works with sticky */
   /* will allow the parent (root) container to continue to grow as necessary */
   /* min-height: 100vh; */
-  width: 100%;
+  min-width: 100%;
   margin: 0px;
+  padding: 0px;
+  overflow: hidden;
 }
+
+/* body {
+  padding-top: 1px;
+} */
 
 #root {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   /* justify-content: center; */
   align-items: center;
   /* min-height: 100vh; */
   /* used to only apply to splash, double check in  */
-  overflow: auto;
+  /* overflow: auto; */
   position: relative;
+  /* padding-bottom: 1px; */
 }
 
 .hidden {
@@ -64,8 +72,14 @@ textarea {
 
   /* Dark Theme */
   --darkText: rgba(209, 210, 211, 0.7);
-  --darkBg1: rgb(26, 29, 33);
+  --darkBg1: rgb(27, 29, 33);
   --darkBg2: rgb(25, 23, 29);
+  --darkBg3: rgb(35, 37, 41);
+
+  --darkBg2Hover: rgb(38, 46, 43);
+
+  --darkBorder1: rgb(42, 43, 47);
+  --darkBorder3: rgb(60, 62, 66);
 
   /* Other */
 
