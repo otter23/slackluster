@@ -1,17 +1,26 @@
+import './AddChannelForm.css';
+
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 // import { login } from '../../store/session';
-import * as sessionActions from '../../store/session';
 
-export default function AddChannelForm() {
+import hashIcon from '../../images/icons/hash-icon-offWhite.svg';
+
+import * as channelsActions from '../../store/session';
+
+export default function AddChannelForm({ closModal }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const channels = useSelector((state) => state.channels.channelByChannelId);
+  const channelId = useSelector((state) => state.channels.currentChannelId);
 
   //slices of react state for controlled inputs
   const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
+
+  const [navRow, setNavRow] = useState('about');
 
   //login submit handlers
   const submitLogin = async (e) => {
@@ -19,16 +28,51 @@ export default function AddChannelForm() {
     setErrors([]); //reset error state
 
     // send request to backend API login route (api/session)
-    const data = await dispatch(sessionActions.login({ credential, password }));
+    const data = await dispatch(
+      channelsActions.login({ credential, password })
+    );
     if (data) {
       setErrors(data);
     }
   };
 
   return (
-    <div className='login-card-container'>
-      <div className='login-card'>
-        <h2 className='login-header'>Log In</h2>
+    <div className='addChannel-card-container'>
+      <div className='addChannel-card'>
+        <div className='addChannel-header'>
+          <div className='addChannel-header-left'>
+            <img src={hashIcon} alt='hash' className='channel-hash-icon'></img>
+            <div>{channels[channelId]?.name}</div>
+          </div>
+          <div className='addChannel-close'>
+            <div className='material-symbols-outlined  '>close</div>
+          </div>
+        </div>
+
+        <div className='addChannel-row-two'>
+          <ul className='addChannel-row-two-inner'>
+            <li className='addChannel-about'>
+              <div
+                className={`addChannel-inactive
+                ${navRow === 'about' ? 'addChannel-active' : ''}`}
+                onClick={() => setNavRow('about')}
+              >
+                <span>About</span>
+              </div>
+            </li>
+            <li className='addChannel-members'>
+              <div
+                className={`addChannel-inactive
+                ${navRow === 'members' ? 'addChannel-active' : ''}`}
+                onClick={() => setNavRow('members')}
+              >
+                <span>Members</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div className='addChannel'></div>
 
         {errors.length > 0 && (
           <div className='login-error-container'>

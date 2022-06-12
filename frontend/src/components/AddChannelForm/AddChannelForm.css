@@ -1,52 +1,125 @@
-.login-background {
-  /* background-image: url('https://images.pexels.com/photos/3375493/pexels-photo-3375493.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=1333&w=2000'); */
-  /* background-size: cover; */
-  background-color: rgb(243, 243, 243);
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-/* LoginForm Component HTML Elements */
-
-.login-card-container {
+.addChannel-card-container {
   display: flex;
   justify-content: center;
   /* align-items: center; */
+
   width: 100%;
   height: 100%;
-  overflow-y: auto;
+
+  border: 1px solid var(--darkBorder1);
+  border-radius: 8px;
 }
 
-.login-card {
-  width: 650px;
-  max-height: 650px;
-  /* min-height: calc(100vh - 3rem); */
-  padding: 25px;
-  /* border: 1px solid var(--table1); */
-  border-radius: 4px;
-  /* box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2); */
-  background-color: rgb(243, 243, 243);
+.addChannel-card {
+  width: 580px;
+  height: 100%;
+
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   position: relative;
 }
 
-.login-header {
-  text-align: center;
-  margin: 0px;
-  margin-bottom: 40px;
+.addChannel-header {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 20px 76px 8px 28px;
 
-  font-size: 18px;
-  line-height: 26px;
-  font-weight: 400;
-  color: rgb(33, 33, 36);
-  text-size-adjust: 100%;
+  font-size: 22px;
+  font-weight: 800;
+  /* text-size-adjust: 100%; */
+  color: var(--darkText2);
 
-  padding-bottom: 36px;
-  border-bottom: 2px dotted rgb(204, 204, 204);
+  background-color: var(--darkBg1);
+
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
+
+.addChannel-header-left {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.addChannel-close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.addChannel-close div {
+  color: var(--darkText);
+}
+
+/* NAV SECOND ROW */
+
+.addChannel-row-two {
+  display: flex;
+  background-color: var(--darkBg1);
+  /* border-bottom: 1px solid var(--darkBorder1); */
+  box-shadow: inset 0 -1px 0 0 var(--darkBorder1);
+  width: 100%;
+  height: 36px;
+}
+
+ul.addChannel-row-two-inner {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+
+  width: 100%;
+
+  height: 36px;
+  margin: 0px;
+  padding: 0px 20px;
+}
+
+.addChannel-row-two-inner li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+
+  list-style-type: none;
+  font-size: 13px;
+  font-weight: bolder;
+
+  /* cursor: pointer; */
+  cursor: default;
+}
+
+.addChannel-inactive {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+
+  text-decoration: none;
+  color: var(--darkText);
+}
+
+.addChannel-inactive:hover {
+  color: var(--darkText2);
+}
+
+.addChannel-active {
+  color: var(--darkText2);
+  box-shadow: inset 0 -2px 0 0 #007a5a;
+}
+
+/* comment out in future */
+li.addChannel-members {
+  display: none;
+  cursor: default;
+}
+
+/* NAV SECOND ROW END */
 
 .login-error-container {
   /* background-color: #ffd8dc; */

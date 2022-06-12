@@ -72,6 +72,8 @@ textarea {
 
   /* Dark Theme */
   --darkText: rgba(209, 210, 211, 0.7);
+  --darkText2: rgba(209, 210, 211);
+  --darkText3: rgba(232, 232, 232, 0.7);
   --darkBg1: rgb(27, 29, 33);
   --darkBg2: rgb(25, 23, 29);
   --darkBg3: rgb(35, 37, 41);

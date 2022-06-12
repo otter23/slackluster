@@ -52,13 +52,25 @@ export default function SideMenu() {
   const openAddChannelModal = () => {
     if (showAddChannelModal) return; // do nothing if modal already showing
     setShowAddChannelModal(true); // else open modal
-    document.getElementById('root').classList.add('overflow');
+    document.getElementById('root').classList.add('overflowHidden');
   };
   const closeAddChannelModal = () => {
     if (!showAddChannelModal) return; // do nothing if modal already closed
     setShowAddChannelModal(false); // else close modal
-    document.getElementById('root').classList.remove('overflow');
+    document.getElementById('root').classList.remove('overflowHidden');
   };
+
+  // const [showEditChannelModal, setShowEditChannelModal] = useState(false);
+  // const openEditChannelModal = () => {
+  //   if (showEditChannelModal) return; // do nothing if modal already showing
+  //   setShowEditChannelModal(true); // else open modal
+  //   document.getElementById('root').classList.add('overflowHidden');
+  // };
+  // const closeEditChannelModal = () => {
+  //   if (!showEditChannelModal) return; // do nothing if modal already closed
+  //   setShowEditChannelModal(false); // else close modal
+  //   document.getElementById('root').classList.remove('overflowHidden');
+  // };
 
   //BAd Approach: create a style element to insert into an <object> SVG
   // const [svgCSS, setSvgCSS] = useState(1);
@@ -80,6 +92,13 @@ export default function SideMenu() {
       >
         <AddChannelForm />
       </FullPageModal>
+
+      {/* <FullPageModal
+        showModal={showEditChannelModal}
+        closeModal={closeEditChannelModal}
+      >
+        <EditChannelForm />
+      </FullPageModal> */}
 
       <div className='sideMenu-main-container'>
         <div className='sideMenu-header-container'>
@@ -123,11 +142,13 @@ export default function SideMenu() {
                   <div
                     className={'sideMenu-channel-name'}
                   >{`${channel.name}`}</div>
-                  {channel.ownerId === sessionUser.id && (
-                    <div className='sideMenu-channel-edit-icon'>
-                      <div className='material-symbols-outlined'>edit</div>
-                    </div>
-                  )}
+
+                  {/* <div
+                    className='sideMenu-channel-edit-icon'
+                    onClick={openEditChannelModal}
+                  >
+                    <div className='material-symbols-outlined'>edit</div>
+                  </div> */}
                 </div>
               ))}
             </div>
