@@ -6,6 +6,10 @@ const FullPageModal = ({ showModal, closeModal, children }) => {
   const modal = useRef(null);
 
   // NOTE NEED TO INCLUDE THE FOLLOWING IN PARENT COMPONENT:
+  // <FullPageModal
+  //     showModal={showAddChannelModal}
+  //     closeModal={closeAddChannelModal}
+  //   ></FullPageModal>
   //// const [showModal, setShowModal] = useState(false);
   //// const openModal = () => {
   //// if (showModal) return; // do nothing if modal already showing

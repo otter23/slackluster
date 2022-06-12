@@ -13,19 +13,42 @@
   min-height: 50px;
   width: 100%;
 
-  color: white;
-  font-size: 18px;
-  font-weight: 900;
+  /* gap: 5px; */
 
-  gap: 5px;
-
-  padding: 0px 54px 0px 16px;
+  padding: 0px 54px 0px 8px;
   border-top: 1px solid rgb(42, 43, 47);
   border-bottom: 1px solid rgb(42, 43, 47);
 }
 
+.channel-name-bar-btn {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  gap: 2px;
+
+  color: white;
+  font-size: 18px;
+  font-weight: 900;
+
+  padding: 8px 8px;
+  cursor: pointer;
+}
+
+.channel-name-bar-btn:hover {
+  background-color: var(--darkBg2Hover);
+}
+
 .channel-hash-icon {
   color: white;
+}
+
+.channel-name-expand-icon {
+  height: 23px;
+  width: 23px;
+  font-size: 18px;
+  font-weight: 900;
+  color: white;
+  padding-top: 2px;
 }
 
 .channel-main-container-inner {

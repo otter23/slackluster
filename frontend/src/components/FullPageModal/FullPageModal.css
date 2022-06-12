@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
 
-  background-color: rgba(0, 6, 9, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   width: 100vw;
   min-height: 100vh;
   display: flex;
@@ -23,6 +23,7 @@
   align-items: center;
 }
 
-#root.overflow {
-  overflow: hidden visible;
+#root.overflowHidden {
+  /* overflow: hidden visible; */
+  overflow: hidden;
 }
