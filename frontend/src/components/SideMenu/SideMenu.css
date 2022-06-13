@@ -97,7 +97,6 @@
   /* // manage scrollbar scroller background color here */
   background: rgb(108, 108, 111) !important;
   border-radius: 3px;
-  height: 200px;
 }
 
 /* alt solution to scrollbar length issue */
@@ -127,7 +126,7 @@
   width: 100%;
   font-size: 15px;
 
-  padding: 0px 54px 0px 16px;
+  padding: 0px 16px 0px 16px;
   gap: 8px;
   cursor: pointer;
   position: relative;
@@ -138,7 +137,7 @@
 }
 
 .sideMenu-channel-list-item.selected {
-  background-color: rgb(76, 150, 137);
+  background-color: var(--darkBg5);
   color: white;
   font-weight: 400;
   /* pointer-events: none; */
@@ -149,8 +148,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  width: 15px;
-  height: 15px;
+  min-width: 15px;
+  min-height: 15px;
 }
 
 .sideMenu-channel-hash-icon.selected {
@@ -159,6 +158,11 @@
 
 .sideMenu-channel-name {
   color: inherit;
+  /* hide text overflow as ellipsis */
+  text-overflow: ellipsis;
+  overflow: hidden;
+  /* need to figure out way to do this based on media query */
+  max-width: 230px;
 }
 
 .sideMenu-channel-edit-icon {

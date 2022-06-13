@@ -6,11 +6,11 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import FullPageModal from '../FullPageModal';
-import EditChannelName from '../EditChannelFields/EditChannelName';
-import EditChannelDescription from '../EditChannelFields/EditChannelDescription';
-import EditChannelTopic from '../EditChannelFields/EditChannelTopic';
 
-import hashIcon from '../../images/icons/hash-icon-offWhite.svg';
+import EditChannelName from '../EditChannelForms/EditChannelName';
+import EditChannelDescription from '../EditChannelForms/EditChannelDescription';
+import EditChannelTopic from '../EditChannelForms/EditChannelTopic';
+import DeleteChannel from '../EditChannelForms/DeleteChannel';
 
 export default function ChannelDetails({ closeModal }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -45,19 +45,23 @@ export default function ChannelDetails({ closeModal }) {
         {formSelection === 'name' && <EditChannelName />}
         {formSelection === 'topic' && <EditChannelTopic />}
         {formSelection === 'description' && <EditChannelDescription />}
+        {formSelection === 'delete' && (
+          <DeleteChannel closeDetailsModal={closeModal} />
+        )}
       </FullPageModal>
 
       <div className='channelDetails-card-container'>
         <div className='channelDetails-card'>
           <div className='channelDetails-header'>
             <div className='channelDetails-header-left'>
-              <img
-                src={hashIcon}
-                alt='hash'
-                className='channelDetails-hash-icon'
-              ></img>
-              <div>{channels[channelId]?.name}</div>
+              <span>
+                <div className='channelDetails-header-icon'></div>
+                <span className='channelDetails-header-name'>
+                  &nbsp;{channels[channelId]?.name}
+                </span>
+              </span>
             </div>
+
             <div className='channelDetails-close' onClick={closeModal}>
               <div className='material-symbols-outlined  '>close</div>
             </div>
@@ -89,9 +93,10 @@ export default function ChannelDetails({ closeModal }) {
           <div className='channelDetails-card-bottom'>
             <div
               className={`channelDetails-card-field-container ${
-                sessionUser.id === channels[channelId]?.ownerId
+                sessionUser.id === channels[channelId]?.ownerId &&
+                channels[channelId].name !== 'general'
                   ? 'editable'
-                  : ''
+                  : 'noEdit'
               }`}
               onClick={() => {
                 setFormSelection('name');
@@ -100,25 +105,24 @@ export default function ChannelDetails({ closeModal }) {
             >
               <div>Channel name</div>
               <div className='channelDetails-card-field-row-two'>
-                <img
-                  src={hashIcon}
-                  alt='hash'
-                  className='channelDetails-card-field-icon'
-                ></img>
-                <div>{channels[channelId]?.name}</div>
+                <span>
+                  <div className='channelDetails-card-field-icon'></div>
+
+                  <span className='channelDetails-card-field-name'>
+                    &nbsp;{channels[channelId]?.name}
+                  </span>
+                </span>
               </div>
-              {sessionUser.id === channels[channelId]?.ownerId && (
-                <div className='channelDetails-card-field-edit'>Edit</div>
-              )}
+              {sessionUser.id === channels[channelId]?.ownerId &&
+                channels[channelId].name !== 'general' && (
+                  <div className='channelDetails-card-field-edit'>Edit</div>
+                )}
             </div>
+
             <div className='channelDetails-card-spacer'></div>
 
             <div
-              className={`channelDetails-card-field-container topic ${
-                sessionUser.id === channels[channelId]?.ownerId
-                  ? 'editable'
-                  : ''
-              }`}
+              className={`channelDetails-card-field-container topic editable`}
               onClick={() => {
                 setFormSelection('topic');
                 openEditChannelModal();
@@ -134,17 +138,12 @@ export default function ChannelDetails({ closeModal }) {
                   </div>
                 )}
               </div>
-              {sessionUser.id === channels[channelId]?.ownerId && (
-                <div className='channelDetails-card-field-edit'>Edit</div>
-              )}
+
+              <div className='channelDetails-card-field-edit'>Edit</div>
             </div>
 
             <div
-              className={`channelDetails-card-field-container description ${
-                sessionUser.id === channels[channelId]?.ownerId
-                  ? 'editable'
-                  : ''
-              }`}
+              className={`channelDetails-card-field-container description editable`}
               onClick={() => {
                 setFormSelection('description');
                 openEditChannelModal();
@@ -152,17 +151,16 @@ export default function ChannelDetails({ closeModal }) {
             >
               <div>Description</div>
               <div className='channelDetails-card-field-row-two'>
-                {channels[channelId]?.desription ? (
-                  <div>{channels[channelId]?.desription}</div>
+                {channels[channelId]?.description ? (
+                  <div>{channels[channelId]?.description}</div>
                 ) : (
                   <div className='channelDetails-card-placeholder'>
                     Add a description
                   </div>
                 )}
               </div>
-              {sessionUser.id === channels[channelId]?.ownerId && (
-                <div className='channelDetails-card-field-edit'>Edit</div>
-              )}
+
+              <div className='channelDetails-card-field-edit'>Edit</div>
             </div>
 
             <div
@@ -175,12 +173,35 @@ export default function ChannelDetails({ closeModal }) {
               <div>Created by</div>
               <div className='channelDetails-card-field-row-two'>
                 <div>{`${
-                  users[channels[channelId]?.ownerId].username
+                  users[channels[channelId]?.ownerId]?.username
                 } on ${dayjs(channels[channelId]?.createdAt).format(
                   'MMMM D, YYYY'
                 )}`}</div>
               </div>
             </div>
+
+            <div className='channelDetails-card-spacer'></div>
+
+            {sessionUser.id === channels[channelId]?.ownerId &&
+              channels[channelId].name !== 'general' && (
+                <div
+                  className={`channelDetails-card-field-container delete editable`}
+                  onClick={() => {
+                    setFormSelection('delete');
+                    openEditChannelModal();
+                  }}
+                >
+                  <div className='channelDetails-card-delete-header'>
+                    Delete this channel
+                  </div>
+                  <div className='channelDetails-card-field-row-two'>
+                    <div className='channelDetails-card-placeholder'>
+                      Deleting this channel will permanently remove all of its
+                      messages. This cannot be undone.
+                    </div>
+                  </div>
+                </div>
+              )}
           </div>
         </div>
       </div>

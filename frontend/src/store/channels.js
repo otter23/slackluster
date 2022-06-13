@@ -1,7 +1,7 @@
 //Redux state slice to hold channels from db
 
 import { csrfFetch } from './utils/csrf'; //restoreCSRF
-import { deleteChannelMessages } from './messages'; //restoreCSRF
+// import { deleteChannelMessages } from './messages'; //restoreCSRF
 
 //ACTION TYPES:
 const GET_ALL_CHANNELS = 'channels/getAllChannels';
@@ -112,6 +112,7 @@ export const updateChannelThunk = (formData) => async (dispatch) => {
   const response = await csrfFetch(`/api/channels/${channelId}`, {
     method: 'PATCH',
     body: JSON.stringify({
+      channelId,
       name,
       topic,
       description,
@@ -135,6 +136,7 @@ export const deleteChannelThunk = (ownerId, channelId) => async (dispatch) => {
   if (response.ok) {
     const resBody = await response.json();
     if (resBody.message === 'Success') {
+      dispatch(setCurrentChannel(1));
       // dispatch(deleteChannel(ownerId, channelId));
       //remove channel from messageByChannelId
       // dispatch(deleteChannelMessages(channelId));
