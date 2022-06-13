@@ -42,16 +42,16 @@
   width: 100%;
 }
 
-.editChannel-header-left.delete {
+.editChannel-header-left.delete div {
   /* breakup extremely long single no space words*/
-  overflow-wrap: break-word;
-  word-break: break-all;
+  /* overflow-wrap: break-word;
+  word-break: break-all; */
 
   /* hide text overflow as ellipsis */
   text-overflow: ellipsis;
   overflow: hidden;
   /* need to figure out way to do this based on media query */
-  /* max-width: 476px; */
+  max-width: 476px;
 }
 .editChannel-header-left.delete span {
   color: var(--darkTextDelete);
@@ -210,8 +210,8 @@
 
 .editChannel-delete-btn-container {
   /* background-color: rgb(74, 1, 1); */
-  background-color: rgba(224, 30, 91, 0.3);
-  /* background-color: var(--darkTextDelete); */
+  /* background-color: rgba(224, 30, 91, 0.3); */
+  background-color: var(--darkTextDelete);
   color: white;
 }
 
@@ -262,6 +262,17 @@ div.editChannel-delete-btn-container.disabledDelete {
 
 .editChannel-subheader {
   padding-bottom: 20px;
+  font-size: 15px;
+  color: rgb(171, 171, 173);
+  font-weight: none;
+  /* breakup extremely long single no space words*/
+  /* overflow-wrap: break-word; */
+  /* word-break: break-all; */
+}
+
+.editChannel-subheader-name {
+  font-weight: 800;
+  color: var(--darkText2);
   /* breakup extremely long single no space words*/
   overflow-wrap: break-word;
   word-break: break-all;
