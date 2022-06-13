@@ -56,7 +56,13 @@ export default function EditChannelDescription({ closeModal }) {
             <div className='editChannel-header-left'>
               <div>Edit description</div>
             </div>
-            <div className='editChannel-close' onClick={closeModal}>
+            <div
+              className='editChannel-close'
+              onClick={(e) => {
+                e.stopPropagation();
+                closeModal();
+              }}
+            >
               <div className='material-symbols-outlined  '>close</div>
             </div>
           </div>
@@ -81,7 +87,7 @@ export default function EditChannelDescription({ closeModal }) {
                   className='editChannel-form-textarea'
                   rows={5}
                   cols={5}
-                  value={channelDescription}
+                  value={channelDescription ?? ''}
                   onChange={(e) => {
                     setChannelDescription(e.target.value);
                   }}
@@ -96,21 +102,21 @@ export default function EditChannelDescription({ closeModal }) {
             </div>
 
             <div className='editChannel-buttons-container'>
-              <div className='editChannel-cancel-btn-container'>
-                <button
-                  className='editChannel-cancel-btn'
-                  type='button'
-                  onClick={closeModal}
-                >
-                  Cancel
-                </button>
+              <div
+                className='editChannel-cancel-btn-container'
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closeModal();
+                }}
+              >
+                <div className='editChannel-cancel-btn'>Cancel</div>
               </div>
 
-              <div className={`editChannel-save-btn-container`}>
-                <button className='editChannel-save-btn' type='submit'>
+              <button className={`editChannel-save-btn-container`}>
+                <div className='editChannel-save-btn' type='submit'>
                   Save
-                </button>
-              </div>
+                </div>
+              </button>
             </div>
           </form>
         </div>

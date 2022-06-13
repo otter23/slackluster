@@ -56,7 +56,13 @@ export default function EditChannelTopic({ closeModal }) {
             <div className='editChannel-header-left'>
               <div>Edit topic</div>
             </div>
-            <div className='editChannel-close' onClick={closeModal}>
+            <div
+              className='editChannel-close'
+              onClick={(e) => {
+                e.stopPropagation();
+                closeModal();
+              }}
+            >
               <div className='material-symbols-outlined  '>close</div>
             </div>
           </div>
@@ -81,7 +87,7 @@ export default function EditChannelTopic({ closeModal }) {
                   className='editChannel-form-textarea'
                   rows={5}
                   cols={5}
-                  value={channelTopic}
+                  value={channelTopic ?? ''}
                   onChange={(e) => {
                     setChannelTopic(e.target.value);
                   }}
@@ -105,21 +111,22 @@ export default function EditChannelTopic({ closeModal }) {
             </div>
 
             <div className='editChannel-buttons-container'>
-              <div className='editChannel-cancel-btn-container'>
-                <button
-                  className='editChannel-cancel-btn'
-                  type='button'
-                  onClick={closeModal}
-                >
-                  Cancel
-                </button>
+              <div
+                className='editChannel-cancel-btn-container'
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closeModal();
+                }}
+              >
+                <div className='editChannel-cancel-btn'>Cancel</div>
               </div>
 
-              <div className={`editChannel-save-btn-container`}>
-                <button className='editChannel-save-btn' type='submit'>
-                  Save
-                </button>
-              </div>
+              <button
+                className={`editChannel-save-btn-container`}
+                type='submit'
+              >
+                <div className='editChannel-save-btn'>Save</div>
+              </button>
             </div>
           </form>
         </div>

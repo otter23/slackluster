@@ -65,7 +65,13 @@ export default function EditChannelName({ closeModal }) {
             <div className='editChannel-header-left'>
               <div>Rename this channel</div>
             </div>
-            <div className='editChannel-close' onClick={closeModal}>
+            <div
+              className='editChannel-close'
+              onClick={(e) => {
+                e.stopPropagation();
+                closeModal();
+              }}
+            >
               <div className='material-symbols-outlined  '>close</div>
             </div>
           </div>
@@ -91,7 +97,7 @@ export default function EditChannelName({ closeModal }) {
                 id='name'
                 className='editChannel-form-input'
                 type='text'
-                value={channelName}
+                value={channelName ?? ''}
                 onChange={(e) => {
                   setChannelName(e.target.value);
                   setDisabledSave(false);
@@ -107,29 +113,25 @@ export default function EditChannelName({ closeModal }) {
             </div>
 
             <div className='editChannel-buttons-container'>
-              <div className='editChannel-cancel-btn-container'>
-                <button
-                  className='editChannel-cancel-btn'
-                  type='button'
-                  onClick={closeModal}
-                >
-                  Cancel
-                </button>
+              <div
+                className='editChannel-cancel-btn-container'
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closeModal();
+                }}
+              >
+                <div className='editChannel-cancel-btn'>Cancel</div>
               </div>
 
-              <div
+              <button
                 className={`editChannel-save-btn-container ${
                   disabledSave && 'disabledSave'
                 }`}
+                type='submit'
+                disabled={disabledSave}
               >
-                <button
-                  className='editChannel-save-btn'
-                  type='submit'
-                  disabled={disabledSave}
-                >
-                  Save Changes
-                </button>
-              </div>
+                <div className='editChannel-save-btn'>Save Changes</div>
+              </button>
             </div>
           </form>
         </div>

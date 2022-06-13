@@ -46,7 +46,6 @@ export default function DeleteChannel({ closeModal, closeDetailsModal }) {
           setErrors(resBody.errors);
         }
       }
-      console.log('TEST');
     }
   };
 
@@ -62,7 +61,13 @@ export default function DeleteChannel({ closeModal, closeDetailsModal }) {
               {/* </span> */}
               <div> #&nbsp;{channels[channelId]?.name} </div>
             </div>
-            <div className='editChannel-close' onClick={closeModal}>
+            <div
+              className='editChannel-close'
+              onClick={(e) => {
+                e.stopPropagation();
+                closeModal();
+              }}
+            >
               <div className='material-symbols-outlined  '>close</div>
             </div>
           </div>
@@ -110,29 +115,25 @@ export default function DeleteChannel({ closeModal, closeDetailsModal }) {
             </div>
 
             <div className='editChannel-buttons-container'>
-              <div className='editChannel-cancel-btn-container'>
-                <button
-                  className='editChannel-cancel-btn'
-                  type='button'
-                  onClick={closeModal}
-                >
-                  Cancel
-                </button>
+              <div
+                className='editChannel-cancel-btn-container'
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closeModal();
+                }}
+              >
+                <div className='editChannel-cancel-btn'>Cancel</div>
               </div>
 
-              <div
+              <button
                 className={`editChannel-delete-btn-container ${
                   disabledDelete && 'disabledDelete'
                 }`}
+                type='submit'
+                disabled={disabledDelete}
               >
-                <button
-                  className='editChannel-delete-btn'
-                  type='submit'
-                  disabled={disabledDelete}
-                >
-                  Delete Channel
-                </button>
-              </div>
+                <div className='editChannel-delete-btn'>Delete Channel</div>
+              </button>
             </div>
           </form>
         </div>
