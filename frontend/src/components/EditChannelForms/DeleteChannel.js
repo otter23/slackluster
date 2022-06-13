@@ -60,7 +60,7 @@ export default function DeleteChannel({ closeModal, closeDetailsModal }) {
               <span>Delete&nbsp;</span>
               {/* <div className='editChannel-header-icon'></div> */}
               {/* </span> */}
-              <div> # {channels[channelId]?.name} </div>
+              <div> #&nbsp;{channels[channelId]?.name} </div>
             </div>
             <div className='editChannel-close' onClick={closeModal}>
               <div className='material-symbols-outlined  '>close</div>
@@ -73,9 +73,15 @@ export default function DeleteChannel({ closeModal, closeDetailsModal }) {
             autoComplete='off'
           >
             <div className='editChannel-subheader'>
-              {`Are you sure you want to delete #${channels[channelId]?.name}? All of the channel's
-              messages will be removed from Slackluster immediately — files,
-              however, will not be deleted. This cannot be undone.`}
+              <span>Are you sure you want to delete&nbsp;</span>
+              <span className='editChannel-subheader-name'>
+                #{channels[channelId]?.name}
+              </span>
+              <span>
+                ? All of the channel's messages will be removed from Slackluster
+                immediately — files, however, will not be deleted. This cannot
+                be undone.
+              </span>
             </div>
             <div className='editChannel-form-group'>
               <label className='editChannel-form-label' htmlFor='delete'>
