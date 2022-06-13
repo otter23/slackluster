@@ -1,19 +1,31 @@
 import './ChannelDisplay.css';
 
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import * as channelsActions from '../../store/channels';
 
 import Chat from '../Chat';
 import ChannelDetails from '../ChannelDetails';
-
 import hashIconWhite from '../../images/icons/hash-icon-white.svg';
 import FullPageModal from '../FullPageModal';
 
-export default function ChannelDisplay() {
+export default function ChannelDisplay({ isChannelsLoaded }) {
+  const dispatch = useDispatch();
+
   // const sessionUser = useSelector((state) => state.session.user);
   const messages = useSelector((state) => state.messages.messagesByChannelId);
   const channels = useSelector((state) => state.channels.channelByChannelId);
   const channelId = useSelector((state) => state.channels.currentChannelId);
+
+  useEffect(() => {
+    if (isChannelsLoaded && !channels[channelId]) {
+      alert(
+        `The channel you were viewing was deleted by the owner, redirected you to channel #general`
+      );
+      dispatch(channelsActions.setCurrentChannel(1));
+    }
+  }, [dispatch, channels, channelId]);
 
   const [showChannelInfoModal, setShowChannelInfoModal] = useState(false);
   const openChannelInfoModal = () => {

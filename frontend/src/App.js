@@ -17,6 +17,7 @@ export default function App() {
   const dispatch = useDispatch();
 
   const [isAuthLoaded, setIsAuthLoaded] = useState(false);
+  const [isChannelsLoaded, setIsChannelsLoaded] = useState(false);
 
   //restore user Sesssion
   useEffect(() => {
@@ -41,9 +42,9 @@ export default function App() {
         console.log(res)
       );
       //or just eager load default channel into state?
-      dispatch(channelsActions.getAllChannelsThunk()).catch((res) =>
-        console.log(res)
-      );
+      dispatch(channelsActions.getAllChannelsThunk())
+        .then(() => setIsChannelsLoaded(true))
+        .catch((res) => console.log(res));
       dispatch(messagesActions.getAllMessagesThunk()).catch((res) =>
         console.log(res)
       );
@@ -59,7 +60,11 @@ export default function App() {
       <>
         <Switch>
           <Route exact path='/'>
-            {sessionUser ? <Redirect to='/client/workspace'></Redirect> : <SplashPage />}
+            {sessionUser ? (
+              <Redirect to='/client/workspace'></Redirect>
+            ) : (
+              <SplashPage />
+            )}
           </Route>
 
           <Route path='/login'>
@@ -71,7 +76,11 @@ export default function App() {
           </Route>
 
           <Route path='/client/workspace'>
-            {sessionUser ? <MainPage /> : <Redirect to='/'></Redirect>}
+            {sessionUser ? (
+              <MainPage isChannelsLoaded={isChannelsLoaded} />
+            ) : (
+              <Redirect to='/'></Redirect>
+            )}
           </Route>
 
           <Route>

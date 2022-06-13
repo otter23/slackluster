@@ -6,13 +6,13 @@ import NavBarMain from '../NavBarMain';
 import SideMenu from '../SideMenu';
 import ChannelDisplay from '../ChannelDisplay';
 
-export default function MainPage() {
+export default function MainPage({ isChannelsLoaded }) {
   return (
     <>
       <NavBarMain />
       <div className='mainPage-main-container'>
         <SideMenu />
-        <ChannelDisplay />
+        <ChannelDisplay isChannelsLoaded={isChannelsLoaded} />
       </div>
     </>
   );
