@@ -74,21 +74,30 @@ textarea {
   --darkText: rgba(209, 210, 211, 0.7);
   --darkText2: rgba(209, 210, 211);
   --darkText3: rgba(232, 232, 232, 0.7);
-  --darkBg1: rgb(27, 29, 33);
+  --darkText4: rgb(171, 171, 173);
+
+  --errorText: rgb(232, 145, 45);
+  --darkBg1: rgb(26, 29, 33);
   --darkBg2: rgb(25, 23, 29);
   --darkBg3: rgb(35, 37, 41);
+  --darkBg4: rgb(53, 55, 59);
+  --darkBg5: rgb(76, 150, 137);
+  --darkBg6: rgb(0, 122, 90);
 
   --darkBg2Hover: rgb(38, 46, 43);
 
   --darkBorder1: rgb(42, 43, 47);
+
   --darkBorder3: rgb(60, 62, 66);
+  --darkBorder4: rgb(53, 55, 59);
+  --darkTextDelete: rgb(224, 30, 90);
 
   /* Other */
 
   --btn: rgb(63, 143, 214);
   --btnTrue: rgb(18, 143, 220);
   --btnHover: rgb(66, 150, 225);
-  --btnDelete: rgb(209, 61, 54);
+
   --btnCancel: rgb(151, 158, 162);
   --inputOutline: rgb(63, 143, 214);
 

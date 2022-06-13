@@ -36,16 +36,43 @@
   border-top-right-radius: 12px;
 }
 
+.channelDetails-header div {
+  /* breakup extremely long single no space words*/
+  overflow-wrap: break-word;
+  word-break: break-all;
+
+  /* hide text overflow as ellipsis */
+  text-overflow: ellipsis;
+  overflow: hidden;
+  /* need to figure out way to do this based on media query */
+  /* max-width: 476px; */
+}
+
 .channelDetails-header-left {
   display: flex;
   align-items: center;
   width: 100%;
 }
 
+.channelDetails-header-icon {
+  float: left;
+  background-image: url('../../images/icons/hash-icon-white.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  /* background-size: contain; */
+  background-size: 100% 100%;
+
+  width: 26px;
+  height: 26px;
+}
+
 .channelDetails-close {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  min-height: 36px;
+  min-width: 36px;
 
   position: absolute;
   top: 20px;
@@ -54,6 +81,10 @@
 }
 .channelDetails-close div {
   color: var(--darkText);
+}
+
+.channelDetails-close:hover {
+  background-color: var(--darkBg2Hover) !important;
 }
 
 /* NAV SECOND ROW */
@@ -144,9 +175,16 @@ li.channelDetails-members {
   border: 1px solid var(--darkBorder1);
   border-radius: 12px;
   position: relative;
+
+  /* breakup extremely long single no space words*/
+  overflow-wrap: break-word;
+  word-break: break-all;
 }
 .channelDetails-card-field-container.editable {
   cursor: pointer;
+}
+.channelDetails-card-field-container.noEdit {
+  pointer-events: none;
 }
 
 .channelDetails-card-field-container.editable:hover {
@@ -156,15 +194,21 @@ li.channelDetails-members {
 .channelDetails-card-field-row-two {
   display: flex;
   align-items: center;
+  width: 100%;
   gap: 2px;
   font-size: 13px;
   font-weight: 200;
 }
 
 .channelDetails-card-field-icon {
-  padding-top: 2px;
+  float: left;
+  background-image: url('../../images/icons/hash-icon-offWhite.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  /* background-size: contain; */
+  background-size: 100% 100%;
   width: 15px;
-  height: 17px;
+  height: 15px;
 }
 
 .channelDetails-card-field-edit {
@@ -203,4 +247,8 @@ li.channelDetails-members {
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   pointer-events: none;
+}
+
+.channelDetails-card-delete-header {
+  color: var(--darkTextDelete);
 }

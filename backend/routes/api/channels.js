@@ -44,16 +44,25 @@ const validateChannel = [
   check('name')
     .exists({ checkFalsy: true })
     .withMessage('Don’t forget to name your channel.')
-    .isLength({ max: 250 })
+    .isLength({ max: 80 })
     .withMessage('Channel names can’t be longer than 80 characters.')
     .matches(/^[\w-]+$/i, 'g')
     .withMessage(
       'Channel names can’t contain spaces, periods, or most punctuation. Try again?'
     )
-    .custom((value) => {
-      return Channel.findOne({ where: { name: value } }).then((channel) => {
-        if (channel) return Promise.reject('Channel name already exists');
-      });
+    .custom(async (value, { req }) => {
+      //only check if update route, not add route (note: could use req.params instead)
+      if (req.body.channelId) {
+        const currentChannel = await Channel.findByPk(req.body.channelId);
+        //check if name exists in db
+        const namedChannel = await Channel.findOne({ where: { name: value } });
+
+        //if name same as previous, or no records found do nothing, else reject
+        if (currentChannel?.name === namedChannel?.name || !namedChannel)
+          return;
+        else return Promise.reject('Channel name already exists');
+      }
+      return;
     }),
   check('topic')
     .isLength({ max: 250 })
@@ -131,6 +140,7 @@ router.patch(
         name: lowerName,
         topic,
         description,
+        // isPrivate: false,
       });
 
       const io = req.app.get('socketio');
