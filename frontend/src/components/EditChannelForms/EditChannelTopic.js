@@ -1,12 +1,13 @@
 import './EditChannel.css';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as channelsActions from '../../store/channels';
 
 export default function EditChannelTopic({ closeModal }) {
   const dispatch = useDispatch();
+  const topicInputRef = useRef(null);
 
   const channels = useSelector((state) => state.channels.channelByChannelId);
   const channelId = useSelector((state) => state.channels.currentChannelId);
@@ -18,6 +19,11 @@ export default function EditChannelTopic({ closeModal }) {
     channels[channelId]?.description
   );
   const [errors, setErrors] = useState([]);
+
+  //autofocus input field
+  useEffect(() => {
+    topicInputRef.current.focus();
+  }, []);
 
   //submit form handler
   const handleSubmit = async (e) => {
@@ -93,6 +99,7 @@ export default function EditChannelTopic({ closeModal }) {
                   }}
                   placeholder='Add a topic'
                   name='topic'
+                  ref={topicInputRef}
                 ></textarea>
               </div>
 

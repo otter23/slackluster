@@ -1,12 +1,13 @@
 import './EditChannel.css';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as channelsActions from '../../store/channels';
 
 export default function EditChannelName({ closeModal }) {
   const dispatch = useDispatch();
+  const nameInputRef = useRef(null);
 
   const channels = useSelector((state) => state.channels.channelByChannelId);
   const channelId = useSelector((state) => state.channels.currentChannelId);
@@ -19,6 +20,11 @@ export default function EditChannelName({ closeModal }) {
   );
   const [errors, setErrors] = useState([]);
   const [disabledSave, setDisabledSave] = useState(false);
+
+  //autofocus input field
+  useEffect(() => {
+    nameInputRef.current.focus();
+  }, []);
 
   //disable form submit if name has not been change
   useEffect(() => {
@@ -104,6 +110,7 @@ export default function EditChannelName({ closeModal }) {
                 }}
                 placeholder='e.g. marketing'
                 name='name'
+                ref={nameInputRef}
               ></input>
               <div className='editChannel-hash-icon'></div>
               <div className='editChannel-instructions'>
