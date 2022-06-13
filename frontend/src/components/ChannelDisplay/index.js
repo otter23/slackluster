@@ -70,7 +70,7 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
               className='channel-hash-icon'
             ></img>
             <div>{channels[channelId]?.name}</div>
-            <div class='material-symbols-outlined channel-name-expand-icon'>
+            <div className='material-symbols-outlined channel-name-expand-icon'>
               expand_more
             </div>
           </div>
