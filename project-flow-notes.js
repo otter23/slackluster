@@ -354,11 +354,13 @@ frontend: ~$ npm install socket.io-client
 
 Challenges:
 socket.io - getting working in global react context (useRef) and getting working with express routes
+modals - click propogation
+css - inline styling wrap, scroll bar
+
 
 
 
 TO DO:
-setup socket.io
 change app load to be only depended on isLoaded, and then route specific waiting for other slices of redux state
 redux toolkit?
 
