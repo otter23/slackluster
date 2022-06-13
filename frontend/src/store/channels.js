@@ -218,7 +218,11 @@ export default function channelsReducer(state = initialState, action) {
 
       //re-sort channel array based on name in ASC order
       newState.allChannels?.sort((a, b) => {
-        return b.name - a.name;
+        const nameA = a.name.toLowerCase(); // ignore upper and lowercase
+        const nameB = b.name.toLowerCase(); // ignore upper and lowercase
+        if (nameA < nameB) return -1;
+        if (nameA > nameB) return 1;
+        return 0; // names must be equal
       });
 
       //add channel to channelByChannelId
@@ -237,6 +241,15 @@ export default function channelsReducer(state = initialState, action) {
 
       //replace channel in allChannels array
       newState.allChannels[index] = action.payload.updatedChannel;
+
+      //re-sort channel array based on name in ASC order
+      newState.allChannels?.sort((a, b) => {
+        const nameA = a.name.toLowerCase(); // ignore upper and lowercase
+        const nameB = b.name.toLowerCase(); // ignore upper and lowercase
+        if (nameA < nameB) return -1;
+        if (nameA > nameB) return 1;
+        return 0; // names must be equal
+      });
 
       //replace channel in channelByChannelId
       newState.channelByChannelId[channelId] = action.payload.updatedChannel;
