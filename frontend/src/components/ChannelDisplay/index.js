@@ -13,19 +13,32 @@ import FullPageModal from '../FullPageModal';
 export default function ChannelDisplay({ isChannelsLoaded }) {
   const dispatch = useDispatch();
 
-  // const sessionUser = useSelector((state) => state.session.user);
+  const sessionUser = useSelector((state) => state.session.user);
   const messages = useSelector((state) => state.messages.messagesByChannelId);
   const channels = useSelector((state) => state.channels.channelByChannelId);
   const channelId = useSelector((state) => state.channels.currentChannelId);
 
+  //store boolean indicating whether user is owner of currently viewed channel
+  const [isOwner, setIsOwner] = useState(false);
   useEffect(() => {
-    if (isChannelsLoaded && !channels[channelId]) {
+    if (isChannelsLoaded) {
+      if (sessionUser.id === channels[channelId]?.ownerId) {
+        setIsOwner(true);
+      }
+    }
+  }, [sessionUser, isChannelsLoaded, channels, channelId]);
+
+  //when a user deletes a channels, warn other user's who happen to be viewing it
+  useEffect(() => {
+    if (!isOwner && isChannelsLoaded && !channels[channelId]) {
       alert(
         `The channel you were viewing was deleted by the owner, redirected you to channel #general`
       );
       dispatch(channelsActions.setCurrentChannel(1));
+    } else if (isChannelsLoaded && !channels[channelId]) {
+      dispatch(channelsActions.setCurrentChannel(1));
     }
-  }, [dispatch, channels, channelId]);
+  }, [dispatch, isOwner, isChannelsLoaded, channels, channelId]);
 
   const [showChannelInfoModal, setShowChannelInfoModal] = useState(false);
   const openChannelInfoModal = () => {
