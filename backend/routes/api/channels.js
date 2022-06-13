@@ -132,27 +132,40 @@ router.patch(
     const { name, topic, description } = req.body;
     //user not allowed to update isPrivate for now
 
-    const lowerName = name.toLowerCase();
+    let lowerName;
 
-    //check if channel belongs to signed in user
+    //Protect channel name route so only owner can update name with a fetch
+    //Don't allow updates to general channel's name by Demo user (owner)
     if (sessionUserId === channelToUpdate.ownerId) {
-      const updatedChannel = await channelToUpdate.update({
-        name: lowerName,
-        topic,
-        description,
-        // isPrivate: false,
-      });
-
-      const io = req.app.get('socketio');
-      io.emit('channel:update', { updatedChannel });
-      // const socket = req.app.get('socket');
-      // socket.broadcast.emit('channel:update', { updatedChannel });
-
-      return res.json(updatedChannel);
+      if (channelToUpdate.name === 'general') {
+        lowerName = name.toLowerCase();
+      } else {
+        lowerName = channelToUpdate.name;
+      }
     } else {
-      res.status(401);
-      return res.json({ errors: 'Unauthorized' });
+      lowerName = channelToUpdate.name;
     }
+
+    //check if channel belongs to sessionUser - anyone in workspace can update
+    //topic or description
+    // if (sessionUserId === channelToUpdate.ownerId) {
+    const updatedChannel = await channelToUpdate.update({
+      name: lowerName,
+      topic,
+      description,
+      // isPrivate: false,
+    });
+
+    const io = req.app.get('socketio');
+    io.emit('channel:update', { updatedChannel });
+    // const socket = req.app.get('socket');
+    // socket.broadcast.emit('channel:update', { updatedChannel });
+
+    return res.json(updatedChannel);
+    // } else {
+    //   res.status(401);
+    //   return res.json({ errors: 'Unauthorized' });
+    // }
   })
 );
 
@@ -172,8 +185,14 @@ router.delete(
       return res.json({ errors: 'Channel not found' });
     }
 
-    //check if channel belongs to signed in user
+    //prevent anyone from deleting the #general channel
+    if (channelToDelete.name === 'general') {
+      res.status(401);
+      return res.json({ errors: 'Channel #general cannot be deleted.' });
+    }
+
     if (sessionUserId === channelToDelete.ownerId) {
+      //check if channel belongs to signed in user
       //Destroy Channels dependencies first:
       // //find all threads associated to the threadId
       // const messageAssociations = await UserChannel.findAll({
@@ -275,7 +294,11 @@ module.exports = router;
 //   method: 'DELETE',
 // })
 //   .then((res) => res.json())
-//   .then((data) => console.log(data));
+//   .then((data) => console.log(data))
+//   .catch(async (res) => {
+//     const resBody = await res.json();
+//     console.log(resBody.errors);
+//   });
 
 //GET ALL CHANNEL MESSAGES
 // fetch("/api/channels/1/messages").then( res => res.json() ).then(data => console.log(data) )

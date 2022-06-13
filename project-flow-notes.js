@@ -363,6 +363,9 @@ css - inline styling wrap, scroll bar
 TO DO:
 change app load to be only depended on isLoaded, and then route specific waiting for other slices of redux state
 redux toolkit?
+react-images-uploading - npm
+rfdc - clone package npm
+
 
 //SPA where only clicks can navigate
     //represent userId with a UUID
