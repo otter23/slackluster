@@ -138,9 +138,9 @@ router.patch(
     //Don't allow updates to general channel's name by Demo user (owner)
     if (sessionUserId === channelToUpdate.ownerId) {
       if (channelToUpdate.name === 'general') {
-        lowerName = name.toLowerCase();
-      } else {
         lowerName = channelToUpdate.name;
+      } else {
+        lowerName = name.toLowerCase();
       }
     } else {
       lowerName = channelToUpdate.name;
