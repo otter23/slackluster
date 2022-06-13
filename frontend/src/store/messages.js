@@ -63,7 +63,7 @@ export const deleteChannelMessages = (channelId) => ({
 //THUNK ACTION CREATORS:
 
 //request to backend for all messages
-//messages are pre-sorted by alphabetical order in backend
+//messages are pre-sorted by createdAt order in backend
 export const getAllMessagesThunk = () => async (dispatch) => {
   const response = await csrfFetch(`/api/messages`);
 
@@ -75,7 +75,7 @@ export const getAllMessagesThunk = () => async (dispatch) => {
 };
 
 //request to backend for all messages owned by a user
-//messages are pre-sorted by alphabetical order in backend
+//messages are pre-sorted by createdAt order in backend
 export const getUserMessagesThunk = (userId) => async (dispatch) => {
   const response = await csrfFetch(`/api/users/${userId}/messages`);
 
@@ -256,13 +256,14 @@ export default function messagesReducer(state = initialState, action) {
       messageId = action.payload.newMessage.id;
       channelId = action.payload.newMessage.channelId;
 
-      //add message to end of array sorted by "name"
+      //add message to end of array sorted by "createdAt"
       newState.allMessages?.push(action.payload.newMessage);
 
-      //re-sort message array based on name in ASC order
-      newState.allMessages.sort((a, b) => {
-        return b.name - a.name;
-      });
+      //no need to sort, newwest always goes to end of list
+      //re-sort message array based on createdAt in ASC order
+      // newState.allChannels?.sort((a, b) => {
+      //   return a.createdAt.valueOf() - b.createdAt.valueOf();
+      // });
 
       //add message to messageByMessageId
       newState.messageByMessageId[messageId] = action.payload.newMessage;
@@ -283,6 +284,7 @@ export default function messagesReducer(state = initialState, action) {
       );
       //replace message in allMessages array
       newState.allMessages[index] = action.payload.updatedMessage;
+      //no need to update sort order bc createdAt didn't change
 
       //replace message in messageByMessageId
       newState.messageByMessageId[messageId] = action.payload.updatedMessage;
