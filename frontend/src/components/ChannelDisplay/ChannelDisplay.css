@@ -1,13 +1,14 @@
-.channel-main-container {
+.channelDisplay-main-container {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  height: 100%;
+  /* flex: 1; */
   width: 100%;
 
   background-color: var(--darkBg1);
 }
 
-.channel-name-bar {
+.channelDisplay-name-bar {
   display: flex;
   align-items: center;
   min-height: 50px;
@@ -20,7 +21,7 @@
   border-bottom: 1px solid rgb(42, 43, 47);
 }
 
-.channel-name-bar-btn {
+.channelDisplay-name-bar-btn {
   display: flex;
   align-items: center;
   height: 30px;
@@ -34,15 +35,15 @@
   cursor: pointer;
 }
 
-.channel-name-bar-btn:hover {
+.channelDisplay-name-bar-btn:hover {
   background-color: var(--darkBg2Hover);
 }
 
-.channel-hash-icon {
+.channelDisplay-hash-icon {
   color: white;
 }
 
-.channel-name-expand-icon {
+.channelDisplay-name-expand-icon {
   height: 23px;
   width: 23px;
   font-size: 18px;
@@ -51,18 +52,152 @@
   padding-top: 2px;
 }
 
-.channel-main-container-inner {
-  width: 100%;
-  height: 100%;
+/* ************************************************************ */
+/* ************************************************************ */
+
+.channelDisplay-message-container-wrapper {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  /* flex-grow: 1; */
+  /* flex: 1; */
+  height: calc(100% - 45px - 50px - 142px);
+  /* height: 100%; */
+  width: 100%;
+}
+/* want to use height 100% in all parent's of scroller
+ because don't want them to be able to contain the overflow */
+.channelDisplay-message-container-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* flex: 1; */
+  /* flex-grow: 1; */
+  height: 100%;
+  /* height: calc(100% - 45px - 50px - 142px); */
+
+  width: 100%;
+
   overflow-y: overlay;
 
-  padding: 16px;
+  padding-right: 10px;
+  padding-bottom: 8px;
 }
 
-.chat-message-container {
-  width: 100%;
-  padding: 10px;
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/::-webkit-scrollbar */
+/* https://stackoverflow.com/questions/23200639/transparent-scrollbar-with-css */
+.channelDisplay-message-container-inner::-webkit-scrollbar {
+  /*// manage scrollbar width here  */
+  width: 8px;
+}
+.channelDisplay-message-container-inner::-webkit-scrollbar * {
+  /* // manage scrollbar background color here */
+  background: transparent;
+}
+
+.channelDisplay-message-container-inner::-webkit-scrollbar-track {
+  box-shadow: none;
+}
+
+/* .channelDisplay-message-container-inner:hover */
+.channelDisplay-message-container-wrapper:hover
+  .channelDisplay-message-container-inner::-webkit-scrollbar-thumb {
+  /* // manage scrollbar scroller background color here */
+  background: rgb(108, 108, 111) !important;
+  border-radius: 3px;
+}
+
+/* alt solution to scrollbar length issue */
+/* .channelDisplay-message-container-inner::-webkit-scrollbar-track {
+  margin-top: -10px;
+  margin-bottom: -10px;
+} */
+
+/* .channelDisplay-nav-container{} */
+
+.channelDisplay-message-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* want this container to grow with the overflow */
+  flex-grow: 1;
+  /* height: 100%; */
+
   color: var(--darkText);
+  width: 100%;
+}
+
+.channelDisplay-message-list-item {
+  display: flex;
+  align-items: center;
+  min-height: 28px;
+  width: 100%;
+  font-size: 15px;
+
+  padding: 8px 20px;
+  gap: 8px;
+  cursor: pointer;
+  position: relative;
+}
+
+.channelDisplay-message-list-item:hover {
+  background-color: var(--darkBg3);
+}
+
+/* .channelDisplay-message-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 20px;
+  min-height: 20px;
+} */
+
+.channelDisplay-message-img.default {
+  background-image: url('../../images/slack-default-profile.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 4px;
+}
+
+.channelDisplay-message-right {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.channelDisplay-message-top {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.channelDisplay-message-displayName {
+  color: var(--darkText2);
+  font-size: 15px;
+}
+
+.channelDisplay-message-timestamp {
+  color: var(--darkText4);
+  font-size: 12px;
+}
+
+.channelDisplay-message-content {
+  color: var(--darkText2);
+  font-size: 15px;
+
+  /* hide text overflow as ellipsis */
+  /* text-overflow: ellipsis;
+  overflow: hidden; */
+  /* need to figure out way to do this based on media query */
+  /* width: 100%; */
+}
+
+/* ******************************************************** */
+
+.channel-message-input-container {
+  padding: 0px 20px;
+  padding-bottom: 24px;
+  min-height: 142px;
 }

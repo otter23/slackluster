@@ -112,8 +112,8 @@ export default function AddChannelName({ closeModal }) {
           </div>
 
           <div className='addChannel-subHeader'>
-            Channels are where your team communicates. They're best web
-            organized around a topic -- #marketing for example.
+            Channels are where your team communicates. They're best when
+            organized around a topic — #marketing for example.
           </div>
 
           <form

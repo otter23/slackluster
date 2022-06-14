@@ -10,10 +10,13 @@ import ChannelDetails from '../ChannelDetails';
 import hashIconWhite from '../../images/icons/hash-icon-white.svg';
 import FullPageModal from '../FullPageModal';
 
+const dayjs = require('dayjs');
+
 export default function ChannelDisplay({ isChannelsLoaded }) {
   const dispatch = useDispatch();
 
   const sessionUser = useSelector((state) => state.session.user);
+  const users = useSelector((state) => state.users.usersByUserId);
   const messages = useSelector((state) => state.messages.messagesByChannelId);
   const channels = useSelector((state) => state.channels.channelByChannelId);
   const channelId = useSelector((state) => state.channels.currentChannelId);
@@ -61,13 +64,16 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
         <ChannelDetails />
       </FullPageModal>
 
-      <div className='channel-main-container'>
-        <div className='channel-name-bar'>
-          <div className='channel-name-bar-btn' onClick={openChannelInfoModal}>
+      <div className='channelDisplay-main-container'>
+        <div className='channelDisplay-name-bar'>
+          <div
+            className='channelDisplay-name-bar-btn'
+            onClick={openChannelInfoModal}
+          >
             <img
               src={hashIconWhite}
               alt='hash'
-              className='channel-hash-icon'
+              className='channelDisplay-hash-icon'
             ></img>
             <div>{channels[channelId]?.name}</div>
             <div className='material-symbols-outlined channel-name-expand-icon'>
@@ -75,21 +81,46 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
             </div>
           </div>
         </div>
-        <div className='channel-main-container-inner'>
-          {/* <div className='channel-tools-bar'></div> */}
-          <div className='channel-messages-container'>
-            {messages[channelId]?.map((message) => (
-              <div className='chat-message-container' key={message.id}>
-                {`${message.ownerId ? `User ${message.ownerId} - ` : ''}${
-                  message.content
-                }`}
-              </div>
-            ))}
-          </div>
 
-          <div className='channel-message-input-container'>
-            <Chat channelId={channelId} />
+        <div className='channelDisplay-message-container-wrapper'>
+          <div className='channelDisplay-message-container-inner'>
+            {/* <div className='channelDisplay-tools-bar'>sticky</div> */}
+
+            <div className='channelDisplay-message-container'>
+              {messages[channelId]?.map((message) => (
+                <div
+                  className={`channelDisplay-message-list-item`}
+                  key={message.id}
+                >
+                  <div className={`channelDisplay-message-img default`}></div>
+                  <div className={`channelDisplay-message-right`}>
+                    <div className={`channelDisplay-message-top`}>
+                      <div className={`channelDisplay-message-displayName`}>
+                        {`${users[message.ownerId]?.username}`}
+                      </div>
+                      <div className={`channelDisplay-message-timestamp`}>
+                        {`${dayjs(message.createdAt).format('	h:mm A')}`}
+                      </div>
+                    </div>
+
+                    <div className={'channelDisplay-message-content'}>
+                      {`${message.content}`}
+                    </div>
+                  </div>
+
+                  {/* <div
+                    className='channelDisplay-channel-edit-icon'
+                    onClick={openEditChannelModal}
+                  >
+                    <div className='material-symbols-outlined'>edit</div>
+                  </div> */}
+                </div>
+              ))}
+            </div>
           </div>
+        </div>
+        <div className='channel-message-input-container'>
+          <Chat channelId={channelId} />
         </div>
       </div>
     </>
