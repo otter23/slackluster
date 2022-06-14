@@ -100,6 +100,7 @@ export const addChannelThunk = (formData) => async (dispatch) => {
   if (response.ok) {
     const newChannel = await response.json();
     // dispatch(addChannel(newChannel));
+    dispatch(setCurrentChannel(newChannel.id));
     response.newChannel = newChannel;
     return response;
   } else throw response;

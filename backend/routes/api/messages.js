@@ -103,7 +103,7 @@ router.post(
       // return res.redirect(`${req.baseUrl}/${newMessage.id}`);
     } else {
       res.status(401);
-      return res.json({ errors: 'Unauthorized' });
+      return res.json({ errors: ['Unauthorized'] });
     }
   })
 );
@@ -121,7 +121,7 @@ router.patch(
 
     if (!messageToUpdate) {
       res.status(422);
-      return res.json({ errors: 'Message not found' });
+      return res.json({ errors: ['Message not found'] });
     }
 
     const { ownerId, channelId, groupId, threadId, content } = req.body;
@@ -145,7 +145,7 @@ router.patch(
       return res.json(updatedMessage);
     } else {
       res.status(401);
-      return res.json({ errors: 'Unauthorized' });
+      return res.json({ errors: ['Unauthorized'] });
     }
   })
 );
@@ -163,7 +163,7 @@ router.delete(
 
     if (!messageToDelete) {
       res.status(422);
-      return res.json({ errors: 'Message not found' });
+      return res.json({ errors: ['Message not found'] });
     }
 
     //check if message belongs to signed in user
@@ -193,7 +193,7 @@ router.delete(
       return res.json({ message: 'Success' });
     } else {
       res.status(401);
-      return res.json({ errors: 'Unauthorized' });
+      return res.json({ errors: ['Unauthorized'] });
     }
   })
 );
