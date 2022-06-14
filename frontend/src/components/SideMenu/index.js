@@ -6,8 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as channelsActions from '../../store/channels';
 import * as messagesActions from '../../store/messages';
 
-import hashIcon from '../../images/icons/hash-icon.svg';
-import hashIconWhite from '../../images/icons/hash-icon-white.svg';
 import plusIcon from '../../images/icons/plus-icon.svg';
 
 import FullPageModal from '../FullPageModal';
@@ -15,12 +13,20 @@ import AddChannelForm from '../AddChannelForm';
 
 export default function SideMenu() {
   const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
   const channels = useSelector((state) => state.channels.allChannels);
   // const channelByChannelId = useSelector((state) => state.channels.channelByChannelId);
   const currentChannelId = useSelector(
     (state) => state.channels.currentChannelId
   );
+
+  //channels eager loaded once user sign's.
+  // //load all channels into state, if add workspaces, should only add a workspaces channels.
+  // useEffect(() => {
+  //   //or just eager load default channel into state?
+  //   dispatch(channelsActions.getAllChannelsThunk()).catch((res) =>
+  //     console.log(res)
+  //   );
+  // }, []);
 
   useEffect(() => {
     (async () => {
@@ -60,18 +66,6 @@ export default function SideMenu() {
     document.getElementById('root').classList.remove('overflowHidden');
   };
 
-  // const [showEditChannelModal, setShowEditChannelModal] = useState(false);
-  // const openEditChannelModal = () => {
-  //   if (showEditChannelModal) return; // do nothing if modal already showing
-  //   setShowEditChannelModal(true); // else open modal
-  //   document.getElementById('root').classList.add('overflowHidden');
-  // };
-  // const closeEditChannelModal = () => {
-  //   if (!showEditChannelModal) return; // do nothing if modal already closed
-  //   setShowEditChannelModal(false); // else close modal
-  //   document.getElementById('root').classList.remove('overflowHidden');
-  // };
-
   //BAd Approach: create a style element to insert into an <object> SVG
   // const [svgCSS, setSvgCSS] = useState(1);
   // useEffect(() => {
@@ -93,24 +87,17 @@ export default function SideMenu() {
         <AddChannelForm />
       </FullPageModal>
 
-      {/* <FullPageModal
-        showModal={showEditChannelModal}
-        closeModal={closeEditChannelModal}
-      >
-        <EditChannelForm />
-      </FullPageModal> */}
-
       <div className='sideMenu-main-container'>
         <div className='sideMenu-header-container'>
           <div>WorkSpace</div>
         </div>
 
-        <div className='sideMenu-channel-title-btn-container'>
+        <div
+          className='sideMenu-channel-title-btn-container'
+          onClick={openAddChannelModal}
+        >
           <div className='sideMenu-channel-title'>Channels</div>
-          <div
-            className='sideMenu-channel-add-btn'
-            onClick={openAddChannelModal}
-          >
+          <div className='sideMenu-channel-add-btn'>
             <img
               src={plusIcon}
               alt='plus sign'
@@ -133,12 +120,12 @@ export default function SideMenu() {
                     dispatch(channelsActions.setCurrentChannel(channel.id));
                   }}
                 >
-                  <div
-                    src={hashIcon}
-                    alt='hash'
-                    className={`sideMenu-channel-hash-icon
+                  <div className={`sideMenu-channel-hash-icon-container`}>
+                    <div
+                      className={`sideMenu-channel-hash-icon
                   ${channel.id === currentChannelId ? 'selected' : ''}`}
-                  ></div>
+                    ></div>
+                  </div>
                   <div
                     className={'sideMenu-channel-name'}
                   >{`${channel.name}`}</div>
@@ -151,7 +138,17 @@ export default function SideMenu() {
                   </div> */}
                 </div>
               ))}
+              <div
+                className={`sideMenu-channel-list-item`}
+                onClick={openAddChannelModal}
+              >
+                <div className={`sideMenu-channel-plus-icon-container`}>
+                  <div className={`sideMenu-channel-plus-icon`}></div>
+                </div>
+                <div className={'sideMenu-channel-name'}>{`Add channels`}</div>
+              </div>
             </div>
+            <div className='sideMenu-bottom-add-channel-container'></div>
 
             {/* <div className='channel-tools-bar'></div> */}
             {/* <div className='sideMenu-directMessages-container'></div> */}

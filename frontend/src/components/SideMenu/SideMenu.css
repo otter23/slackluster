@@ -29,6 +29,7 @@
   align-items: center;
   justify-content: space-between;
   padding-left: 16px;
+  padding-right: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
 
@@ -110,7 +111,7 @@
 .sideMenu-channel-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   /* want this container to grow with the overflow */
   flex-grow: 1;
   /* height: 100%; */
@@ -126,7 +127,7 @@
   width: 100%;
   font-size: 15px;
 
-  padding: 0px 16px 0px 16px;
+  padding: 0px 16px 0px 28px;
   gap: 8px;
   cursor: pointer;
   position: relative;
@@ -141,6 +142,14 @@
   color: white;
   font-weight: 400;
   /* pointer-events: none; */
+}
+
+.sideMenu-channel-hash-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 20px;
+  min-height: 20px;
 }
 
 .sideMenu-channel-hash-icon {
@@ -163,6 +172,25 @@
   overflow: hidden;
   /* need to figure out way to do this based on media query */
   max-width: 230px;
+}
+
+.sideMenu-channel-plus-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  width: 20px;
+  border-radius: 4px;
+  background-color: var(--darkBorder1);
+}
+
+.sideMenu-channel-plus-icon {
+  background-image: url('../../images/icons/plus-icon.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-width: 13px;
+  min-height: 13px;
 }
 
 .sideMenu-channel-edit-icon {

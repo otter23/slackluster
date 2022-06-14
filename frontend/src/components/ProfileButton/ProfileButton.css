@@ -16,7 +16,7 @@
   background: linear-gradient(to right, rgb(92, 84, 245), rgb(94, 150, 198));
   height: 24px;
   width: 24px;
-  border-radius: 24px;
+  border-radius: 4px;
 
   background-position: center;
   background-size: contain;

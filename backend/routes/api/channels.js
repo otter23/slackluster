@@ -90,12 +90,15 @@ router.post(
 
     const lowerName = name.toLowerCase();
 
-    if (sessionUserId === ownerId) {
+    const defaultPublicDesc =
+      'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.';
+
+    if (sessionUserId) {
       const newChannel = await Channel.create({
         ownerId,
         name: lowerName,
         topic,
-        description,
+        description: description || defaultPublicDesc,
         // isPrivate: false,
       });
 
@@ -108,7 +111,7 @@ router.post(
       // return res.redirect(`${req.baseUrl}/${newChannel.id}`);
     } else {
       res.status(401);
-      return res.json({ errors: 'Unauthorized' });
+      return res.json({ errors: ['Unauthorized'] });
     }
   })
 );
@@ -126,7 +129,7 @@ router.patch(
 
     if (!channelToUpdate) {
       res.status(422);
-      return res.json({ errors: 'Channel not found' });
+      return res.json({ errors: ['Channel not found'] });
     }
 
     const { name, topic, description } = req.body;
@@ -182,13 +185,13 @@ router.delete(
 
     if (!channelToDelete) {
       res.status(422);
-      return res.json({ errors: 'Channel not found' });
+      return res.json({ errors: ['Channel not found'] });
     }
 
     //prevent anyone from deleting the #general channel
     if (channelToDelete.name === 'general') {
       res.status(401);
-      return res.json({ errors: 'Channel #general cannot be deleted.' });
+      return res.json({ errors: ['Channel #general cannot be deleted.'] });
     }
 
     if (sessionUserId === channelToDelete.ownerId) {
@@ -227,7 +230,7 @@ router.delete(
       return res.json({ message: 'Success' });
     } else {
       res.status(401);
-      return res.json({ errors: 'Unauthorized' });
+      return res.json({ errors: ['Unauthorized'] });
     }
   })
 );

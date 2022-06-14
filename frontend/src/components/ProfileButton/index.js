@@ -5,6 +5,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session';
 
+import defaultProfile from '../../images/slack-default-profile.png';
+
 export default function ProfileButton({ user }) {
   const dispatch = useDispatch();
 
@@ -56,7 +58,7 @@ export default function ProfileButton({ user }) {
             ? {
                 backgroundImage: `url(${sessionUser?.profileImageUrl})`,
               }
-            : { backgroundImage: '' }
+            : { backgroundImage: `url(${defaultProfile})` }
         }
       >
         {showMenu && (
@@ -65,6 +67,12 @@ export default function ProfileButton({ user }) {
               <div className='nav-user-dropdown-welcome'>
                 <div className='nav-user-dropdown-welcome-text'>
                   Welcome {user?.username}!
+                </div>
+              </div>
+
+              <div className='nav-user-dropdown-welcome'>
+                <div className='nav-user-dropdown-welcome-text'>
+                  Developed by Elan Katz
                 </div>
               </div>
 

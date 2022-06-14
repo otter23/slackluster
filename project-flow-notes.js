@@ -358,7 +358,7 @@ modals - click propogation
 css - inline styling wrap, scroll bar
 
 
-
+TODO MESSAGES CRUD
 
 TO DO:
 change app load to be only depended on isLoaded, and then route specific waiting for other slices of redux state
