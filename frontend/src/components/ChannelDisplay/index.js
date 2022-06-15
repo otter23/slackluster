@@ -84,6 +84,17 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
     // }
   };
 
+  const messageToolbox = (
+    <div className='channelDisplay-message-toolbox'>
+      <div className='channelDisplay-message-toolbox-edit' onClick={''}>
+        <div className='material-symbols-outlined edit'>edit</div>
+      </div>
+      <div className='channelDisplay-message-toolbox-delete' onClick={''}>
+        <div className='material-symbols-outlined delete'>delete</div>
+      </div>
+    </div>
+  );
+
   console.log(
     'DEBUG HEROKU DATE',
     messages[channelId] &&
@@ -181,6 +192,7 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
                           {`${message.content}`}
                         </div>
                       </div>
+                      {messageToolbox}
                       {/* <div
                         className='channelDisplay-channel-edit-icon'
                         onClick={openEditChannelModal}
@@ -203,6 +215,7 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
                           {`${message.content}`}
                         </div>
                       </div>
+                      {messageToolbox}
                     </div>
                   )}
                 </>
