@@ -138,7 +138,7 @@
 }
 
 .sideMenu-channel-list-item.selected {
-  background-color: var(--darkBg5);
+  background-color: var(--darkBg7);
   color: white;
   font-weight: 400;
   /* pointer-events: none; */

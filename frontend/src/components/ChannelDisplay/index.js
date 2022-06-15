@@ -11,6 +11,8 @@ import hashIconWhite from '../../images/icons/hash-icon-white.svg';
 import FullPageModal from '../FullPageModal';
 
 const dayjs = require('dayjs');
+const dayOfYear = require('dayjs/plugin/dayOfYear');
+dayjs.extend(dayOfYear);
 
 export default function ChannelDisplay({ isChannelsLoaded }) {
   const dispatch = useDispatch();
@@ -43,6 +45,7 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
     }
   }, [dispatch, isOwner, isChannelsLoaded, channels, channelId]);
 
+  //full page modal management
   const [showChannelInfoModal, setShowChannelInfoModal] = useState(false);
   const openChannelInfoModal = () => {
     if (showChannelInfoModal) return; // do nothing if modal already showing
@@ -54,6 +57,40 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
     setShowChannelInfoModal(false); // else close modal
     document.getElementById('root').classList.remove('overflowHidden');
   };
+
+  //check whether divider should be displayed
+  const displayDateDivider = (ind, message) => {
+    if (ind === 0) return true;
+
+    //.unix() called on backend to make sure server time isn't a factor
+    // const prev = dayjs(dayjs.unix(messages[channelId][ind - 1].createdAt));
+    // const curr = dayjs(dayjs.unix(message.createdAt));
+
+    const prev = dayjs(messages[channelId][ind - 1].createdAt);
+    const curr = dayjs(message.createdAt);
+
+    if (dayjs(prev).isSame(curr, 'year')) {
+      if (dayjs(prev).isSame(curr, 'day')) return false;
+      else return true;
+    } else {
+      return true;
+    }
+
+    // if (prev.year() === curr.year()) {
+    //   if (prev.dayOfYear() === curr.dayOfYear()) return false;
+    //   else return true;
+    // } else {
+    //   return true;
+    // }
+  };
+
+  console.log(
+    'DEBUG HEROKU DATE',
+    messages[channelId] &&
+      dayjs(
+        messages[channelId][messages[channelId].length - 1].createdAt
+      ).format('dddd, MMMM D, YYYY h:mm A')
+  );
 
   return (
     <>
@@ -87,34 +124,88 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
             {/* <div className='channelDisplay-tools-bar'>sticky</div> */}
 
             <div className='channelDisplay-message-container'>
-              {messages[channelId]?.map((message) => (
-                <div
-                  className={`channelDisplay-message-list-item`}
-                  key={message.id}
-                >
-                  <div className={`channelDisplay-message-img default`}></div>
-                  <div className={`channelDisplay-message-right`}>
-                    <div className={`channelDisplay-message-top`}>
-                      <div className={`channelDisplay-message-displayName`}>
-                        {`${users[message.ownerId]?.username}`}
-                      </div>
-                      <div className={`channelDisplay-message-timestamp`}>
-                        {`${dayjs(message.createdAt).format('	h:mm A')}`}
-                      </div>
-                    </div>
-
-                    <div className={'channelDisplay-message-content'}>
-                      {`${message.content}`}
-                    </div>
+              <div className='channelDisplay-message-intro'>
+                <div className={`channelDisplay-message-img intro`}></div>
+                <div className='channelDisplay-message-intro-text-container'>
+                  <div className='channelDisplay-message-intro-text-top'>
+                    <span>This is the very beginning of the&nbsp;</span>
+                    {/* <span className='channelDisplay-intro-hash'></span> */}
+                    <span>#&nbsp;{channels[channelId]?.name}</span>
+                    <span>&nbsp;channel</span>
                   </div>
-
-                  {/* <div
-                    className='channelDisplay-channel-edit-icon'
-                    onClick={openEditChannelModal}
-                  >
-                    <div className='material-symbols-outlined'>edit</div>
-                  </div> */}
+                  <div className='channelDisplay-message-intro-text-bottom'>
+                    {channels[channelId]?.description}&nbsp;
+                    <span
+                      className='channelDisplay-message-intro-text-bottom-link'
+                      onClick={openChannelInfoModal}
+                    >
+                      Edit Description
+                    </span>
+                  </div>
                 </div>
+              </div>
+
+              {messages[channelId]?.map((message, ind) => (
+                <>
+                  {displayDateDivider(ind, message) && (
+                    <div className='channelDisplay-message-day-divider'>
+                      <div className='channelDisplay-message-day-divider-border'></div>
+                      <div className='channelDisplay-message-day-divider-btn'>
+                        {dayjs(message.createdAt).format('dddd, MMMM D')}
+                      </div>
+                    </div>
+                  )}
+
+                  {messages[channelId][ind - 1]?.ownerId !== message.ownerId ||
+                  displayDateDivider(ind, message) ? (
+                    <div
+                      className={`channelDisplay-message-list-item`}
+                      key={message.id}
+                    >
+                      <div
+                        className={`channelDisplay-message-img default`}
+                      ></div>
+
+                      <div className={`channelDisplay-message-right`}>
+                        <div className={`channelDisplay-message-top`}>
+                          <div className={`channelDisplay-message-displayName`}>
+                            {`${users[message.ownerId]?.username}`}
+                          </div>
+
+                          <div className={`channelDisplay-message-timestamp`}>
+                            {`${dayjs(message.createdAt).format('	h:mm A')}`}
+                          </div>
+                        </div>
+
+                        <div className={'channelDisplay-message-content'}>
+                          {`${message.content}`}
+                        </div>
+                      </div>
+                      {/* <div
+                        className='channelDisplay-channel-edit-icon'
+                        onClick={openEditChannelModal}
+                      >
+                        <div className='material-symbols-outlined'>edit</div>
+                      </div> */}
+                    </div>
+                  ) : (
+                    <div
+                      className={`channelDisplay-message-list-item-single`}
+                      key={message.id}
+                    >
+                      <div
+                        className={`channelDisplay-message-single-timestamp`}
+                      >
+                        {`${dayjs(message.createdAt).format('	h:mm')}`}
+                      </div>
+                      <div className={`channelDisplay-message-right-single`}>
+                        <div className={'channelDisplay-message-content'}>
+                          {`${message.content}`}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </>
               ))}
             </div>
           </div>

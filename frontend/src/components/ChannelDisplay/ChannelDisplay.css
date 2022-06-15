@@ -78,9 +78,9 @@
 
   width: 100%;
 
-  overflow-y: overlay;
+  overflow-y: scroll;
 
-  padding-right: 10px;
+  padding-right: 0px;
   padding-bottom: 8px;
 }
 
@@ -115,10 +115,98 @@
 
 /* .channelDisplay-nav-container{} */
 
+.channelDisplay-message-intro {
+  display: flex;
+  align-items: flex-start;
+  min-height: 28px;
+  width: 100%;
+  font-size: 15px;
+  line-height: 22px;
+
+  padding: 8px 20px;
+  gap: 8px;
+  /* cursor: pointer; */
+  position: relative;
+  margin-top: 88px;
+  margin-bottom: 60px;
+}
+
+.channelDisplay-message-img.intro {
+  background-image: url('../../images/slack-lightbulb.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 4px;
+  /* margin-top: 4px; */
+}
+
+.channelDisplay-message-intro-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--darkText2);
+}
+
+.channelDisplay-message-intro-text-top {
+  display: flex;
+  align-items: center;
+  color: var(--darkText2);
+}
+
+.channelDisplay-message-intro-text-bottom {
+  color: var(--darkText);
+}
+.channelDisplay-message-intro-text-bottom-link {
+  color: var(--darTextLink);
+  cursor: pointer;
+}
+.channelDisplay-message-intro-text-bottom-link:hover {
+  text-decoration: underline;
+}
+
+.channelDisplay-intro-hash {
+  float: left;
+  background-image: url('../../images/icons/hash-icon-blue.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-width: 15px;
+  min-height: 15px;
+}
+
+.channelDisplay-message-day-divider {
+  padding: 20px 0px;
+  position: relative;
+}
+.channelDisplay-message-day-divider-border {
+  border: 1px solid var(--darkBorder1);
+  /* border-bottom: 0px solid var(--darkText2); */
+}
+
+.channelDisplay-message-day-divider-btn {
+  padding: 0px 16px 0px 16px;
+  border: 1px solid var(--darkBorder1);
+  border-radius: 28px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--darkBg1);
+
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+/* *********************************** */
+
 .channelDisplay-message-container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: flex-end;
   /* want this container to grow with the overflow */
   flex-grow: 1;
   /* height: 100%; */
@@ -129,18 +217,33 @@
 
 .channelDisplay-message-list-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   min-height: 28px;
   width: 100%;
   font-size: 15px;
+  line-height: 22px;
 
   padding: 8px 20px;
   gap: 8px;
-  cursor: pointer;
+  /* cursor: pointer; */
   position: relative;
 }
 
-.channelDisplay-message-list-item:hover {
+.channelDisplay-message-list-item-single {
+  display: flex;
+  align-items: flex-start;
+  min-height: 28px;
+  width: 100%;
+  font-size: 15px;
+  /* line-height: 22px; */
+
+  padding: 8px 20px;
+  /* cursor: pointer; */
+  position: relative;
+}
+
+.channelDisplay-message-list-item:hover,
+.channelDisplay-message-list-item-single:hover {
   background-color: var(--darkBg3);
 }
 
@@ -160,12 +263,27 @@
   min-width: 36px;
   min-height: 36px;
   border-radius: 4px;
+  /* margin-top: 4px; */
 }
 
 .channelDisplay-message-right {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  /* padding: 8px; */
+  position: absolute;
+  /* top: 4px; */
+  top: 50%;
+  transform: translateY(-50%);
+  left: 64px;
+}
+
+.channelDisplay-message-right-single {
+  display: flex;
+
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 64px;
 }
 
 .channelDisplay-message-top {
@@ -175,17 +293,38 @@
 }
 .channelDisplay-message-displayName {
   color: var(--darkText2);
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 900;
 }
 
 .channelDisplay-message-timestamp {
   color: var(--darkText4);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.channelDisplay-message-timestamp:hover {
+  text-decoration: underline;
+}
+
+.channelDisplay-message-single-timestamp {
+  visibility: hidden;
   font-size: 12px;
+  font-weight: 400;
+  color: var(--darkText4);
+  min-width: 36px;
+  text-align: right;
+}
+
+.channelDisplay-message-list-item-single:hover
+  .channelDisplay-message-single-timestamp {
+  visibility: visible;
 }
 
 .channelDisplay-message-content {
   color: var(--darkText2);
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 400;
 
   /* hide text overflow as ellipsis */
   /* text-overflow: ellipsis;
