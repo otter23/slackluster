@@ -353,16 +353,16 @@ frontend: ~$ npm install socket.io-client
 /*
 
 Challenges:
-socket.io - getting working in global react context (useRef) and getting working with express routes
-modals - click propogation
-css - inline styling wrap, scroll bar
-dynmic message display based on user, date and time
+  socket.io - getting working in global react context (useRef) and getting working with express routes
+  modals - click propagation
+  css - inline styling wrap, scroll bar
+  dynamic message display based on user, date and time
 
 
 TODO:
   - MESSAGES CRUD
   - splash page
-  - about page
+  - about links in footer
   - login and sign up styling
       -confirm password IS required
   -readme
@@ -371,8 +371,9 @@ TO FIX:
   -add state to hold a channel's current unsent message
   -hover over time - creates popup with full date/time
   -add button for scroll to bottom of chat
-  -mapping over a fragment, it wants a unique key, what to do
+  -mapping over a fragment, it wants a unique key, best practice?
   -check all message submission error handling
+  -fix new channel rerouting
 
 
 TO DO:
