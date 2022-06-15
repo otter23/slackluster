@@ -368,10 +368,11 @@ TODO:
   -readme
 
 TO FIX:
-  -new-user signup doesn't update usersThunk ??
-  -reset message input when switch channels
-  -hover over time popup with full date/time
-  -scroll to bottom when post new message
+  -add state to hold a channel's current unsent message
+  -hover over time - creates popup with full date/time
+  -add button for scroll to bottom of chat
+  -mapping over a fragment, it wants a unique key, what to do
+  -check all message submission error handling
 
 
 TO DO:

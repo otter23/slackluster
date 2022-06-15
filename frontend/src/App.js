@@ -37,7 +37,7 @@ export default function App() {
   //Note this approach is not scalable as your db grows.
   //Also load each channel's resources individually when a user joins a channel
   useEffect(() => {
-    if (!sessionUser) {
+    if (sessionUser) {
       dispatch(usersActions.getAllUsersThunk()).catch((res) =>
         console.log(res)
       );
