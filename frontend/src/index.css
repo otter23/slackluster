@@ -75,6 +75,7 @@ textarea {
   --darkText2: rgba(209, 210, 211);
   --darkText3: rgba(232, 232, 232, 0.7);
   --darkText4: rgb(171, 171, 173);
+  --darTextLink: rgb(29, 155, 209);
 
   --errorText: rgb(232, 145, 45);
   --darkBg1: rgb(26, 29, 33);
@@ -83,6 +84,7 @@ textarea {
   --darkBg4: rgb(53, 55, 59);
   --darkBg5: rgb(76, 150, 137);
   --darkBg6: rgb(0, 122, 90);
+  --darkBg7: rgb(17, 100, 163);
 
   --darkBg2Hover: rgb(38, 46, 43);
 

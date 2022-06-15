@@ -356,15 +356,31 @@ Challenges:
 socket.io - getting working in global react context (useRef) and getting working with express routes
 modals - click propogation
 css - inline styling wrap, scroll bar
+dynmic message display based on user, date and time
 
 
-TODO MESSAGES CRUD
+TODO:
+  - MESSAGES CRUD
+  - splash page
+  - about page
+  - login and sign up styling
+      -confirm password IS required
+  -readme
+
+TO FIX:
+  -new-user signup doesn't update usersThunk ??
+  -reset message input when switch channels
+  -hover over time popup with full date/time
+  -scroll to bottom when post new message
+
 
 TO DO:
 change app load to be only depended on isLoaded, and then route specific waiting for other slices of redux state
 redux toolkit?
 react-images-uploading - npm
 rfdc - clone package npm
+
+
 
 
 //SPA where only clicks can navigate
