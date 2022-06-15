@@ -220,8 +220,6 @@
   align-items: flex-start;
   min-height: 28px;
   width: 100%;
-  font-size: 15px;
-  line-height: 22px;
 
   padding: 8px 20px;
   gap: 8px;
@@ -234,8 +232,6 @@
   align-items: flex-start;
   min-height: 28px;
   width: 100%;
-  font-size: 15px;
-  /* line-height: 22px; */
 
   padding: 8px 20px;
   /* cursor: pointer; */
@@ -269,37 +265,46 @@
 .channelDisplay-message-right {
   display: flex;
   flex-direction: column;
-  /* padding: 8px; */
-  position: absolute;
-  /* top: 4px; */
+
+  /* top | right | bottom | left */
+  margin: -12px -8px -16px -16px;
+  padding: 8px 8px 8px 16px;
+
+  /* position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 64px;
+  left: 64px; */
 }
 
 .channelDisplay-message-right-single {
   display: flex;
 
-  position: absolute;
+  /* top | right | bottom | left */
+  margin: -12px -8px -16px -16px;
+  padding: 8px 8px 8px 24px;
+
+  /* position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 64px;
+  left: 64px; */
 }
 
 .channelDisplay-message-top {
   display: flex;
-  align-items: center;
   gap: 5px;
 }
 .channelDisplay-message-displayName {
   color: var(--darkText2);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 900;
+  line-height: 22px;
 }
 
 .channelDisplay-message-timestamp {
+  display: flex;
+  align-items: flex-end;
   color: var(--darkText4);
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
 }
 
@@ -325,6 +330,7 @@
   color: var(--darkText2);
   font-size: 14px;
   font-weight: 400;
+  line-height: 22px;
 
   /* hide text overflow as ellipsis */
   /* text-overflow: ellipsis;
@@ -398,7 +404,10 @@
 /* ******************************************************** */
 
 .channel-message-input-container {
+  display: flex;
+  /* flex-grow: 1; */
+
   padding: 0px 20px;
   padding-bottom: 24px;
-  min-height: 142px;
+  height: 142px;
 }
