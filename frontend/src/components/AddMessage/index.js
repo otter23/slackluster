@@ -51,8 +51,10 @@ export default function Message() {
     const channelScroll = document.querySelector(
       '.channelDisplay-message-container-inner'
     );
+    //prettier-ignore
     // channelScroll.scrollTop = channelScroll.scrollHeight- channelScroll.clientHeight
     channelScroll.scrollTop = channelScroll.scrollHeight;
+    // channelScroll.scrollIntoView();
   };
 
   //form submit handler
