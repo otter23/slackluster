@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import * as channelsActions from '../../store/channels';
 
-import Chat from '../Chat';
+import AddMessage from '../AddMessage';
 import ChannelDetails from '../ChannelDetails';
 import hashIconWhite from '../../images/icons/hash-icon-white.svg';
 import FullPageModal from '../FullPageModal';
@@ -66,11 +66,11 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
     // const prev = dayjs(dayjs.unix(messages[channelId][ind - 1].createdAt));
     // const curr = dayjs(dayjs.unix(message.createdAt));
 
-    const prev = dayjs(messages[channelId][ind - 1].createdAt);
-    const curr = dayjs(message.createdAt);
+    const prev = dayjs(messages[channelId][ind - 1]?.createdAt);
+    const curr = dayjs(message?.createdAt);
 
-    if (dayjs(prev).isSame(curr, 'year')) {
-      if (dayjs(prev).isSame(curr, 'day')) return false;
+    if (dayjs(prev)?.isSame(curr, 'year')) {
+      if (dayjs(prev)?.isSame(curr, 'day')) return false;
       else return true;
     } else {
       return true;
@@ -84,12 +84,18 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
     // }
   };
 
+  //temporary holder for the actual modal/forms
+  const openModal = () => {};
+
   const messageToolbox = (
     <div className='channelDisplay-message-toolbox'>
-      <div className='channelDisplay-message-toolbox-edit' onClick={''}>
+      <div className='channelDisplay-message-toolbox-edit' onClick={openModal}>
         <div className='material-symbols-outlined edit'>edit</div>
       </div>
-      <div className='channelDisplay-message-toolbox-delete' onClick={''}>
+      <div
+        className='channelDisplay-message-toolbox-delete'
+        onClick={openModal}
+      >
         <div className='material-symbols-outlined delete'>delete</div>
       </div>
     </div>
@@ -99,8 +105,8 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
     'DEBUG HEROKU DATE',
     messages[channelId] &&
       dayjs(
-        messages[channelId][messages[channelId].length - 1].createdAt
-      ).format('dddd, MMMM D, YYYY h:mm A')
+        messages[channelId][messages[channelId]?.length - 1]?.createdAt
+      )?.format('dddd, MMMM D, YYYY h:mm A')
   );
 
   return (
@@ -159,7 +165,10 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
               {messages[channelId]?.map((message, ind) => (
                 <>
                   {displayDateDivider(ind, message) && (
-                    <div className='channelDisplay-message-day-divider'>
+                    <div
+                      className='channelDisplay-message-day-divider'
+                      key={dayjs(message.createdAt).unix()}
+                    >
                       <div className='channelDisplay-message-day-divider-border'></div>
                       <div className='channelDisplay-message-day-divider-btn'>
                         {dayjs(message.createdAt).format('dddd, MMMM D')}
@@ -224,7 +233,7 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
           </div>
         </div>
         <div className='channel-message-input-container'>
-          <Chat channelId={channelId} />
+          <AddMessage channelId={channelId} />
         </div>
       </div>
     </>
