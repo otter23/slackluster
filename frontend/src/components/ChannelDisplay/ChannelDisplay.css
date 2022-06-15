@@ -335,6 +335,68 @@
 
 /* ******************************************************** */
 
+.channelDisplay-message-toolbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 2px;
+
+  border: 1px solid var(--darkBorder1);
+  height: 36px;
+  width: 76px;
+  /* width: 132px; */
+  border-radius: 4px;
+  position: absolute;
+  right: 20px;
+  top: -18px;
+  /* transform: translateY(-50%); */
+  background-color: var(--darkBg1);
+
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 28px;
+
+  visibility: hidden;
+}
+
+.channelDisplay-message-toolbox-edit,
+.channelDisplay-message-toolbox-delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 32px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.channelDisplay-message-toolbox-edit:hover,
+.channelDisplay-message-toolbox-delete:hover {
+  background-color: var(--darkBg3);
+}
+
+.channelDisplay-message-toolbox-edit div {
+  padding-top: 2px;
+  padding-left: 2px;
+  font-size: 20px;
+}
+
+.channelDisplay-message-toolbox-delete div {
+  color: var(--darkTextDelete);
+  padding-top: 2px;
+  padding-left: 2px;
+  font-size: 20px;
+}
+
+.channelDisplay-message-list-item:hover .channelDisplay-message-toolbox,
+.channelDisplay-message-list-item:hover .channelDisplay-message-toolbox,
+.channelDisplay-message-list-item-single:hover .channelDisplay-message-toolbox,
+.channelDisplay-message-list-item-single:hover .channelDisplay-message-toolbox {
+  visibility: visible;
+}
+
+/* ******************************************************** */
+
 .channel-message-input-container {
   padding: 0px 20px;
   padding-bottom: 24px;
