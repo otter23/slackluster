@@ -1,0 +1,120 @@
+.editMessage-container-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  flex-grow: 1;
+  width: 100%;
+
+  border: 1px solid rgb(86, 88, 86);
+  border-radius: 8px;
+  min-height: 118px;
+
+  background-color: var(--darkBg3);
+}
+
+.editMessage-container-inner:focus-within {
+  filter: brightness(105%);
+  border: 1px solid rgb(129, 131, 133);
+}
+
+.editMessage-top-container {
+  display: flex;
+  min-height: 38px;
+  width: 100%;
+  padding: 4px;
+}
+
+.editMessage-form {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  width: 100%;
+}
+
+.editMessage-form-textarea-wrapper {
+  display: flex;
+  min-height: 38px;
+  width: 100%;
+  padding: 8px 12px;
+  flex-grow: 1;
+
+  /* breakup extremely long single no space words*/
+  overflow-wrap: break-word;
+  word-break: break-all;
+
+  min-width: 0px;
+  /* position: relative; */
+}
+
+.editMessage-form-textarea {
+  display: flex;
+  flex-grow: 1;
+
+  background-color: var(--darkBg3);
+  color: var(--darkText2);
+  font-weight: 400;
+  font-size: 15px;
+  width: 100%;
+
+  outline: none;
+  border: none;
+  font: inherit;
+
+  /* flex-shrink: 1; */
+
+  /* Don't allow user to resize */
+  resize: none;
+  /* hide scrollbar on growth*/
+  overflow: hidden;
+}
+
+.editMessage-bottom-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+
+  padding-right: 4px;
+  min-height: 40px;
+}
+
+.editMessage-save-btn-container {
+  all: unset;
+  margin: 0;
+  padding: 0;
+}
+
+.editMessage-cancel-btn-container,
+.editMessage-save-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--darkText);
+  font-size: 13px;
+
+  border: 1px solid var(--darkBorder4);
+  border-radius: 4px;
+
+  padding: 2px 8px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.editMessage-save-btn-container {
+  background-color: var(--darkBg6);
+  color: white;
+  height: 28px;
+}
+
+.editMessage-save-btn-container:hover {
+  filter: brightness(120%);
+}
+
+.editMessage-cancel-btn-container:hover {
+  background-color: var(--darkBg2Hover);
+}

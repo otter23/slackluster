@@ -69,8 +69,15 @@ export default function Message({
     scrollToBottom();
   };
 
-  //Allow 'Enter' to submit form request. Can still use Shift + Enter to create new lines
+  //handle  'Enter' key press.
   const onEnterPress = (e) => {
+    //prevent enter from creating a line break character
+    if (!messageInput && e.keyCode === 13 && e.shiftKey === false) {
+      e.preventDefault();
+      return;
+    }
+    //allow enter to submit the form
+    //Can still use Shift + Enter to create new lines
     if (e.keyCode === 13 && e.shiftKey === false) {
       e.preventDefault();
       messageForm.current.requestSubmit();

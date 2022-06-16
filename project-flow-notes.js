@@ -367,6 +367,10 @@ TODO:
   - login and sign up styling
       -confirm password IS required
   -readme
+  -404 about page
+  -add automatic messages when updating channel description or topic
+  -add edited status boolean to a message table
+
 
 TO FIX:
   -PRIORITY: on window resize, re render
@@ -378,8 +382,10 @@ TO FIX:
   -fix new channel rerouting?? seem to be working
   -link highlighting in message input
   -add transition for deletion of message
+  -edit message form barely visible doesn't scroll into view
 
   -ADD PRE/css styling TO CHANNEL AND TOPIC DISPLAYS
+  -change path to exact
 
 
 TO DO:
