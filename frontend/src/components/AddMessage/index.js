@@ -8,9 +8,14 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import * as messagesActions from '../../store/messages';
 
-export default function Message() {
+export default function Message({
+  addMessageBox,
+  messagesBox,
+  scrollToBottom,
+}) {
   const dispatch = useDispatch();
   const messageForm = useRef(null);
+  const messageInputRef = useRef(null);
 
   //Redux State
   const sessionUser = useSelector((state) => state.session.user);
@@ -22,9 +27,10 @@ export default function Message() {
   const [errors, setErrors] = useState('');
   const [disabledSend, setDisabledSend] = useState(true);
 
-  //reset input when change to another channel
+  //reset input value and container height when change to another channel
   useEffect(() => {
     setMessageInput('');
+    if (messageInputRef) messageInputRef.current.style.height = '22px';
   }, [channelId]);
 
   //disable send Message btn if input is blank
@@ -32,13 +38,38 @@ export default function Message() {
     if (messageInput === '') setDisabledSend(true);
   }, [messageInput]);
 
-  //adjust height of textarea based on content
+  //adjust height of textarea and message scrolling container based on content
   const autoHeight = (elem) => {
-    elem.style.height = '1px';
+    // elem.style.height = '1px';
+    elem.style.height = 'auto';
     elem.style.height = elem.scrollHeight + 'px';
+    // if (addMessageBox.current && messagesBox.current) {
+    let viewportHeight = window.innerHeight;
+    let addMessageBoxHeight = addMessageBox.current?.offsetHeight;
+
+    messagesBox.current.style.height = `${
+      viewportHeight - 95 - addMessageBoxHeight
+    }px`;
+    scrollToBottom();
+    // }
   };
 
-  //allow 'enter' to submit form request. Can still use shiftEnter to create new lines
+  //reset the height on the textarea and rest of page and scroll to bottom
+  const resetInput = () => {
+    if (messageInputRef) messageInputRef.current.style.height = '22px';
+
+    if (addMessageBox && messagesBox) {
+      let viewportHeight = window.innerHeight;
+      let addMessageBoxHeight = addMessageBox.current?.offsetHeight;
+
+      messagesBox.current.style.height = `${
+        viewportHeight - 95 - addMessageBoxHeight
+      }px`;
+    }
+    scrollToBottom();
+  };
+
+  //Allow 'Enter' to submit form request. Can still use Shift + Enter to create new lines
   const onEnterPress = (e) => {
     if (e.keyCode === 13 && e.shiftKey === false) {
       e.preventDefault();
@@ -46,18 +77,7 @@ export default function Message() {
     }
   };
 
-  //Function to scroll to bottom (e.g. after submit)
-  const scrollBottom = () => {
-    const channelScroll = document.querySelector(
-      '.channelDisplay-message-container-inner'
-    );
-    //prettier-ignore
-    // channelScroll.scrollTop = channelScroll.scrollHeight- channelScroll.clientHeight
-    channelScroll.scrollTop = channelScroll.scrollHeight;
-    // channelScroll.scrollIntoView();
-  };
-
-  //form submit handler
+  //Add message form submit handler
   const sendMessage = async (e) => {
     e.preventDefault();
     setErrors([]); //reset error state
@@ -76,8 +96,9 @@ export default function Message() {
       if (response.ok) {
         // clear the input field after the message is sent
         setMessageInput('');
+        resetInput();
         setDisabledSend(true);
-        scrollBottom();
+        scrollToBottom();
         return;
       }
     } catch (errorResponse) {
@@ -89,7 +110,10 @@ export default function Message() {
   };
 
   return (
-    <div className='addMessage-container-inner'>
+    <div
+      className='addMessage-container-inner'
+      onClick={() => messageInputRef.current.focus()}
+    >
       <div className='addMessage-top-container'>
         {errors.length > 0 && (
           <div className='addMessage-error-container'>
@@ -112,17 +136,18 @@ export default function Message() {
             <textarea
               id='message'
               className='addMessage-form-textarea'
+              name='message'
               rows={1}
               // cols={5}
               value={messageInput ?? ''}
+              ref={messageInputRef}
+              placeholder={`Send a message to # ${channels[channelId]?.name} `}
               onKeyDown={onEnterPress}
               onChange={(e) => {
                 setMessageInput(e.target.value);
                 autoHeight(e.target);
                 setDisabledSend(false);
               }}
-              placeholder={`Send a message to # ${channels[channelId]?.name} `}
-              name='message'
             ></textarea>
           </div>
         </div>
@@ -135,7 +160,11 @@ export default function Message() {
             type='submit'
             disabled={disabledSend}
           >
-            <div className='addMessage-send-btn-img'></div>
+            <div
+              className={`addMessage-send-btn-img ${
+                disabledSend && 'disabledSend'
+              }`}
+            ></div>
           </button>
         </div>
       </form>

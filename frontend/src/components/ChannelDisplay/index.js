@@ -1,6 +1,6 @@
 import './ChannelDisplay.css';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as channelsActions from '../../store/channels';
@@ -17,6 +17,11 @@ dayjs.extend(dayOfYear);
 export default function ChannelDisplay({ isChannelsLoaded }) {
   const dispatch = useDispatch();
 
+  //references used for resizing purposes
+  const addMessageBox = useRef(null);
+  const messagesBox = useRef(null);
+
+  //redux State subscriptions
   const sessionUser = useSelector((state) => state.session.user);
   const users = useSelector((state) => state.users.usersByUserId);
   const messages = useSelector((state) => state.messages.messagesByChannelId);
@@ -84,8 +89,32 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
     // }
   };
 
-  //temporary holder for the actual modal/forms
+  //Function to scroll to bottom (e.g. after submit)
+  const scrollToBottom = () => {
+    const channelScroll = document.querySelector(
+      '.channelDisplay-message-container-inner'
+    );
+    //prettier-ignore
+    // channelScroll.scrollTop = channelScroll.scrollHeight- channelScroll.clientHeight
+    channelScroll.scrollTop = channelScroll.scrollHeight;
+    // channelScroll.scrollIntoView();
+  };
+
+  //temporary holder for the actual toolBox modal/forms
   const openModal = () => {};
+
+  //dynamically update height of scroll container based on input container size
+  //updates height when user changes to another channel bc input gets resized
+  useEffect(() => {
+    if (addMessageBox && messagesBox) {
+      let viewportHeight = window.innerHeight;
+      let addMessageBoxHeight = addMessageBox.current?.offsetHeight;
+      messagesBox.current.style.height = `${
+        viewportHeight - 95 - addMessageBoxHeight
+      }px`;
+    }
+    scrollToBottom();
+  }, [addMessageBox, messagesBox, channelId]);
 
   const messageToolbox = (
     <div className='channelDisplay-message-toolbox'>
@@ -129,14 +158,19 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
               alt='hash'
               className='channelDisplay-hash-icon'
             ></img>
-            <div>{channels[channelId]?.name}</div>
+            <div className='channelDisplay-name-bar-btn-text'>
+              {channels[channelId]?.name}
+            </div>
             <div className='material-symbols-outlined channel-name-expand-icon'>
               expand_more
             </div>
           </div>
         </div>
 
-        <div className='channelDisplay-message-container-wrapper'>
+        <div
+          className='channelDisplay-message-container-wrapper'
+          ref={messagesBox}
+        >
           <div className='channelDisplay-message-container-inner'>
             {/* <div className='channelDisplay-tools-bar'>sticky</div> */}
 
@@ -145,18 +179,24 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
                 <div className={`channelDisplay-message-img intro`}></div>
                 <div className='channelDisplay-message-intro-text-container'>
                   <div className='channelDisplay-message-intro-text-top'>
-                    <span>This is the very beginning of the&nbsp;</span>
                     {/* <span className='channelDisplay-intro-hash'></span> */}
-                    <span>#&nbsp;{channels[channelId]?.name}</span>
-                    <span>&nbsp;channel</span>
+                    <span>
+                      This is the very beginning of the &#8203;
+                      <span className='channelDisplay-message-intro-text-top-name'>
+                        #&nbsp;{channels[channelId]?.name}
+                      </span>
+                      &nbsp;channel
+                    </span>
                   </div>
                   <div className='channelDisplay-message-intro-text-bottom'>
-                    {channels[channelId]?.description}&nbsp;
-                    <span
-                      className='channelDisplay-message-intro-text-bottom-link'
-                      onClick={openChannelInfoModal}
-                    >
-                      Edit Description
+                    <span>
+                      <span>{channels[channelId]?.description}&nbsp;</span>
+                      <span
+                        className='channelDisplay-message-intro-text-bottom-link'
+                        onClick={openChannelInfoModal}
+                      >
+                        Edit Description
+                      </span>
                     </span>
                   </div>
                 </div>
@@ -197,9 +237,9 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
                           </div>
                         </div>
 
-                        <div className={'channelDisplay-message-content'}>
+                        <pre className={'channelDisplay-message-content'}>
                           {`${message.content}`}
-                        </div>
+                        </pre>
                       </div>
                       {messageToolbox}
                       {/* <div
@@ -220,9 +260,9 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
                         {`${dayjs(message.createdAt).format('	h:mm')}`}
                       </div>
                       <div className={`channelDisplay-message-right-single`}>
-                        <div className={'channelDisplay-message-content'}>
+                        <pre className={'channelDisplay-message-content'}>
                           {`${message.content}`}
-                        </div>
+                        </pre>
                       </div>
                       {messageToolbox}
                     </div>
@@ -232,8 +272,13 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
             </div>
           </div>
         </div>
-        <div className='channel-message-input-container'>
-          <AddMessage channelId={channelId} />
+        <div className='channel-message-input-container' ref={addMessageBox}>
+          <AddMessage
+            channelId={channelId}
+            addMessageBox={addMessageBox}
+            messagesBox={messagesBox}
+            scrollToBottom={scrollToBottom}
+          />
         </div>
       </div>
     </>
