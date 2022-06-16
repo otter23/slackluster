@@ -16,7 +16,10 @@ const dayjs = require('dayjs');
 const dayOfYear = require('dayjs/plugin/dayOfYear');
 dayjs.extend(dayOfYear);
 
-export default function ChannelDisplay({ isChannelsLoaded }) {
+export default function ChannelDisplay({
+  isChannelsLoaded,
+  openSideMenuModal,
+}) {
   const dispatch = useDispatch();
 
   //references used for resizing purposes
@@ -102,6 +105,7 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
 
   //state management for resizing viewport and scroll container
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
+  // const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [scrollBottom, setScrollBottom] = useState(null);
 
   //only set scroll even listener once channelScroll exists
@@ -204,6 +208,13 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
 
       <div className='channelDisplay-main-container'>
         <div className='channelDisplay-name-bar'>
+          <div
+            className='channelDisplay-sideMenu-toggle'
+            onClick={openSideMenuModal}
+          >
+            <span className='material-symbols-outlined'>menu</span>
+          </div>
+
           <div
             className='channelDisplay-name-bar-btn'
             onClick={openChannelInfoModal}
