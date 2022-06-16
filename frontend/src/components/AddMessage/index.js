@@ -12,6 +12,7 @@ export default function Message({
   addMessageBox,
   messagesBox,
   scrollToBottom,
+  scrollBottom,
 }) {
   const dispatch = useDispatch();
   const messageForm = useRef(null);
@@ -50,7 +51,8 @@ export default function Message({
     messagesBox.current.style.height = `${
       viewportHeight - 95 - addMessageBoxHeight
     }px`;
-    scrollToBottom();
+
+    if (scrollBottom) scrollToBottom();
     // }
   };
 

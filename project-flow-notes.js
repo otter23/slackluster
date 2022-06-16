@@ -373,8 +373,7 @@ TODO:
 
 
 TO FIX:
-  -PRIORITY: on window resize, re render
-  -add state to hold a channel's current unsent message
+  -add state to hold a channel's current unsent message, would need to persist even if channel unmounts, could be in redux state, but not in db
   -hover over time - creates popup with full date/time
   -add button for scroll to bottom of chat
   -mapping over a fragment, it wants a unique key, best practice?

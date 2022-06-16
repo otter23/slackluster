@@ -22,6 +22,7 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
   //references used for resizing purposes
   const addMessageBox = useRef(null);
   const messagesBox = useRef(null);
+  const channelScroll = useRef(null);
 
   //redux State subscriptions
   const sessionUser = useSelector((state) => state.session.user);
@@ -48,9 +49,7 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
   const [isOwner, setIsOwner] = useState(false);
   useEffect(() => {
     if (isChannelsLoaded && sessionUser) {
-      if (sessionUser.id === channels[channelId]?.ownerId) {
-        setIsOwner(true);
-      }
+      if (sessionUser.id === channels[channelId]?.ownerId) setIsOwner(true);
     }
   }, [sessionUser, isChannelsLoaded, channels, channelId]);
 
@@ -70,8 +69,8 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
   const displayDateDivider = (ind, message) => {
     if (ind === 0) return true;
 
-    //.unix() called on backend to make sure server time isn't a factor
-    // const prev = dayjs(dayjs.unix(messages[channelId][ind - 1].createdAt));
+    //can call .unix()  on backend to make sure server time isn't a factor
+    //only an issue in python, not in javascript backend
     // const curr = dayjs(dayjs.unix(message.createdAt));
 
     const prev = dayjs(messages[channelId][ind - 1]?.createdAt);
@@ -80,9 +79,7 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
     if (dayjs(prev)?.isSame(curr, 'year')) {
       if (dayjs(prev)?.isSame(curr, 'day')) return false;
       else return true;
-    } else {
-      return true;
-    }
+    } else return true;
 
     // if (prev.year() === curr.year()) {
     //   if (prev.dayOfYear() === curr.dayOfYear()) return false;
@@ -102,6 +99,43 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
     channelScroll.scrollTop = channelScroll.scrollHeight;
     // channelScroll.scrollIntoView();
   };
+
+  //state management for resizing viewport and scroll container
+  const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
+  const [scrollBottom, setScrollBottom] = useState(null);
+
+  //only set scroll even listener once channelScroll exists
+  useEffect(() => {
+    if (channelScroll) {
+      //set scrollBottom when scroll updates
+      channelScroll.current.onscroll = () => {
+        setScrollBottom(
+          channelScroll.current.scrollHeight -
+            channelScroll.current.scrollTop ===
+            channelScroll.current.clientHeight
+        );
+      };
+    }
+  }, [channelScroll]);
+
+  //add global event listener for window viewport size change
+  window.onresize = () => setViewportHeight(window.innerHeight);
+
+  //dynamically update height of scroll container based on viewport height and scroll status
+  useEffect(() => {
+    if (addMessageBox && messagesBox) {
+      // let viewportHeight = window.innerHeight;
+      let addMessageBoxHeight = addMessageBox.current?.offsetHeight;
+      messagesBox.current.style.height = `${
+        viewportHeight - 95 - addMessageBoxHeight
+      }px`;
+    }
+
+    //if already at bottom, stay at bottom, else return
+    if (scrollBottom)
+      channelScroll.current.scrollTop = channelScroll.current.scrollHeight;
+    else return;
+  }, [addMessageBox, messagesBox, viewportHeight, scrollBottom]);
 
   //dynamically update height of scroll container based on input container size
   //updates height when user changes to another channel bc input gets resized
@@ -192,7 +226,10 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
           className='channelDisplay-message-container-wrapper'
           ref={messagesBox}
         >
-          <div className='channelDisplay-message-container-inner'>
+          <div
+            className='channelDisplay-message-container-inner'
+            ref={channelScroll}
+          >
             {/* <div className='channelDisplay-tools-bar'>sticky</div> */}
 
             <div className='channelDisplay-message-container'>
@@ -241,7 +278,7 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
                   {messages[channelId][ind - 1]?.ownerId !== message.ownerId ||
                   displayDateDivider(ind, message) ? (
                     <div
-                      className={`channelDisplay-message-list-item`}
+                      className={`channelDisplay-message-list-item current-${message.id}`}
                       key={message.id}
                     >
                       <div
@@ -291,9 +328,16 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
                         <div className='channelDisplay-message-toolbox'>
                           <div
                             className='channelDisplay-message-toolbox-edit'
-                            onClick={async () => {
-                              await setCurrentMessage(message);
+                            onClick={() => {
+                              setCurrentMessage(message);
                               setEditMEssageDisplay(true);
+                              const mainView = document.querySelector(
+                                `.channelDisplay-message-list-item.current-${message.id}`
+                              );
+                              mainView.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'center',
+                              });
                             }}
                           >
                             <div className='material-symbols-outlined edit'>
@@ -316,11 +360,13 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
                     </div>
                   ) : (
                     <div
-                      className={`channelDisplay-message-list-item-single ${
-                        currentMessage &&
-                        currentMessage?.id === message.id &&
-                        'edit'
-                      }`}
+                      className={`channelDisplay-message-list-item-single
+                      current-${message.id}
+                       ${
+                         currentMessage &&
+                         currentMessage?.id === message.id &&
+                         'edit'
+                       }`}
                       key={message.id}
                     >
                       <div
@@ -352,6 +398,20 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
                             onClick={() => {
                               setCurrentMessage(message);
                               setEditMEssageDisplay(true);
+                              const mainView = document.querySelector(
+                                `.channelDisplay-message-list-item-single.current-${message.id}`
+                              );
+                              mainView?.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'center',
+                                // inline: 'nearest',
+                              });
+                              // console.log(
+                              //   'BOTTOM',
+                              //   messages[channelId]?.length - 1 === ind
+                              // );
+                              // if (messages[channelId]?.length - 1 === ind)
+                              //   scrollToBottom();
                             }}
                           >
                             <div className='material-symbols-outlined edit'>
@@ -384,6 +444,7 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
             addMessageBox={addMessageBox}
             messagesBox={messagesBox}
             scrollToBottom={scrollToBottom}
+            scrollBottom={scrollBottom}
           />
         </div>
       </div>
