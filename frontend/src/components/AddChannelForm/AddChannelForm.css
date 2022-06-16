@@ -19,6 +19,13 @@
   position: relative;
 }
 
+@media screen and (max-width: 600px) {
+  .addChannel-card {
+    max-width: 580px;
+    width: 100%;
+  }
+}
+
 .addChannel-header {
   display: flex;
   align-items: center;

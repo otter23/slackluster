@@ -1,6 +1,6 @@
 import './SideMenu.css';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as channelsActions from '../../store/channels';
@@ -11,7 +11,7 @@ import plusIcon from '../../images/icons/plus-icon.svg';
 import FullPageModal from '../FullPageModal';
 import AddChannelForm from '../AddChannelForm';
 
-export default function SideMenu() {
+export default function SideMenu({ showSideMenuModal, closeSideMenuModal }) {
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.channels.allChannels);
   // const channelByChannelId = useSelector((state) => state.channels.channelByChannelId);
@@ -28,6 +28,24 @@ export default function SideMenu() {
   //   );
   // }, []);
 
+  //When screen < 600px sideMenu is an absolute positioned modal handle its state
+  const sideMenu = useRef(null);
+  useEffect(() => {
+    //if modal already closed do nothing
+    if (!showSideMenuModal) return;
+    // close modal upon click
+    const eventListener = ({ target }) => {
+      if (target !== sideMenu.current && !sideMenu.current?.contains(target)) {
+        closeSideMenuModal();
+      }
+    };
+    //add event listener to entire document
+    document.addEventListener('click', eventListener);
+    //cleanup function - remove listener on dock
+    return () => document.removeEventListener('click', eventListener);
+  }, [sideMenu, showSideMenuModal, closeSideMenuModal]);
+
+  //after first render and every time switch channel load channel's messages
   useEffect(() => {
     (async () => {
       try {
@@ -53,7 +71,7 @@ export default function SideMenu() {
     })();
   }, [dispatch, currentChannelId]);
 
-  //Modal management
+  //Add channel form Modal management
   const [showAddChannelModal, setShowAddChannelModal] = useState(false);
   const openAddChannelModal = () => {
     if (showAddChannelModal) return; // do nothing if modal already showing
@@ -87,7 +105,12 @@ export default function SideMenu() {
         <AddChannelForm />
       </FullPageModal>
 
-      <div className='sideMenu-main-container'>
+      <div
+        ref={sideMenu}
+        className={`sideMenu-main-container ${
+          !showSideMenuModal ? 'hidden' : ''
+        } `}
+      >
         <div className='sideMenu-header-container'>
           <div>WorkSpace</div>
         </div>
