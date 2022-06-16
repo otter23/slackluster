@@ -370,6 +370,8 @@ TODO:
   -404 about page
   -add automatic messages when updating channel description or topic
   -add edited status boolean to a message table
+  -add media query to mobile optimizations
+  -link highlighting in message input
 
 
 TO FIX:
@@ -379,12 +381,17 @@ TO FIX:
   -mapping over a fragment, it wants a unique key, best practice?
   -check all message submission error handling
   -fix new channel rerouting?? seem to be working
-  -link highlighting in message input
+
   -add transition for deletion of message
   -edit message form barely visible doesn't scroll into view
-
   -ADD PRE/css styling TO CHANNEL AND TOPIC DISPLAYS
   -change path to exact
+  -notify channel there are new messages (button)
+
+channels:
+fix memails
+change to var
+
 
 
 TO DO:

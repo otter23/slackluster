@@ -11,7 +11,7 @@
 }
 
 .channelDetails-card {
-  max-width: 580px;
+  width: 580px;
   height: 100%;
 
   border-top-left-radius: 12px;
@@ -251,4 +251,11 @@ li.channelDetails-members {
 
 .channelDetails-card-delete-header {
   color: var(--darkTextDelete);
+}
+
+@media screen and (max-width: 600px) {
+  .channelDetails-card {
+    width: 100%;
+    max-width: 580px;
+  }
 }

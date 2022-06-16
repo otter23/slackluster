@@ -11,7 +11,7 @@
 }
 
 .editChannel-card {
-  max-width: 580px;
+  width: 580px;
   height: 100%;
 
   border-top-left-radius: 12px;
@@ -275,4 +275,11 @@
   /* breakup extremely long single no space words*/
   overflow-wrap: break-word;
   word-break: break-all;
+}
+
+@media screen and (max-width: 600px) {
+  .editChannel-card {
+    width: 100%;
+    max-width: 580px;
+  }
 }
