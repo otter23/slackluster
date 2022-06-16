@@ -9,6 +9,29 @@
   background-color: var(--darkBg2);
 }
 
+@media screen and (max-width: 600px) {
+  .sideMenu-main-container {
+    position: absolute;
+    z-index: 2000;
+    top: 44px;
+    visibility: visible;
+
+    transform: matrix(1, 0, 0, 1, 0, 0);
+    /* transform: translate3d(0vw, 0, 0); */
+
+    transition-delay: 0s;
+    transition-duration: 0.5s;
+    transition-property: transform, visibility;
+    transition-timing-function: ease-in-out;
+  }
+
+  .sideMenu-main-container.hidden {
+    visibility: hidden;
+    transform: matrix(1, 0, 0, 1, -300, 0);
+    /* transform: translate3d(-100vw, 0, 0); */
+  }
+}
+
 .sideMenu-header-container {
   display: flex;
   align-items: center;
