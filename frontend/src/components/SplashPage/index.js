@@ -31,7 +31,7 @@ export default function SplashPage({ isLoaded }) {
           </Link>
         </div>
 
-        <div className='splash-photo-meta-container'>
+        {/* <div className='splash-photo-meta-container'>
           <div className='splash-photo-title'>
             <a href='https://www.flickr.com/photos/137364640@N08/51103074015/'>
               Slackluster
@@ -42,7 +42,7 @@ export default function SplashPage({ isLoaded }) {
               by Slackluster
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <Footer />

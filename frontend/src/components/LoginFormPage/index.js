@@ -239,13 +239,13 @@ export default function LoginFormPage() {
 
               <div className='login-not-member'>
                 <span>Not a Slackluster member?</span>
-                <Link className='login-link-signup' to='/sign-up'>
+                <Link className='login-link-signup' to='/get-started'>
                   Sign up here.
                 </Link>
               </div>
             </div>
 
-            <div className='login-footer'>
+            {/* <div className='login-footer'>
               <div className='login-footer-left'>
                 English
                 <span className='material-symbols-outlined login-footer-icon'>
@@ -258,7 +258,7 @@ export default function LoginFormPage() {
                 <span>Privacy</span>
                 <span>Terms</span>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
