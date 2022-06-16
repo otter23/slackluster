@@ -373,7 +373,9 @@ TO FIX:
   -add button for scroll to bottom of chat
   -mapping over a fragment, it wants a unique key, best practice?
   -check all message submission error handling
-  -fix new channel rerouting
+  -fix new channel rerouting?? seem to be working
+
+  -ADD PRE/css styling TO CHANNEL AND TOPIC DISPLAYS
 
 
 TO DO:
@@ -383,6 +385,13 @@ react-images-uploading - npm
 rfdc - clone package npm
 
 
+JoonXLeo
+cdb-cure-all
+cheesecake-is-not-a-pie
+granof-the-grey
+array.reduce()
+bobarz
+OWL
 
 
 //SPA where only clicks can navigate

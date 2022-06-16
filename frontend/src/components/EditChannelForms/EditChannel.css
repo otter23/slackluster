@@ -11,7 +11,7 @@
 }
 
 .editChannel-card {
-  width: 580px;
+  max-width: 580px;
   height: 100%;
 
   border-top-left-radius: 12px;
