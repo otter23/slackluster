@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as channelsActions from '../../store/channels';
 
 import AddMessage from '../AddMessage';
+import DeleteMessage from '../DeleteMessageForm';
 import ChannelDetails from '../ChannelDetails';
 import hashIconWhite from '../../images/icons/hash-icon-white.svg';
 import FullPageModal from '../FullPageModal';
@@ -28,10 +29,12 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
   const channels = useSelector((state) => state.channels.channelByChannelId);
   const channelId = useSelector((state) => state.channels.currentChannelId);
 
+  const [currentMessage, setCurrentMessage] = useState(null);
+
   //store boolean indicating whether user is owner of currently viewed channel
   const [isOwner, setIsOwner] = useState(false);
   useEffect(() => {
-    if (isChannelsLoaded) {
+    if (isChannelsLoaded && sessionUser) {
       if (sessionUser.id === channels[channelId]?.ownerId) {
         setIsOwner(true);
       }
@@ -49,19 +52,6 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
       dispatch(channelsActions.setCurrentChannel(1));
     }
   }, [dispatch, isOwner, isChannelsLoaded, channels, channelId]);
-
-  //full page modal management
-  const [showChannelInfoModal, setShowChannelInfoModal] = useState(false);
-  const openChannelInfoModal = () => {
-    if (showChannelInfoModal) return; // do nothing if modal already showing
-    setShowChannelInfoModal(true); // else open modal
-    document.getElementById('root').classList.add('overflowHidden');
-  };
-  const closeChannelInfoModal = () => {
-    if (!showChannelInfoModal) return; // do nothing if modal already closed
-    setShowChannelInfoModal(false); // else close modal
-    document.getElementById('root').classList.remove('overflowHidden');
-  };
 
   //check whether divider should be displayed
   const displayDateDivider = (ind, message) => {
@@ -100,9 +90,6 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
     // channelScroll.scrollIntoView();
   };
 
-  //temporary holder for the actual toolBox modal/forms
-  const openModal = () => {};
-
   //dynamically update height of scroll container based on input container size
   //updates height when user changes to another channel bc input gets resized
   useEffect(() => {
@@ -116,19 +103,42 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
     scrollToBottom();
   }, [addMessageBox, messagesBox, channelId]);
 
-  const messageToolbox = (
-    <div className='channelDisplay-message-toolbox'>
-      <div className='channelDisplay-message-toolbox-edit' onClick={openModal}>
-        <div className='material-symbols-outlined edit'>edit</div>
-      </div>
-      <div
-        className='channelDisplay-message-toolbox-delete'
-        onClick={openModal}
-      >
-        <div className='material-symbols-outlined delete'>delete</div>
-      </div>
-    </div>
-  );
+  //full page modal management
+  const [showChannelInfoModal, setShowChannelInfoModal] = useState(false);
+  const openChannelInfoModal = () => {
+    if (showChannelInfoModal) return; // do nothing if modal already showing
+    setShowChannelInfoModal(true); // else open modal
+    document.getElementById('root').classList.add('overflowHidden');
+  };
+  const closeChannelInfoModal = () => {
+    if (!showChannelInfoModal) return; // do nothing if modal already closed
+    setShowChannelInfoModal(false); // else close modal
+    document.getElementById('root').classList.remove('overflowHidden');
+  };
+
+  const [showDeleteMessageModal, setShowDeleteMessageModal] = useState(false);
+  const openDeleteMessageModal = () => {
+    if (showDeleteMessageModal) return; // do nothing if modal already showing
+    setShowDeleteMessageModal(true); // else open modal
+    document.getElementById('root').classList.add('overflowHidden');
+  };
+  const closeDeleteMessageModal = () => {
+    if (!showDeleteMessageModal) return; // do nothing if modal already closed
+    setShowDeleteMessageModal(false); // else close modal
+    document.getElementById('root').classList.remove('overflowHidden');
+  };
+
+  const [showEditMessageModal, setShowEditMessageModal] = useState(false);
+  const openEditMessageModal = () => {
+    if (showEditMessageModal) return; // do nothing if modal already showing
+    setShowEditMessageModal(true); // else open modal
+    document.getElementById('root').classList.add('overflowHidden');
+  };
+  const closeEditMessageModal = () => {
+    if (!showEditMessageModal) return; // do nothing if modal already closed
+    setShowEditMessageModal(false); // else close modal
+    document.getElementById('root').classList.remove('overflowHidden');
+  };
 
   console.log(
     'DEBUG HEROKU DATE',
@@ -145,6 +155,20 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
         closeModal={closeChannelInfoModal}
       >
         <ChannelDetails />
+      </FullPageModal>
+
+      <FullPageModal
+        showModal={showEditMessageModal}
+        closeModal={closeEditMessageModal}
+      >
+        <ChannelDetails message={currentMessage} />
+      </FullPageModal>
+
+      <FullPageModal
+        showModal={showDeleteMessageModal}
+        closeModal={closeDeleteMessageModal}
+      >
+        <DeleteMessage message={currentMessage} />
       </FullPageModal>
 
       <div className='channelDisplay-main-container'>
@@ -241,7 +265,35 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
                           {`${message.content}`}
                         </pre>
                       </div>
-                      {messageToolbox}
+
+                      {/* {messageToolbox} */}
+                      {sessionUser?.id === message?.ownerId && (
+                        <div className='channelDisplay-message-toolbox'>
+                          <div
+                            className='channelDisplay-message-toolbox-edit'
+                            onClick={async () => {
+                              await setCurrentMessage(message);
+                              openEditMessageModal();
+                            }}
+                          >
+                            <div className='material-symbols-outlined edit'>
+                              edit
+                            </div>
+                          </div>
+                          <div
+                            className='channelDisplay-message-toolbox-delete'
+                            onClick={() => {
+                              setCurrentMessage(message);
+                              openDeleteMessageModal();
+                            }}
+                          >
+                            <div className='material-symbols-outlined delete'>
+                              delete
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
                       {/* <div
                         className='channelDisplay-channel-edit-icon'
                         onClick={openEditChannelModal}
@@ -264,7 +316,33 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
                           {`${message.content}`}
                         </pre>
                       </div>
-                      {messageToolbox}
+                      {/* {messageToolbox} */}
+                      {sessionUser?.id === message?.ownerId && (
+                        <div className='channelDisplay-message-toolbox'>
+                          <div
+                            className='channelDisplay-message-toolbox-edit'
+                            onClick={() => {
+                              setCurrentMessage(message);
+                              openEditMessageModal();
+                            }}
+                          >
+                            <div className='material-symbols-outlined edit'>
+                              edit
+                            </div>
+                          </div>
+                          <div
+                            className='channelDisplay-message-toolbox-delete'
+                            onClick={() => {
+                              setCurrentMessage(message);
+                              openDeleteMessageModal();
+                            }}
+                          >
+                            <div className='material-symbols-outlined delete'>
+                              delete
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
                 </>

@@ -89,6 +89,7 @@ textarea {
   --darkBg2Hover: rgb(38, 46, 43);
 
   --darkBorder1: rgb(42, 43, 47);
+  --darkBorder2: rgba(209, 210, 211, 0.1);
 
   --darkBorder3: rgb(60, 62, 66);
   --darkBorder4: rgb(53, 55, 59);
