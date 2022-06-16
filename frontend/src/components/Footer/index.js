@@ -9,6 +9,9 @@ import fbIcon from '../../images/icons/fb-icon.svg';
 import twitterIcon from '../../images/icons/twitter-icon.svg';
 import instaIcon from '../../images/icons/insta-icon.svg';
 
+import githubLogo from '../../images/github.svg';
+import linkedInLogo from '../../images/linkedin.svg';
+
 export default function Footer() {
   //subscribe to redux session state
   const sessionUser = useSelector((state) => state.session.user);
@@ -17,6 +20,21 @@ export default function Footer() {
 
   const mainFooter = (
     <footer className='footer-container'>
+      <div className='footer-developer-name'>
+        <div>Elan Katz</div>
+        <div className='footer-image-links'>
+          <a href='https://github.com/otter23' target='_blank' rel='noreferrer'>
+            <img src={githubLogo} height='20px' alt='github'></img>
+          </a>
+          <a
+            href='https://www.linkedin.com/in/elankatz/'
+            target='_blank'
+            rel='noreferrer'
+          >
+            <img src={linkedInLogo} height='25px' alt='linkedIn'></img>
+          </a>
+        </div>
+      </div>
       <div className='footer-top-row'>
         <div>Status</div>
         <div>Privacy</div>
