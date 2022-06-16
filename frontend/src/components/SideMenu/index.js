@@ -92,12 +92,12 @@ export default function SideMenu() {
           <div>WorkSpace</div>
         </div>
 
-        <div
-          className='sideMenu-channel-title-btn-container'
-          onClick={openAddChannelModal}
-        >
+        <div className='sideMenu-channel-title-btn-container'>
           <div className='sideMenu-channel-title'>Channels</div>
-          <div className='sideMenu-channel-add-btn'>
+          <div
+            className='sideMenu-channel-add-btn'
+            onClick={openAddChannelModal}
+          >
             <img
               src={plusIcon}
               alt='plus sign'
