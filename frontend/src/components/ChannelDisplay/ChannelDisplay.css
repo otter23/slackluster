@@ -289,6 +289,11 @@
   background-color: var(--darkBg3);
 }
 
+.channelDisplay-message-list-item.edit,
+.channelDisplay-message-list-item-single.edit {
+  background-color: var(--darkBg3);
+}
+
 /* .channelDisplay-message-left {
   display: flex;
   justify-content: center;
@@ -311,6 +316,7 @@
 .channelDisplay-message-right {
   display: flex;
   flex-direction: column;
+  width: 100%;
 
   /* top | right | bottom | left */
   margin: -12px -8px -16px -16px;
@@ -324,6 +330,7 @@
 
 .channelDisplay-message-right-single {
   display: flex;
+  width: 100%;
 
   /* top | right | bottom | left */
   margin: -12px -8px -16px -16px;

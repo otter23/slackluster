@@ -7,7 +7,11 @@ import * as messagesActions from '../../store/messages';
 
 const dayjs = require('dayjs');
 
-export default function DeleteMessage({ closeModal, message }) {
+export default function DeleteMessage({
+  closeModal,
+  message,
+  closeDeleteMessage,
+}) {
   const dispatch = useDispatch();
 
   const sessionUser = useSelector((state) => state.session.user);
@@ -34,6 +38,7 @@ export default function DeleteMessage({ closeModal, message }) {
       );
       if (response.ok) {
         closeModal();
+        closeDeleteMessage();
       }
     } catch (errorResponse) {
       const resBody = await errorResponse.json();
@@ -111,6 +116,7 @@ export default function DeleteMessage({ closeModal, message }) {
                 className='deleteMessage-cancel-btn-container'
                 onClick={(e) => {
                   e.stopPropagation();
+                  closeDeleteMessage();
                   closeModal();
                 }}
               >

@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as channelsActions from '../../store/channels';
 
 import AddMessage from '../AddMessage';
+import EditMessage from '../EditMessage';
 import DeleteMessage from '../DeleteMessageForm';
 import ChannelDetails from '../ChannelDetails';
 import hashIconWhite from '../../images/icons/hash-icon-white.svg';
@@ -30,6 +31,18 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
   const channelId = useSelector((state) => state.channels.currentChannelId);
 
   const [currentMessage, setCurrentMessage] = useState(null);
+  const [editMessageDisplay, setEditMEssageDisplay] = useState(false);
+
+  //cancel edit message click handler
+  const closeEditMessage = () => {
+    setEditMEssageDisplay(false);
+    setCurrentMessage(null);
+  };
+
+  //cancel delete message click handler
+  const closeDeleteMessage = () => {
+    setCurrentMessage(null);
+  };
 
   //store boolean indicating whether user is owner of currently viewed channel
   const [isOwner, setIsOwner] = useState(false);
@@ -128,25 +141,13 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
     document.getElementById('root').classList.remove('overflowHidden');
   };
 
-  const [showEditMessageModal, setShowEditMessageModal] = useState(false);
-  const openEditMessageModal = () => {
-    if (showEditMessageModal) return; // do nothing if modal already showing
-    setShowEditMessageModal(true); // else open modal
-    document.getElementById('root').classList.add('overflowHidden');
-  };
-  const closeEditMessageModal = () => {
-    if (!showEditMessageModal) return; // do nothing if modal already closed
-    setShowEditMessageModal(false); // else close modal
-    document.getElementById('root').classList.remove('overflowHidden');
-  };
-
-  console.log(
-    'DEBUG HEROKU DATE',
-    messages[channelId] &&
-      dayjs(
-        messages[channelId][messages[channelId]?.length - 1]?.createdAt
-      )?.format('dddd, MMMM D, YYYY h:mm A')
-  );
+  // console.log(
+  //   'DEBUG HEROKU DATE',
+  //   messages[channelId] &&
+  //     dayjs(
+  //       messages[channelId][messages[channelId]?.length - 1]?.createdAt
+  //     )?.format('dddd, MMMM D, YYYY h:mm A')
+  // );
 
   return (
     <>
@@ -158,17 +159,13 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
       </FullPageModal>
 
       <FullPageModal
-        showModal={showEditMessageModal}
-        closeModal={closeEditMessageModal}
-      >
-        <ChannelDetails message={currentMessage} />
-      </FullPageModal>
-
-      <FullPageModal
         showModal={showDeleteMessageModal}
         closeModal={closeDeleteMessageModal}
       >
-        <DeleteMessage message={currentMessage} />
+        <DeleteMessage
+          message={currentMessage}
+          closeDeleteMessage={closeDeleteMessage}
+        />
       </FullPageModal>
 
       <div className='channelDisplay-main-container'>
@@ -240,6 +237,7 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
                     </div>
                   )}
 
+                  {/* Toggle whether user profile message style is shown or not */}
                   {messages[channelId][ind - 1]?.ownerId !== message.ownerId ||
                   displayDateDivider(ind, message) ? (
                     <div
@@ -250,30 +248,52 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
                         className={`channelDisplay-message-img default`}
                       ></div>
 
-                      <div className={`channelDisplay-message-right`}>
-                        <div className={`channelDisplay-message-top`}>
-                          <div className={`channelDisplay-message-displayName`}>
-                            {`${users[message.ownerId]?.username}`}
-                          </div>
+                      <div
+                        className={`channelDisplay-message-right ${
+                          currentMessage &&
+                          currentMessage?.id === message.id &&
+                          'edit'
+                        }`}
+                      >
+                        {/* toggle whether edit form is shown */}
+                        {editMessageDisplay &&
+                        currentMessage?.id === message.id ? (
+                          <EditMessage
+                            message={message}
+                            closeEditMessage={closeEditMessage}
+                            openDeleteMessageModal={openDeleteMessageModal}
+                          />
+                        ) : (
+                          <>
+                            <div className={`channelDisplay-message-top`}>
+                              <div
+                                className={`channelDisplay-message-displayName`}
+                              >
+                                {`${users[message.ownerId]?.username}`}
+                              </div>
 
-                          <div className={`channelDisplay-message-timestamp`}>
-                            {`${dayjs(message.createdAt).format('	h:mm A')}`}
-                          </div>
-                        </div>
-
-                        <pre className={'channelDisplay-message-content'}>
-                          {`${message.content}`}
-                        </pre>
+                              <div
+                                className={`channelDisplay-message-timestamp`}
+                              >
+                                {`${dayjs(message.createdAt).format('	h:mm A')}`}
+                              </div>
+                            </div>
+                            <pre className={'channelDisplay-message-content'}>
+                              {`${message.content}`}
+                            </pre>
+                          </>
+                        )}
                       </div>
 
                       {/* {messageToolbox} */}
+                      {/* Only show toolbox if user is owner */}
                       {sessionUser?.id === message?.ownerId && (
                         <div className='channelDisplay-message-toolbox'>
                           <div
                             className='channelDisplay-message-toolbox-edit'
                             onClick={async () => {
                               await setCurrentMessage(message);
-                              openEditMessageModal();
+                              setEditMEssageDisplay(true);
                             }}
                           >
                             <div className='material-symbols-outlined edit'>
@@ -293,17 +313,14 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
                           </div>
                         </div>
                       )}
-
-                      {/* <div
-                        className='channelDisplay-channel-edit-icon'
-                        onClick={openEditChannelModal}
-                      >
-                        <div className='material-symbols-outlined'>edit</div>
-                      </div> */}
                     </div>
                   ) : (
                     <div
-                      className={`channelDisplay-message-list-item-single`}
+                      className={`channelDisplay-message-list-item-single ${
+                        currentMessage &&
+                        currentMessage?.id === message.id &&
+                        'edit'
+                      }`}
                       key={message.id}
                     >
                       <div
@@ -312,18 +329,29 @@ export default function ChannelDisplay({ isChannelsLoaded }) {
                         {`${dayjs(message.createdAt).format('	h:mm')}`}
                       </div>
                       <div className={`channelDisplay-message-right-single`}>
-                        <pre className={'channelDisplay-message-content'}>
-                          {`${message.content}`}
-                        </pre>
+                        {/* toggle whether edit form is shown */}
+                        {editMessageDisplay &&
+                        currentMessage?.id === message.id ? (
+                          <EditMessage
+                            message={message}
+                            closeEditMessage={closeEditMessage}
+                            openDeleteMessageModal={openDeleteMessageModal}
+                          />
+                        ) : (
+                          <pre className={'channelDisplay-message-content'}>
+                            {`${message.content}`}
+                          </pre>
+                        )}
                       </div>
                       {/* {messageToolbox} */}
+                      {/* Only show toolbox if user is owner */}
                       {sessionUser?.id === message?.ownerId && (
                         <div className='channelDisplay-message-toolbox'>
                           <div
                             className='channelDisplay-message-toolbox-edit'
                             onClick={() => {
                               setCurrentMessage(message);
-                              openEditMessageModal();
+                              setEditMEssageDisplay(true);
                             }}
                           >
                             <div className='material-symbols-outlined edit'>
