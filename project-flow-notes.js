@@ -357,6 +357,7 @@ Challenges:
   modals - click propagation
   css - inline styling wrap, scroll bar
   dynamic message display based on user, date and time
+  dynamic resizing of chat/messages
 
 
 TODO:
@@ -368,12 +369,14 @@ TODO:
   -readme
 
 TO FIX:
+-on window resize, re render
   -add state to hold a channel's current unsent message
   -hover over time - creates popup with full date/time
   -add button for scroll to bottom of chat
   -mapping over a fragment, it wants a unique key, best practice?
   -check all message submission error handling
   -fix new channel rerouting?? seem to be working
+  -link highlighting
 
   -ADD PRE/css styling TO CHANNEL AND TOPIC DISPLAYS
 
@@ -385,13 +388,11 @@ react-images-uploading - npm
 rfdc - clone package npm
 
 
-JoonXLeo
-cdb-cure-all
-cheesecake-is-not-a-pie
-granof-the-grey
-array.reduce()
-bobarz
-OWL
+
+
+
+
+
 
 
 //SPA where only clicks can navigate
