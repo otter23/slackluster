@@ -1,0 +1,222 @@
+.deleteMessage-card-container {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+
+  width: 100%;
+  height: 100%;
+
+  border: 1px solid var(--darkBorder1);
+  border-radius: 12px;
+}
+
+.deleteMessage-card {
+  max-width: 580px;
+  height: 100%;
+
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  position: relative;
+}
+
+.deleteMessage-header {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 16px 24px;
+
+  font-size: 22px;
+  font-weight: 800;
+  /* text-size-adjust: 100%; */
+  color: var(--darkText2);
+
+  background-color: var(--darkBg1);
+
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.deleteMessage-header-left {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.deleteMessage-close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 36px;
+  min-width: 36px;
+
+  /* position: absolute; */
+  /* top: 20px;
+  right: 10px; */
+  margin-right: -8px;
+  cursor: pointer;
+}
+.deleteMessage-close div {
+  color: var(--darkText);
+  font-size: 20px;
+  vertical-align: text-top;
+  text-align: center;
+  padding-top: 2px;
+}
+
+.deleteMessage-close:hover {
+  background-color: var(--darkBg2Hover) !important;
+}
+
+/* ********************************* */
+
+.deleteMessage-form {
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--darkBg1);
+  color: var(--darkText2);
+  padding: 0px 24px;
+}
+
+.deleteMessage-subheader {
+  padding-bottom: 16px;
+  font-size: 15px;
+  color: rgb(171, 171, 173);
+  font-weight: none;
+  /* breakup extremely long single no space words*/
+  /* overflow-wrap: break-word; */
+  /* word-break: break-all; */
+}
+
+.deleteMessage-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  padding: 20px;
+  border: 1px solid var(--darkBorder2);
+  border-radius: 4px;
+}
+
+.deleteMessage-error-container {
+  color: var(--errorText);
+  font-size: 15px;
+  padding-bottom: 16px;
+}
+
+/* ****************************************** */
+
+.deleteMessage-message-list-item {
+  display: flex;
+  align-items: flex-start;
+  min-height: 28px;
+  width: 100%;
+
+  padding: 8px 20px;
+  gap: 8px;
+  /* cursor: pointer; */
+  position: relative;
+}
+
+.deleteMessage-message-img.default {
+  background-image: url('../../images/slack-default-profile.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 4px;
+  /* margin-top: 4px; */
+}
+
+.deleteMessage-message-right {
+  display: flex;
+  flex-direction: column;
+
+  /* top | right | bottom | left */
+  margin: -12px -8px -16px -16px;
+  padding: 8px 8px 8px 16px;
+
+  /* position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 64px; */
+}
+
+.deleteMessage-message-top {
+  display: flex;
+  gap: 5px;
+}
+.deleteMessage-message-displayName {
+  color: var(--darkText2);
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 22px;
+}
+
+.deleteMessage-message-timestamp {
+  display: flex;
+  align-items: flex-end;
+  color: var(--darkText4);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+pre.deleteMessage-message-content {
+  color: var(--darkText2);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+
+  /* get rid of <pre> settings */
+  margin: 0px;
+  padding: 0px;
+  font-family: inherit;
+  /* renders \n line breaks */
+  white-space: pre-line;
+}
+
+/* ********************* */
+
+.deleteMessage-buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 0px;
+}
+
+.deleteMessage-delete-btn-container {
+  all: unset;
+}
+
+.deleteMessage-cancel-btn-container,
+.deleteMessage-delete-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--darkText);
+
+  border: 1px solid var(--darkBorder4);
+  border-radius: 4px;
+
+  padding: 0px 12px;
+  min-height: 36px;
+  cursor: pointer;
+}
+
+.deleteMessage-delete-btn-container {
+  /* background-color: rgb(74, 1, 1); */
+  /* background-color: rgba(224, 30, 91, 0.3); */
+  background-color: var(--darkTextDelete);
+  color: white;
+}
+
+.deleteMessage-cancel-btn-container:hover {
+  background-color: var(--darkBg2Hover);
+}
+
+.deleteMessage-delete-btn-container:hover {
+  filter: brightness(120%);
+}
