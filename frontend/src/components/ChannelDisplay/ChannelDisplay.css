@@ -11,8 +11,15 @@
   /* position: relative; */
 }
 
+@media screen and (max-width: 600px) {
+  .channelDisplay-main-container {
+    width: 100%;
+  }
+}
+
 .channelDisplay-name-bar {
   display: flex;
+  gap: 2px;
   align-items: center;
   min-height: 50px;
   width: 100%;
@@ -20,9 +27,26 @@
 
   /* gap: 5px; */
 
-  padding: 0px 54px 0px 8px;
+  padding: 0px 54px 0px 20px;
   border-top: 1px solid rgb(42, 43, 47);
   border-bottom: 1px solid rgb(42, 43, 47);
+}
+
+.channelDisplay-sideMenu-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding: 5px; */
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+/* .channelDisplay-sideMenu-toggle span {} */
+
+.channelDisplay-sideMenu-toggle:hover {
+  background-color: var(--darkBg2Hover);
+  filter: brightness(130%);
 }
 
 .channelDisplay-name-bar-btn {
@@ -31,7 +55,7 @@
   max-height: 30px;
   gap: 2px;
 
-  color: white;
+  color: var(--darkText2);
   font-size: 18px;
   font-weight: 900;
 

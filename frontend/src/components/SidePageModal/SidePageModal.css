@@ -1,0 +1,67 @@
+.SidePageModal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 44px;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100vw;
+  min-height: 100vh;
+
+  z-index: 4000;
+}
+
+.SidePageModal-child-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding: 20px; */
+}
+
+.SidePageModal-child-container.slideIn {
+  animation-duration: 0.2s;
+  animation-name: slideIn;
+}
+
+@keyframes slideIn {
+  from {
+    margin-left: -100%;
+  }
+  to {
+    margin-left: 0%;
+  }
+}
+
+.SidePageModal-child-container.slideOut {
+  /* animation-duration: 0.2s;
+  animation-name: slideOut; */
+
+  transform: matrix(1, 0, 0, 1, 0, 0);
+  transition-delay: 0s;
+  transition-duration: 0s;
+  transition-property: visibility;
+  transition-timing-function: ease;
+  visibility: hidden;
+}
+
+/* @keyframes slideOut {
+  from {
+    margin-left: 0%;
+  }
+  to {
+    margin-left: -100%;
+  }
+} */
+
+/* .SidePageModal-child-container.hidden {
+  display: none;
+} */
+
+#root.overflowHidden {
+  /* overflow: hidden visible; */
+  overflow: hidden;
+}
