@@ -320,7 +320,7 @@
 
 .channelDisplay-message-list-item.edit,
 .channelDisplay-message-list-item-single.edit {
-  background-color: var(--darkBg3);
+  background-color: rgb(69, 63, 45);
 }
 
 /* .channelDisplay-message-left {
@@ -414,16 +414,22 @@ pre.channelDisplay-message-content {
   font-weight: 400;
   line-height: 22px;
 
-  /* get rid of pre settings */
+  width: 100%;
+
+  /* get rid of <pre> settings */
   margin: 0px;
   padding: 0px;
   font-family: inherit;
   /* renders \n line breaks */
-  white-space: pre-line;
+  /* white-space: pre-line; */
+  /* renders \n line breaks and extra spaces */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: normal;
 
   /* hide text overflow as ellipsis */
-  /* text-overflow: ellipsis;
-  overflow: hidden; */
+  /* text-overflow: ellipsis;  */
+  /* overflow: hidden; */
   /* need to figure out way to do this based on media query */
   /* width: 100%; */
 }

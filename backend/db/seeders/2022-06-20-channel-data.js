@@ -125,7 +125,7 @@ module.exports = {
         },
         {
           ownerId: 2,
-          name: 'me-mails',
+          name: 'memails',
           topic: null,
           description: 'Jan cohort inside jokes',
           isPrivate: false,
@@ -181,8 +181,8 @@ module.exports = {
         },
         {
           ownerId: 2,
-          name: 'var-var-vinks',
-          topic: 'Everything you ever wanted to know about var',
+          name: 'var',
+          topic: 'All things var',
           description: 'This channel may have been deprecated',
           isPrivate: false,
         },

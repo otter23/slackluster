@@ -361,36 +361,32 @@ Challenges:
 
 
 TODO:
-  - EDIT MESSAGE
-  - About links in footer and profile button
-  - Splash page
+  - SPLASH/FOOTER
+    - About links in footer and profile button
   - login and sign up styling
       -confirm password IS required
   -readme
   -404 about page
   -add automatic messages when updating channel description or topic
   -add edited status boolean to a message table
-  -add media query to mobile optimizations
-  -link highlighting in message input
 
+  -link highlighting in message input
+  -new message notification on side menu
+  -not rendering extra spaces in messages??
+  -hover over time - creates popup with full date/time OR REMOVE UNDERLINE
+  -check all message submission error handling
+
+
+Future work:
+  -add state to hold a channel's current unsent message, would need to persist even if channel unmounts, could be in redux state, but not in db
+  -add button for scroll to bottom of chat when new message
+  -notify channel there are new messages (button)
+  -add transition for deletion of message - http://reactcommunity.org/react-transition-group/transition
+      -https://gist.github.com/Yarith/bcd7b715cff302fdf4512f538b769521
 
 TO FIX:
-  -add state to hold a channel's current unsent message, would need to persist even if channel unmounts, could be in redux state, but not in db
-  -hover over time - creates popup with full date/time
-  -add button for scroll to bottom of chat
   -mapping over a fragment, it wants a unique key, best practice?
-  -check all message submission error handling
-  -fix new channel rerouting?? seem to be working
-
-  -add transition for deletion of message
-  -edit message form barely visible doesn't scroll into view
-  -ADD PRE/css styling TO CHANNEL AND TOPIC DISPLAYS
-  -change path to exact
-  -notify channel there are new messages (button)
-
-channels:
-fix memails
-change to var
+  -change main page path to exact ?
 
 
 

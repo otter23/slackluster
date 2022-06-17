@@ -158,6 +158,7 @@ export default function ChannelDisplay({
   //close side modal when channelId changes
   useEffect(() => {
     closeSideMenuModal();
+    // eslint-disable-next-line
   }, [channelId]);
 
   //full page modal management
@@ -295,20 +296,20 @@ export default function ChannelDisplay({
                   {messages[channelId][ind - 1]?.ownerId !== message.ownerId ||
                   displayDateDivider(ind, message) ? (
                     <div
-                      className={`channelDisplay-message-list-item current-${message.id}`}
+                      className={`channelDisplay-message-list-item
+                      current-${message.id}
+                       ${
+                         currentMessage &&
+                         currentMessage?.id === message.id &&
+                         'edit'
+                       }`}
                       key={message.id}
                     >
                       <div
                         className={`channelDisplay-message-img default`}
                       ></div>
 
-                      <div
-                        className={`channelDisplay-message-right ${
-                          currentMessage &&
-                          currentMessage?.id === message.id &&
-                          'edit'
-                        }`}
-                      >
+                      <div className={`channelDisplay-message-right`}>
                         {/* toggle whether edit form is shown */}
                         {editMessageDisplay &&
                         currentMessage?.id === message.id ? (
@@ -349,12 +350,17 @@ export default function ChannelDisplay({
                               setCurrentMessage(message);
                               setEditMEssageDisplay(true);
                               const mainView = document.querySelector(
-                                `.channelDisplay-message-list-item.current-${message.id}`
+                                `.channelDisplay-message-list-item.current-${message.id} +div`
                               );
-                              mainView.scrollIntoView({
+                              mainView?.scrollIntoView({
                                 behavior: 'smooth',
-                                block: 'center',
+                                block: 'end',
+                                inline: 'nearest',
                               });
+                              // if last list item then scroll to bottom
+                              if (messages[channelId]?.length - 1 === ind) {
+                                setTimeout(() => scrollToBottom(), 200);
+                              }
                             }}
                           >
                             <div className='material-symbols-outlined edit'>
@@ -416,19 +422,17 @@ export default function ChannelDisplay({
                               setCurrentMessage(message);
                               setEditMEssageDisplay(true);
                               const mainView = document.querySelector(
-                                `.channelDisplay-message-list-item-single.current-${message.id}`
+                                `.channelDisplay-message-list-item-single.current-${message.id} + div`
                               );
                               mainView?.scrollIntoView({
                                 behavior: 'smooth',
-                                block: 'center',
-                                // inline: 'nearest',
+                                block: 'end',
+                                inline: 'nearest',
                               });
-                              // console.log(
-                              //   'BOTTOM',
-                              //   messages[channelId]?.length - 1 === ind
-                              // );
-                              // if (messages[channelId]?.length - 1 === ind)
-                              //   scrollToBottom();
+                              // if last list item then scroll to bottom
+                              if (messages[channelId]?.length - 1 === ind) {
+                                setTimeout(() => scrollToBottom(), 200);
+                              }
                             }}
                           >
                             <div className='material-symbols-outlined edit'>

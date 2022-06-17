@@ -13,16 +13,21 @@ export default function EditChannelDescription({ closeModal }) {
   const channelId = useSelector((state) => state.channels.currentChannelId);
 
   //slices of react state for controlled inputs
+  // eslint-disable-next-line
   const [channelName, setChannelName] = useState(channels[channelId]?.name);
+  // eslint-disable-next-line
   const [channelTopic, setChannelTopic] = useState(channels[channelId]?.topic);
   const [channelDescription, setChannelDescription] = useState(
     channels[channelId]?.description
   );
   const [errors, setErrors] = useState([]);
 
-  //autofocus input field
+  //autofocus input field and move cursor to end
   useEffect(() => {
     descriptionInputRef.current.focus();
+    let len = channelDescription.length;
+    descriptionInputRef.current?.setSelectionRange(len, len);
+    // eslint-disable-next-line
   }, []);
 
   //submit form handler

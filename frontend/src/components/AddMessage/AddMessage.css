@@ -70,6 +70,9 @@
   /* hide scrollbar on growth*/
   overflow: hidden;
 
+  overflow-wrap: break-word;
+  word-break: normal;
+
   /* can use absolute  and bot:0 to set bottom and then grow up */
   /* position: absolute; */
   /* left: 0px;*/
@@ -151,4 +154,25 @@
   fill: green;
   min-width: 16px;
   min-height: 16px;
+}
+
+/* mobile optimization, but until include icons style non-mobile as well */
+@media screen and (max-width: 3200px) {
+  .channel-message-input-container {
+    min-height: 104px;
+    /* height: 104px; */
+  }
+
+  .addMessage-container-inner {
+    min-height: 80px;
+  }
+
+  .addMessage-top-container {
+    display: none;
+  }
+
+  .addMessage-form-textarea-wrapper {
+    padding-top: 12px;
+    padding-bottom: 0px;
+  }
 }
