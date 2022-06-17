@@ -19,6 +19,7 @@ dayjs.extend(dayOfYear);
 export default function ChannelDisplay({
   isChannelsLoaded,
   openSideMenuModal,
+  closeSideMenuModal,
 }) {
   const dispatch = useDispatch();
 
@@ -153,6 +154,11 @@ export default function ChannelDisplay({
     }
     scrollToBottom();
   }, [addMessageBox, messagesBox, channelId]);
+
+  //close side modal when channelId changes
+  useEffect(() => {
+    closeSideMenuModal();
+  }, [channelId]);
 
   //full page modal management
   const [showChannelInfoModal, setShowChannelInfoModal] = useState(false);

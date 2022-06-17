@@ -45,6 +45,7 @@ export default function MainPage({ isChannelsLoaded }) {
         <ChannelDisplay
           isChannelsLoaded={isChannelsLoaded}
           openSideMenuModal={openSideMenuModal}
+          closeSideMenuModal={closeSideMenuModal}
         />
       </div>
     </>
