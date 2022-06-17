@@ -19,13 +19,12 @@
 
 .channelDisplay-name-bar {
   display: flex;
-  gap: 2px;
   align-items: center;
+  gap: 8px;
+
   min-height: 50px;
   width: 100%;
   width: calc(100% - 1px);
-
-  gap: 8px;
 
   padding: 0px 54px 0px 20px;
   border-top: 1px solid rgb(42, 43, 47);
