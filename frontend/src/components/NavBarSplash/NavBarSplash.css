@@ -2,7 +2,8 @@
 
 .nav-splash {
   /* background-color: rgba(246, 239, 232, 0.3); */
-  background-color: white;
+  /* background-color: white; */
+  background-color: var(--bg2);
   /* border: 1px solid rgb(238, 238, 238); */
   height: 54px;
   width: 100%;

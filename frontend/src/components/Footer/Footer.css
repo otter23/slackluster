@@ -51,6 +51,11 @@
   min-height: 25px;
 }
 
+.footer-github-link:hover,
+.footer-linkedIn-link:hover {
+  filter: brightness(130%);
+}
+
 .footer-top-row {
   display: flex;
   justify-content: space-around;
