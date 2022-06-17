@@ -5,7 +5,7 @@ import { Redirect, Link } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
 
 // import signupBg from '../../images/login-bg-2000x1333.jpg';
-import slacklusterLogo from '../../images/Slack_RGB_logo.svg';
+import MarkLogo from '../../images/Slack_Mark.svg';
 import NavBarSplash from '../NavBarSplash';
 
 function SignupFormPage() {
@@ -25,7 +25,9 @@ function SignupFormPage() {
   const [passwordLabel, setPasswordLabel] = useState(false);
   const [hidePassword, setHidePassword] = useState(true);
 
-  // const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPasswordLabel, setConfirmPasswordLabel] = useState(false);
+
   const [errors, setErrors] = useState([]);
 
   //If already logged-in, user exists in session redux state, redirect to home page
@@ -37,19 +39,17 @@ function SignupFormPage() {
     // if (password === confirmPassword) {
     setErrors([]); //reset errors
 
-    return dispatch(sessionActions.signup({ email, username, password })).catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-        // console.log(errors);
-      }
-    );
+    return dispatch(
+      sessionActions.signup({ email, username, password, confirmPassword })
+    ).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+      // console.log(errors);
+    });
     // }
 
-    //if passwords don't match:
-    // return setErrors([
-    //   'Confirm Password field must be the same as the Password field',
-    // ]);
+    // if passwords don't match:
+    // return setErrors(['Password and Confirm Password do not match.']);
   };
 
   return (
@@ -64,25 +64,28 @@ function SignupFormPage() {
           <div className='signup-card'>
             <div className='signup-logo-icon-container'>
               <img
-                src={slacklusterLogo}
+                className='signup-logo-icon'
+                src={MarkLogo}
                 alt='logo'
                 viewBox='0 0 100 100'
                 preserveAspectRatio='xMidYMid meet'
-                className='signup-logo-icon'
               />
+              <div className='signup-slackluster'>slackluster</div>
             </div>
 
-            <h6 className='signup-header'>Sign up for Slackluster</h6>
+            <h6 className='signup-header'>
+              We suggest using the email address you use at work.
+            </h6>
 
             {errors.length > 0 && (
-              <div className='signup-error-container'>
+              <ul className='signup-error-container'>
                 {/* <p className='signup-error-message'>Invalid email or password.</p> */}
                 {errors.map((error, idx) => (
-                  <p className='signup-error-message' key={idx}>
+                  <li className='signup-error-message' key={idx}>
                     {error}
-                  </p>
+                  </li>
                 ))}
-              </div>
+              </ul>
             )}
 
             <form
@@ -111,11 +114,23 @@ function SignupFormPage() {
                   type='text'
                   name='username'
                   value={username}
+                  onClick={(e) => {
+                    let len = username.length;
+                    e.target?.setSelectionRange(len, len);
+                  }}
                   onChange={(e) => setUsername(e.target.value)}
-                  onFocus={() => setUsernameLabel((prev) => !prev)}
+                  onFocus={(e) => {
+                    setUsernameLabel((prev) => !prev);
+                    let len = username.length;
+                    e.target?.setSelectionRange(len, len);
+                  }}
                   onBlur={() => setUsernameLabel((prev) => !prev)}
                   required
                 />
+              </div>
+
+              <div className='signup-input-note'>
+                Username can not exceed 80 characters.
               </div>
 
               <div
@@ -138,8 +153,16 @@ function SignupFormPage() {
                   type='text'
                   name='email'
                   value={email}
+                  onClick={(e) => {
+                    let len = email.length;
+                    e.target?.setSelectionRange(len, len);
+                  }}
                   onChange={(e) => setEmail(e.target.value)}
-                  onFocus={() => setEmailLabel((prev) => !prev)}
+                  onFocus={(e) => {
+                    setEmailLabel((prev) => !prev);
+                    let len = email.length;
+                    e.target?.setSelectionRange(len, len);
+                  }}
                   onBlur={() => setEmailLabel((prev) => !prev)}
                   required
                 />
@@ -167,14 +190,22 @@ function SignupFormPage() {
                     type={hidePassword ? 'password' : 'text'}
                     name='password'
                     value={password}
+                    onClick={(e) => {
+                      let len = password.length;
+                      e.target?.setSelectionRange(len, len);
+                    }}
                     onChange={(e) => setPassword(e.target.value)}
-                    onFocus={() => setPasswordLabel((prev) => !prev)}
+                    onFocus={(e) => {
+                      setPasswordLabel((prev) => !prev);
+                      let len = password.length;
+                      e.target?.setSelectionRange(len, len);
+                    }}
                     onBlur={() => setPasswordLabel((prev) => !prev)}
                     required
                   />
                   <div
                     className='signup-eye-icon-container'
-                    onClick={(e) => setHidePassword((prevVal) => !prevVal)}
+                    onClick={() => setHidePassword((prevVal) => !prevVal)}
                   >
                     {hidePassword ? (
                       <span className='material-symbols-outlined'>
@@ -189,15 +220,48 @@ function SignupFormPage() {
                 </div>
               </div>
 
-              {/* <label>
-              Confirm Password
-              <input
-                type='password'
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              />
-            </label> */}
+              <div className='signup-input-note'>
+                Password must contain at least 1 lowercase letter, uppercase
+                letter, number, and special character (i.e. "!@#$%^&*").
+              </div>
+
+              <div
+                className={`signup-form-group ${
+                  confirmPasswordLabel ? 'signup-form-group-color' : ''
+                }`}
+              >
+                <label
+                  className={`signup-label ${
+                    confirmPassword.length > 0 || confirmPasswordLabel
+                      ? 'signup-label-small'
+                      : ''
+                  } ${confirmPasswordLabel ? 'signup-label-color' : ''}`}
+                  htmlFor='confirmPassword'
+                >
+                  Confirm Password
+                </label>
+
+                <input
+                  id='confirmPassword'
+                  className={`signup-input`}
+                  type={'password'}
+                  name='confirmPassword'
+                  value={confirmPassword}
+                  onClick={(e) => {
+                    let len = confirmPassword.length;
+                    e.target?.setSelectionRange(len, len);
+                  }}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  onFocus={(e) => {
+                    setConfirmPasswordLabel((prev) => !prev);
+                    let len = confirmPassword.length;
+                    e.target?.setSelectionRange(len, len);
+                  }}
+                  onBlur={() => setConfirmPasswordLabel((prev) => !prev)}
+                  required
+                />
+              </div>
+
               <div className='signup-signup-btn-container'>
                 <button className='signup-signup-btn' type='submit'>
                   Sign Up
@@ -209,13 +273,16 @@ function SignupFormPage() {
             <div className='signup-card-bottom'>
               <div className='signup-terms-privacy'>
                 <p>
-                  By signing up, you agree with Slackluster's &nbsp;
+                  By continuing, you're agreeing to our Slackluster's &nbsp;
                   <Link className='signup-link-terms' to='#'>
-                    Terms of Services &nbsp;
+                    Customer Terms of Services,&nbsp;
+                  </Link>
+                  <Link className='signup-link-privacy' to='#'>
+                    Privacy Policy,&nbsp;
                   </Link>
                   and &nbsp;
                   <Link className='signup-link-privacy' to='#'>
-                    Privacy Policy
+                    Cookie Policy
                   </Link>
                   .
                 </p>
@@ -229,7 +296,7 @@ function SignupFormPage() {
               </div>
             </div>
 
-            <div className='signup-footer'>
+            {/* <div className='signup-footer'>
               <div className='signup-footer-left'>
                 English
                 <span className='material-symbols-outlined signup-footer-icon'>
@@ -242,7 +309,7 @@ function SignupFormPage() {
                 <span>Privacy</span>
                 <span>Terms</span>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -30,13 +30,13 @@ module.exports = {
           description: 'jan cohort inside jokes',
           isPrivate: false,
         },
-        {
-          ownerId: 1,
-          name: 'bitcoin',
-          topic: null,
-          description: null,
-          isPrivate: true,
-        },
+        // {
+        //   ownerId: 1,
+        //   name: 'bitcoin',
+        //   topic: null,
+        //   description: null,
+        //   isPrivate: true,
+        // },
         {
           ownerId: 2,
           name: 'bobarz',
@@ -54,7 +54,7 @@ module.exports = {
         },
         {
           ownerId: 2,
-          name: 'cbd-4-all',
+          name: 'cbd-farm',
           topic: null,
           description: null,
           isPrivate: false,
@@ -66,13 +66,13 @@ module.exports = {
           description: null,
           isPrivate: false,
         },
-        {
-          ownerId: 2,
-          name: 'data-structures-algorithms ',
-          topic: null,
-          description: null,
-          isPrivate: false,
-        },
+        // {
+        //   ownerId: 2,
+        //   name: 'data-structures-algorithms ',
+        //   topic: null,
+        //   description: null,
+        //   isPrivate: false,
+        // },
         {
           ownerId: 1,
           name: 'diversity',
@@ -95,13 +95,13 @@ module.exports = {
           description: null,
           isPrivate: false,
         },
-        {
-          ownerId: 1,
-          name: 'help-requests',
-          topic: null,
-          description: 'Ask your coding related questions here',
-          isPrivate: false,
-        },
+        // {
+        //   ownerId: 1,
+        //   name: 'help-requests',
+        //   topic: null,
+        //   description: 'Ask your coding related questions here',
+        //   isPrivate: false,
+        // },
         {
           ownerId: 1,
           name: 'jan-cohort-2022',
@@ -144,13 +144,13 @@ module.exports = {
           description: 'Declare your love for microsoft paint here',
           isPrivate: false,
         },
-        {
-          ownerId: 2,
-          name: 'movies',
-          topic: null,
-          description: null,
-          isPrivate: false,
-        },
+        // {
+        //   ownerId: 2,
+        //   name: 'movies',
+        //   topic: null,
+        //   description: null,
+        //   isPrivate: false,
+        // },
         {
           ownerId: 2,
           name: 'novohort',

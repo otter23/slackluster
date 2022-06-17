@@ -29,7 +29,7 @@ export default function NavBarMain() {
               viewBox='0 0 100 100'
               preserveAspectRatio='xMidYMid meet'
             />
-            <div className='nav-main-slackluster'>Slackluster</div>
+            <div className='nav-main-slackluster'>slackluster</div>
           </NavLink>
 
           {/* <div className='nav-main--discover'>

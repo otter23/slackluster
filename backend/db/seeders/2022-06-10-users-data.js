@@ -8,7 +8,7 @@ module.exports = {
       //prettier-ignore
       [
         {email: "demo@user.io", username: "demoUser", hashedPassword: bcrypt.hashSync('password'), },
-        {email: "demo2@user.io", username: "demoUser2", hashedPassword: bcrypt.hashSync('password'), },
+        {email: "newUser@user.io", username: "newUser", hashedPassword: bcrypt.hashSync('password'), },
 
         {email: "albert@user.io", username: "albert", hashedPassword: bcrypt.hashSync('password'), },
         {email: "alex@user.io", username: "alex", hashedPassword: bcrypt.hashSync('password'), },
