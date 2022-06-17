@@ -198,6 +198,15 @@ li.channelDetails-members {
   gap: 2px;
   font-size: 13px;
   font-weight: 200;
+
+  /* get rid of <pre> settings */
+  margin: 0px;
+  padding: 0px;
+  font-family: inherit;
+  /* renders \n line breaks and extra spaces */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 .channelDetails-card-field-icon {

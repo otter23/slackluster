@@ -129,7 +129,7 @@ export default function ChannelDetails({ closeModal }) {
               }}
             >
               <div>Topic</div>
-              <div className='channelDetails-card-field-row-two'>
+              <pre className='channelDetails-card-field-row-two'>
                 {channels[channelId]?.topic ? (
                   <div>{channels[channelId]?.topic}</div>
                 ) : (
@@ -137,7 +137,7 @@ export default function ChannelDetails({ closeModal }) {
                     Add a topic
                   </div>
                 )}
-              </div>
+              </pre>
 
               <div className='channelDetails-card-field-edit'>Edit</div>
             </div>
@@ -150,7 +150,7 @@ export default function ChannelDetails({ closeModal }) {
               }}
             >
               <div>Description</div>
-              <div className='channelDetails-card-field-row-two'>
+              <pre className='channelDetails-card-field-row-two'>
                 {channels[channelId]?.description ? (
                   <div>{channels[channelId]?.description}</div>
                 ) : (
@@ -158,7 +158,7 @@ export default function ChannelDetails({ closeModal }) {
                     Add a description
                   </div>
                 )}
-              </div>
+              </pre>
 
               <div className='channelDetails-card-field-edit'>Edit</div>
             </div>

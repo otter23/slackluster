@@ -14,16 +14,21 @@ export default function EditChannelName({ closeModal }) {
 
   //slices of react state for controlled inputs
   const [channelName, setChannelName] = useState(channels[channelId]?.name);
+  // eslint-disable-next-line
   const [channelTopic, setChannelTopic] = useState(channels[channelId]?.topic);
+  // eslint-disable-next-line
   const [channelDescription, setChannelDescription] = useState(
     channels[channelId]?.description
   );
   const [errors, setErrors] = useState([]);
   const [disabledSave, setDisabledSave] = useState(false);
 
-  //autofocus input field
+  //autofocus input field and move cursor to end
   useEffect(() => {
     nameInputRef.current.focus();
+    let len = channelName.length;
+    nameInputRef.current?.setSelectionRange(len, len);
+    // eslint-disable-next-line
   }, []);
 
   //disable form submit if name has not been change

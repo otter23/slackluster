@@ -1,6 +1,6 @@
 import './EditMessage.css';
 
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 import * as messagesActions from '../../store/messages';
@@ -17,6 +17,15 @@ export default function Message({
   //controlled inputs
   const [messageInput, setMessageInput] = useState(message.content || '');
   const [errors, setErrors] = useState('');
+
+  //autofocus input field and move cursor to end
+  useEffect(() => {
+    autoHeight(editMessageInputRef.current);
+    editMessageInputRef.current?.focus();
+    let len = messageInput.length;
+    editMessageInputRef.current?.setSelectionRange(len, len);
+    // eslint-disable-next-line
+  }, []);
 
   //adjust height of textarea container based on content
   const autoHeight = (elem) => {
