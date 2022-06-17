@@ -74,10 +74,12 @@ export default function ProfileButton({ user }) {
                     </div>
                   </div>
                   <div className={'nav-user-message-content'}>
-                    <div class='material-symbols-outlined brightness'>
+                    <div className='material-symbols-outlined brightness'>
                       brightness_1
                     </div>
-                    <div class='nav-user-message-content-active'>Active</div>
+                    <div className='nav-user-message-content-active'>
+                      Active
+                    </div>
                   </div>
                 </div>
               </div>

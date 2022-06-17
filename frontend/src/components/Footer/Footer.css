@@ -1,27 +1,37 @@
 .footer-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+
   background-color: var(--bg1);
   color: white;
-  justify-content: space-around;
-  align-items: center;
   font-size: 15px;
 
-  padding: 16px 0px;
-  flex-grow: 1;
-  max-height: 56px;
+  padding: 16px 20px;
+  min-height: 56px;
   width: 100%;
-  /* position: absolute;
-  bottom: 0px;
-  left: 0px; */
-  padding-left: 20px;
+}
+
+.footer-top-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+
+  width: 100%;
+  height: 100%;
 }
 
 .footer-developer-container {
   display: flex;
-  /* flex-direction: column; */
+  justify-content: center;
   align-items: center;
   gap: 15px;
-  padding: 16px 0px;
+
+  height: 100%;
+  width: 100%;
+  max-width: 250px;
 }
 
 /* .footer-developer-name {} */
@@ -29,6 +39,7 @@
 .footer-image-links {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
   gap: 10px;
 }
@@ -56,34 +67,37 @@
   filter: brightness(130%);
 }
 
-.footer-top-row {
+.footer-technologies {
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  /* width: 100%; */
-  flex-grow: 1;
-  padding: 0px 20px;
+  justify-content: space-around;
+
+  max-width: 850px;
+  width: 100%;
 }
+
+/* ******************************* */
 
 .footer-bot-row {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px 20px;
   gap: 20px;
+
+  padding: 0px 20px;
 }
 
 .footer-icon-container {
   display: flex;
   justify-content: space-around;
   gap: 32px;
+
   color: rgba(255, 255, 255, 0.6);
 }
 
 .footer-icon-container img {
   /* https://codepen.io/sosuke/pen/Pjoqqp */
   /* color: #8a8a8a; */
-
   filter: brightness(0) saturate(100%) invert(59%) sepia(0%) saturate(0%)
     hue-rotate(151deg) brightness(94%) contrast(81%);
 }
@@ -110,32 +124,30 @@
   }
 } */
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1000px) {
   .footer-container {
     flex-direction: column;
-    padding-bottom: 18px;
-    max-height: 750px;
   }
 
   .footer-top-row {
     display: flex;
     flex-direction: column;
+    gap: 0px;
     width: 100%;
-    padding: 0px 20px;
   }
 
-  .footer-top-row div {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
-    padding: 16px 0px;
-    width: 100%;
+  .footer-developer-container {
     justify-content: center;
-    align-items: flex-start;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 20px;
+    max-width: 1001px;
   }
 
   /* needed higher selector here */
-  div.footer-english-div {
-    justify-content: flex-start;
-    align-items: center;
+  div.footer-technologies {
+    padding: 20px 0px;
+    flex-wrap: wrap;
+    gap: 20px;
   }
 
   .footer-bot-row {

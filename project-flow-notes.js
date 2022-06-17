@@ -358,14 +358,13 @@ Challenges:
   css - inline styling wrap, scroll bar
   dynamic message display based on user, date and time
   dynamic resizing of chat/messages
+  mobile optimization
 
 
 TODO:
-  - SPLASH/FOOTER
-    - About links in footer and profile button
-  - login and sign up styling
-      -confirm password IS required
   -readme
+  -hover over time - creates popup with full date/time OR REMOVE UNDERLINE
+
   -404 about page
   -add automatic messages when updating channel description or topic
   -add edited status boolean to a message table
@@ -373,7 +372,7 @@ TODO:
   -link highlighting in message input
   -new message notification on side menu
   -not rendering extra spaces in messages??
-  -hover over time - creates popup with full date/time OR REMOVE UNDERLINE
+
   -check all message submission error handling
 
 
@@ -386,7 +385,7 @@ Future work:
 
 TO FIX:
   -mapping over a fragment, it wants a unique key, best practice?
-  -change main page path to exact ?
+  -route protection? change main page path to exact ?
 
 
 

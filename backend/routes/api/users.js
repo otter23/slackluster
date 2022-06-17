@@ -49,19 +49,19 @@ const validateSignup = [
     .withMessage(
       'Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*").'
     ),
-  // check('confirmPassword')
-  //   .exists({ checkFalsy: true })
-  //   .withMessage('Please confirm password')
-  //   .custom((value, { req }) => {
-  //     if (value !== req.body.password) {
-  //       throw new Error('Password and Confirm Password do not match.');
-  //     }
-  //     return true;
-  //   }),
+  check('confirmPassword')
+    .exists({ checkFalsy: true })
+    .withMessage('Please confirm password')
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error('Password and Confirm Password do not match.');
+      }
+      return true;
+    }),
   // check('imageUrl')
   //   .exists({ checkFalsy: true })
   //   .withMessage('Please provide an ImageUrl'),
-  //.matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, 'g')
+  // .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, 'g')
   // .withMessage('imagUrl must be  (i.e. "!@#$%^&*").'),
   handleValidationErrors, //evaluates result of check() middlewares
 ];

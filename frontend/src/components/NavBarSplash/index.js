@@ -63,7 +63,7 @@ const NavBar = () => {
               viewBox='0 0 100 100'
               preserveAspectRatio='xMidYMid meet'
             />
-            <div className='nav-splash-slackluster'>Slackluster</div>
+            <div className='nav-splash-slackluster'>slackluster</div>
           </NavLink>
 
           {/* <div className='nav-splash-discover'>

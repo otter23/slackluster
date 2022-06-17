@@ -7,8 +7,7 @@ import { Redirect, Link } from 'react-router-dom';
 //format for Create-react-app which uses SVGR under the hood:
 //import { ReactComponent as FlickrLogo } from './Flickr.svg';
 
-// import loginBg from '../../images/login-bg-2000x1333.jpg';
-import slacklusterLogo from '../../images/Slack_RGB_logo.svg';
+import MarkLogo from '../../images/Slack_Mark.svg';
 import NavBarSplash from '../NavBarSplash';
 
 export default function LoginFormPage() {
@@ -19,7 +18,7 @@ export default function LoginFormPage() {
 
   //slices of react state for controlled inputs
   const [credential, setCredential] = useState(
-    window.localStorage.getItem('nFlckrEmail') || ''
+    window.localStorage.getItem('slackLusterEmail') || ''
   );
   const [credentialLabel, setCredentialLabel] = useState(false);
   const [password, setPassword] = useState('');
@@ -45,7 +44,8 @@ export default function LoginFormPage() {
 
       if (response.ok) {
         //save email for next session if remember checked
-        if (remember) window.localStorage.setItem('nFlckrEmail', credential);
+        if (remember)
+          window.localStorage.setItem('slackLusterEmail', credential);
         return;
       }
     } catch (errorResponse) {
@@ -92,24 +92,22 @@ export default function LoginFormPage() {
           <div className='login-card'>
             <div className='login-logo-icon-container'>
               <img
-                src={slacklusterLogo}
+                src={MarkLogo}
                 alt='logo'
                 viewBox='0 0 100 100'
                 preserveAspectRatio='xMidYMid meet'
                 className='login-logo-icon'
               />
+              <div className='signup-slackluster'>slackluster</div>
             </div>
-            <h6 className='login-header'>Log in to Slackluster</h6>
+            <h6 className='login-header'>Sign in to Slackluster.</h6>
 
             {errors.length > 0 && (
-              <div className='login-error-container'>
-                <p className='login-error-message'>
-                  Invalid email or password.
-                </p>
-                {/* {errors.map((error, idx) => (
-            <p key={idx}>{error}</p>
-          ))} */}
-              </div>
+              <ul className='login-error-container'>
+                {errors.map((error, idx) => (
+                  <li key={idx}>{error}</li>
+                ))}
+              </ul>
             )}
 
             <form
@@ -117,12 +115,6 @@ export default function LoginFormPage() {
               autoComplete='off'
               onSubmit={handleSubmit}
             >
-              {/* <input
-                autocomplete='false'
-
-                type='text'
-                styles='display:none;'
-              ></input> */}
               <div
                 className={`login-form-group ${
                   credentialLabel ? 'login-form-group-color' : ''
@@ -136,8 +128,7 @@ export default function LoginFormPage() {
                   } ${credentialLabel ? 'login-label-color' : ''}`}
                   htmlFor='email'
                 >
-                  Email address
-                  {/* Username or Email */}
+                  Username or Email Address
                 </label>
                 <input
                   id='email'
@@ -145,8 +136,16 @@ export default function LoginFormPage() {
                   type='text'
                   name='email'
                   value={credential}
+                  onClick={(e) => {
+                    let len = credential.length;
+                    e.target?.setSelectionRange(len, len);
+                  }}
                   onChange={(e) => setCredential(e.target.value)}
-                  onFocus={() => setCredentialLabel((prev) => !prev)}
+                  onFocus={(e) => {
+                    setCredentialLabel((prev) => !prev);
+                    let len = credential.length;
+                    e.target?.setSelectionRange(len, len);
+                  }}
                   onBlur={() => setCredentialLabel((prev) => !prev)}
                   required
                 />
@@ -174,14 +173,22 @@ export default function LoginFormPage() {
                     type={hidePassword ? 'password' : 'text'}
                     name='password'
                     value={password}
+                    onClick={(e) => {
+                      let len = password.length;
+                      e.target?.setSelectionRange(len, len);
+                    }}
                     onChange={(e) => setPassword(e.target.value)}
-                    onFocus={() => setPasswordLabel((prev) => !prev)}
+                    onFocus={(e) => {
+                      setPasswordLabel((prev) => !prev);
+                      let len = password.length;
+                      e.target?.setSelectionRange(len, len);
+                    }}
                     onBlur={() => setPasswordLabel((prev) => !prev)}
                     required
                   />
                   <div
                     className='login-eye-icon-container'
-                    onClick={(e) => setHidePassword((prevVal) => !prevVal)}
+                    onClick={() => setHidePassword((prevVal) => !prevVal)}
                   >
                     {hidePassword ? (
                       <span className='material-symbols-outlined'>
@@ -230,12 +237,11 @@ export default function LoginFormPage() {
             </form>
 
             <div className='login-card-bottom'>
-              <div className='login-forgot-password'>
-                {/* to='/forgot-password' */}
-                <Link className='login-link-forgot' to='#'>
+              {/* <div className='login-forgot-password'>
+                <Link className='login-link-forgot' to='/forgot-password'>
                   Forgot password?
                 </Link>
-              </div>
+              </div> */}
 
               <div className='login-not-member'>
                 <span>Not a Slackluster member?</span>

@@ -32,12 +32,13 @@ export default function Footer() {
             </a>
           </div>
         </div>
-        <div>Javascript</div>
-        <div>HTML5</div>
-        <div>CSS3</div>
-        <div>React/Redux</div>
-        <div>Express</div>
-        <div>Sequelize/PostgreSQL</div>
+        <div className='footer-technologies'>
+          <div>Javascript</div>
+          <div>HTML5 / CSS3</div>
+          <div>React / Redux</div>
+          <div>Express</div>
+          <div>Sequelize / PostgreSQL</div>
+        </div>
 
         {/* <div>Status</div>
         <div>Privacy</div>

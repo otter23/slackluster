@@ -44,13 +44,14 @@ export const login = (user) => async (dispatch) => {
 
 //request to backend to signup/add user to db
 export const signup = (user) => async (dispatch) => {
-  const { username, email, password } = user;
+  const { username, email, password, confirmPassword } = user;
   const response = await csrfFetch('/api/users', {
     method: 'POST',
     body: JSON.stringify({
       username,
       email,
       password,
+      confirmPassword,
     }),
   });
   const data = await response.json();
