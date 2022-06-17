@@ -19,15 +19,14 @@ export default function SplashPage({ isLoaded }) {
         // style={{ backgroundImage: `url(${image})` }}
       >
         <div className='splash-body-container'>
-          <h1 className='splash-find-inspiration'>
-            Slackluster is your digital HQ
-          </h1>
-          <h2>
+          <div className='splash-header-image'></div>
+          <h1 className='splash-header'>Slackluster is your digital HQ</h1>
+          <h2 className='splash-header-two'>
             Transform the way you work with one place for everyone and
             everything you need to get stuff done.
           </h2>
-          <Link to='/get-started' className='splash-start-for-free'>
-            Try for free
+          <Link to='/get-started' className='splash-try-for-free'>
+            TRY FOR FREE
           </Link>
         </div>
 
