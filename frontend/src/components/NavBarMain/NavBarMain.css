@@ -36,7 +36,7 @@
   /* padding-right: 19px; */
 }
 
-.nav-slackluster {
+.nav-main-slackluster {
   font-size: 20px;
   color: white;
   font-weight: 700;
@@ -116,5 +116,4 @@
   list-style: none;
   margin: 0px;
 }
-.nav-main-profile-btn {
-}
+/* .nav-main-profile-btn {} */

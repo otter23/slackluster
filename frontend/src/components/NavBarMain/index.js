@@ -1,7 +1,7 @@
 import './NavBarMain.css';
 
-import React, { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from '../ProfileButton';
 
@@ -29,7 +29,7 @@ export default function NavBarMain() {
               viewBox='0 0 100 100'
               preserveAspectRatio='xMidYMid meet'
             />
-            <div className='nav-slackluster'>Slackluster</div>
+            <div className='nav-main-slackluster'>Slackluster</div>
           </NavLink>
 
           {/* <div className='nav-main--discover'>
