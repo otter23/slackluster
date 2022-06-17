@@ -25,7 +25,7 @@
   width: 100%;
   width: calc(100% - 1px);
 
-  /* gap: 5px; */
+  gap: 8px;
 
   padding: 0px 54px 0px 20px;
   border-top: 1px solid rgb(42, 43, 47);
@@ -49,6 +49,12 @@
   filter: brightness(130%);
 }
 
+@media screen and (min-width: 600px) {
+  .channelDisplay-sideMenu-toggle {
+    display: none;
+  }
+}
+
 .channelDisplay-name-bar-btn {
   display: flex;
   align-items: center;
@@ -59,7 +65,7 @@
   font-size: 18px;
   font-weight: 900;
 
-  padding: 8px 8px;
+  padding: 8px 0px;
   cursor: pointer;
 
   /* to allow for dynamic ellipsis parent needs a width */
