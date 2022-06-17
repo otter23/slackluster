@@ -66,7 +66,7 @@ export default function LoginFormPage() {
     try {
       const response = await dispatch(
         sessionActions.login({
-          credential: 'demo1@user.io',
+          credential: 'demo@user.io',
           password: 'password',
         })
       );

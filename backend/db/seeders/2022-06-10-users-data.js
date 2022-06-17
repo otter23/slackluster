@@ -7,8 +7,8 @@ module.exports = {
       'Users',
       //prettier-ignore
       [
-        {email: "demo1@user.io", username: "Demo User1", hashedPassword: bcrypt.hashSync('password'), },
-        {email: "demo2@user.io", username: "Demo User2", hashedPassword: bcrypt.hashSync('password'), },
+        {email: "demo@user.io", username: "demoUser", hashedPassword: bcrypt.hashSync('password'), },
+        {email: "demo2@user.io", username: "demoUser2", hashedPassword: bcrypt.hashSync('password'), },
 
         {email: "albert@user.io", username: "albert", hashedPassword: bcrypt.hashSync('password'), },
         {email: "alex@user.io", username: "alex", hashedPassword: bcrypt.hashSync('password'), },
@@ -18,6 +18,7 @@ module.exports = {
         {email: "connie@user.io", username: "connie", hashedPassword: bcrypt.hashSync('password'), },
         {email: "conniex@user.io", username: "conniex", hashedPassword: bcrypt.hashSync('password'), },
         {email: "dan@user.io", username: "dan", hashedPassword: bcrypt.hashSync('password'), },
+        {email: "elan@user.io", username: "elan", hashedPassword: bcrypt.hashSync('password'), },
         {email: "elee@user.io", username: "elee", hashedPassword: bcrypt.hashSync('password'), },
         {email: "eric@user.io", username: "eric", hashedPassword: bcrypt.hashSync('password'), },
         {email: "helen@user.io", username: "helen", hashedPassword: bcrypt.hashSync('password'), },

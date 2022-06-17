@@ -95,6 +95,8 @@ textarea {
   --darkBorder4: rgb(53, 55, 59);
   --darkTextDelete: rgb(224, 30, 90);
 
+  --activeStatus: rgb(86, 169, 122);
+
   /* Other */
 
   --btn: rgb(63, 143, 214);

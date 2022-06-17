@@ -64,35 +64,54 @@ export default function ProfileButton({ user }) {
         {showMenu && (
           <>
             <div className='nav-user-dropdown-container' ref={menu}>
-              <div className='nav-user-dropdown-welcome'>
-                <div className='nav-user-dropdown-welcome-text'>
-                  Welcome {user?.username}!
+              {/* Top row */}
+              <div className={`nav-user-message-list-item`}>
+                <div className={`nav-user-message-img default`}></div>
+                <div className={`nav-user-message-right`}>
+                  <div className={`nav-user-message-top`}>
+                    <div className={`nav-user-message-displayName`}>
+                      {`${sessionUser.username}`}
+                    </div>
+                  </div>
+                  <div className={'nav-user-message-content'}>
+                    <div class='material-symbols-outlined brightness'>
+                      brightness_1
+                    </div>
+                    <div class='nav-user-message-content-active'>Active</div>
+                  </div>
                 </div>
               </div>
 
-              <div className='nav-user-dropdown-welcome'>
-                <div className='nav-user-dropdown-welcome-text'>
+              <div className='nav-user-dropdown-developed'>
+                <div className='nav-user-dropdown-developed-text'>
                   Developed by Elan Katz
                 </div>
+                <div className='nav-user-dropdown-developed-images'>
+                  <a
+                    className='nav-user-dropdown-github'
+                    href='https://github.com/otter23'
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    {' '}
+                  </a>
+                  <a
+                    className='nav-user-dropdown-linked in'
+                    href='https://www.linkedin.com/in/elankatz/'
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    {' '}
+                  </a>
+                </div>
               </div>
 
-              {/* {sessionUser && (
-                <Link
-                  className='nav-user-dropdown-artist-link'
-                  to={`/${sessionUser?.artistUrl}`}
-                >
-                  <div>Artist Profile Page</div>
-                </Link>
-              )} */}
-
               <div className='nav-user-logout'>
-                <button
-                  className='nav-user-logout-btn'
-                  type='button'
-                  onClick={logout}
-                >
-                  Sign Out of Workspace
-                </button>
+                <div className='nav-user-logout-btn' onClick={logout}>
+                  <div className='nav-user-logout-btn-text'>
+                    Sign out of Workspace
+                  </div>
+                </div>
               </div>
             </div>
           </>
