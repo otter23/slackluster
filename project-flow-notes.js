@@ -360,16 +360,12 @@ Challenges:
   dynamic resizing of chat/messages
   mobile optimization
 
-TOFIX
--splash page github/linked in links to white
--add a shout out to slack on the splash page
+TO FIX:
 -fix modals so dragged click doen't register
 
 TODO:
   -README
   -hover over time - creates popup with full date/time OR REMOVE UNDERLINE/POINTER
-  -add everyone in cohort + ta's and ryan as a user
-
   -404 about page
 
 

@@ -24,9 +24,9 @@ module.exports = {
       'Messages',
       //prettier-ignore
       [
-        { ownerId: 11, channelId: 1, groupId: null, threadId: null, content: 'Welcome to Slackluster!', createdAt: date1 },
-        { ownerId: 11, channelId: 1, groupId: null, threadId: null, content: 'Thank you for checking out my slack clone!', createdAt: date2 },
-        { ownerId: 11, channelId: 1, groupId: null, threadId: null, content: 'Feel free to navigate around the site and create, edit, and delete channels and messages.', createdAt: date3 },
+        { ownerId: 3, channelId: 1, groupId: null, threadId: null, content: 'Welcome to Slackluster!', createdAt: date1 },
+        { ownerId: 3, channelId: 1, groupId: null, threadId: null, content: 'Thank you for checking out my slack clone!', createdAt: date2 },
+        { ownerId: 3, channelId: 1, groupId: null, threadId: null, content: 'Feel free to navigate around the site and create, edit, and delete channels and messages.', createdAt: date3 },
 
         // { ownerId: 2, channelId: 1, groupId: null, threadId: null, content: 'Wow looks great!', createdAt: date3 },
         // { ownerId: 2, channelId: 1, groupId: null, threadId: null, content: '4 message in the channel', createdAt: date4 },

@@ -9,7 +9,7 @@ import AddMessage from '../AddMessage';
 import EditMessage from '../EditMessage';
 import DeleteMessage from '../DeleteMessageForm';
 import ChannelDetails from '../ChannelDetails';
-import hashIcon from '../../images/icons/hash-icon.svg';
+import hashIcon from '../../images/icons/hash-icon-offWhite.svg';
 import FullPageModal from '../FullPageModal';
 
 const dayjs = require('dayjs');
