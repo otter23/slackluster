@@ -375,9 +375,11 @@ TODO:
   -new message notification on side menu
 
   -check all message submission error handling
+  -route protection? change main page path to exact ?
 
 
 Future work:
+-loading all messages in history is not efficient, won't scale as a chanel's messages grow, need to learn infinite scale
   -add state to hold a channel's current unsent message, would need to persist even if channel unmounts, could be in redux state, but not in db
   -add button for scroll to bottom of chat when new message
   -notify channel there are new messages (button)
@@ -385,13 +387,9 @@ Future work:
       -https://gist.github.com/Yarith/bcd7b715cff302fdf4512f538b769521
 
 TO FIX:
-  -mapping over a fragment, it wants a unique key, best practice?
-  -route protection? change main page path to exact ?
-  -remove socket connected socket object
--remember credential
--general topic edit not working
--update the edit message form styling
--FIX SPLASH PAGE FOR MOBILE
+  -update the edit message form styling
+  -FIX SPLASH PAGE FOR MOBILE
+  -upon page refresh it loads to top of chat instead of bottom of chat
 
 
 TO DO:
