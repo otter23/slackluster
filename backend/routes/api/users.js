@@ -82,6 +82,9 @@ router.post(
       onlineStatus: true,
     });
 
+    const io = req.app.get('socketio');
+    io.emit('user:add', { user });
+
     await setTokenCookie(res, user);
 
     return res.json({

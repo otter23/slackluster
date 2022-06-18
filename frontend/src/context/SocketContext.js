@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import * as usersActions from '../store/users';
 import * as channelsActions from '../store/channels';
 import * as messagesActions from '../store/messages';
 
@@ -33,6 +34,11 @@ export const SocketProvider = ({ children }) => {
 
       // socket.current.emit('join', sessionUser);
       // socket.current.on('welcome', (msg) => console.log(msg));
+
+      //user event listeners to update redux state
+      socket.current.on('user:add', ({ user }) => {
+        dispatch(usersActions.addUser(user));
+      });
 
       //channel event listeners to update redux state
       socket.current.on('channel:add', ({ newChannel }) => {

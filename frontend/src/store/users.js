@@ -3,11 +3,17 @@ import { csrfFetch } from './utils/csrf'; //restoreCSRF
 
 //ACTION TYPES:
 const GET_ALL_USERS = 'users/GET_ALL_USERS';
+const ADD_USER = 'users/ADD_USER';
 
 //REGULAR ACTION CREATORS (implicit returns)
 export const getAllUsers = (usersByUserId) => ({
   type: GET_ALL_USERS,
   payload: { usersByUserId },
+});
+
+export const addUser = (user) => ({
+  type: ADD_USER,
+  payload: { user },
 });
 
 //THUNK ACTION CREATORS:
@@ -30,11 +36,10 @@ const initialState = { usersByUserId: {} };
 
 export default function photosReducer(state = initialState, action) {
   Object.freeze(state);
-
-  //Shallow Clone State:
-  let newState = { ...state };
+  Object.freeze(state.usersByUserId);
 
   //Deep Clone State:
+  let newState = { usersByUserId: {} };
   Object.keys(state.usersByUserId).forEach((key) => {
     let user = state.usersByUserId[key];
     newState.usersByUserId[key] = { ...user };
@@ -47,6 +52,12 @@ export default function photosReducer(state = initialState, action) {
       // // just overwriting state entirely with data from database.
       // newState.usersByUserId = action.payload.usersByUserId;
       return newState;
+
+    case ADD_USER:
+      //if already exists, will replace key of same id wih new user object
+      newState.usersByUserId[action.payload.user?.id] = action.payload.user;
+      return newState;
+
     default:
       return state;
   }
