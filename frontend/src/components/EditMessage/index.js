@@ -15,14 +15,14 @@ export default function Message({
   const editMessageInputRef = useRef(null);
 
   //controlled inputs
-  const [messageInput, setMessageInput] = useState(message.content || '');
+  const [messageInput, setMessageInput] = useState(message?.content || '');
   const [errors, setErrors] = useState('');
 
   //autofocus input field and move cursor to end
   useEffect(() => {
     autoHeight(editMessageInputRef.current);
     editMessageInputRef.current?.focus();
-    let len = messageInput.length;
+    let len = messageInput?.length;
     editMessageInputRef.current?.setSelectionRange(len, len);
     // eslint-disable-next-line
   }, []);
@@ -38,7 +38,7 @@ export default function Message({
   const onEnterPress = (e) => {
     if (e.keyCode === 13 && e.shiftKey === false) {
       e.preventDefault();
-      editMessageForm.current.requestSubmit();
+      editMessageForm.current?.requestSubmit();
     }
   };
 
@@ -56,8 +56,8 @@ export default function Message({
       // { messageId, channelId, groupId, threadId, content }
       const response = await dispatch(
         messagesActions.updateMessageThunk({
-          messageId: message.id,
-          channelId: message.channelId,
+          messageId: message?.id,
+          channelId: message?.channelId,
           content: messageInput,
         })
       );
@@ -77,12 +77,12 @@ export default function Message({
   return (
     <div
       className='editMessage-container-inner'
-      onClick={() => editMessageInputRef.current.focus()}
+      onClick={() => editMessageInputRef.current?.focus()}
     >
       <div className='editMessage-top-container'>
-        {errors.length > 0 && (
+        {errors?.length > 0 && (
           <div className='editMessage-error-container'>
-            {errors.map((error, ind) => (
+            {errors?.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}
           </div>

@@ -40,7 +40,7 @@ export default function AddChannelName({ closeModal }) {
 
   //autofocus input field
   useEffect(() => {
-    nameInputRef.current.focus();
+    nameInputRef.current?.focus();
   }, []);
 
   //disable form submit if name has not been change
@@ -58,7 +58,7 @@ export default function AddChannelName({ closeModal }) {
     try {
       const response = await dispatch(
         channelsActions.addChannelThunk({
-          ownerId: sessionUser.id,
+          ownerId: sessionUser?.id,
           name: channelName,
           topic: null,
           description: channelDescription,
@@ -139,7 +139,9 @@ export default function AddChannelName({ closeModal }) {
                 type='text'
                 value={channelName ?? ''}
                 onChange={(e) =>
-                  setChannelName(e.target.value.toLowerCase().replace(' ', '-'))
+                  setChannelName(
+                    e.target.value?.toLowerCase()?.replace(' ', '-')
+                  )
                 }
                 placeholder='e.g. plan-budget'
                 name='name'

@@ -14,18 +14,22 @@ export default function EditChannelTopic({ closeModal }) {
 
   //slices of react state for controlled inputs
   // eslint-disable-next-line
-  const [channelName, setChannelName] = useState(channels[channelId]?.name);
-  const [channelTopic, setChannelTopic] = useState(channels[channelId]?.topic);
+  const [channelName, setChannelName] = useState(
+    channels[channelId]?.name || ''
+  );
+  const [channelTopic, setChannelTopic] = useState(
+    channels[channelId]?.topic || ''
+  );
   // eslint-disable-next-line
   const [channelDescription, setChannelDescription] = useState(
-    channels[channelId]?.description
+    channels[channelId]?.description || ''
   );
   const [errors, setErrors] = useState([]);
 
   //autofocus input field and move cursor to end
   useEffect(() => {
-    topicInputRef.current.focus();
-    let len = channelTopic.length;
+    topicInputRef.current?.focus();
+    let len = channelTopic?.length;
     topicInputRef.current?.setSelectionRange(len, len);
     // eslint-disable-next-line
   }, []);
@@ -85,9 +89,9 @@ export default function EditChannelTopic({ closeModal }) {
           >
             <div className='editChannel-form-group'>
               <label className='editChannel-form-label' htmlFor='topic'></label>
-              {errors.length > 0 && (
+              {errors?.length > 0 && (
                 <div className='editChannel-error-container'>
-                  {errors.map((error, ind) => (
+                  {errors?.map((error, ind) => (
                     <div key={ind}>{error}</div>
                   ))}
                 </div>

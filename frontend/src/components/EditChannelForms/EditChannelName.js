@@ -13,20 +13,24 @@ export default function EditChannelName({ closeModal }) {
   const channelId = useSelector((state) => state.channels.currentChannelId);
 
   //slices of react state for controlled inputs
-  const [channelName, setChannelName] = useState(channels[channelId]?.name);
+  const [channelName, setChannelName] = useState(
+    channels[channelId]?.name || ''
+  );
   // eslint-disable-next-line
-  const [channelTopic, setChannelTopic] = useState(channels[channelId]?.topic);
+  const [channelTopic, setChannelTopic] = useState(
+    channels[channelId]?.topic || ''
+  );
   // eslint-disable-next-line
   const [channelDescription, setChannelDescription] = useState(
-    channels[channelId]?.description
+    channels[channelId]?.description || ''
   );
   const [errors, setErrors] = useState([]);
   const [disabledSave, setDisabledSave] = useState(false);
 
   //autofocus input field and move cursor to end
   useEffect(() => {
-    nameInputRef.current.focus();
-    let len = channelName.length;
+    nameInputRef.current?.focus();
+    let len = channelName?.length;
     nameInputRef.current?.setSelectionRange(len, len);
     // eslint-disable-next-line
   }, []);
@@ -96,9 +100,9 @@ export default function EditChannelName({ closeModal }) {
               <label className='editChannel-form-label' htmlFor='name'>
                 Channel name
               </label>
-              {errors.length > 0 && (
+              {errors?.length > 0 && (
                 <div className='editChannel-error-container'>
-                  {errors.map((error, ind) => (
+                  {errors?.map((error, ind) => (
                     <div key={ind}>{error}</div>
                   ))}
                 </div>

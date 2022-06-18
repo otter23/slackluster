@@ -82,7 +82,7 @@ export default function Message({
     //Can still use Shift + Enter to create new lines
     if (e.keyCode === 13 && e.shiftKey === false) {
       e.preventDefault();
-      messageForm.current.requestSubmit();
+      messageForm.current?.requestSubmit();
     }
   };
 
@@ -96,7 +96,7 @@ export default function Message({
       //thunk to persist message in db, route will broadcast to other users once persisted
       const response = await dispatch(
         messagesActions.addMessageThunk({
-          ownerId: sessionUser.id,
+          ownerId: sessionUser?.id,
           channelId,
           content: messageInput,
         })
@@ -124,9 +124,9 @@ export default function Message({
       onClick={() => messageInputRef.current.focus()}
     >
       <div className='addMessage-top-container'>
-        {errors.length > 0 && (
+        {errors?.length > 0 && (
           <div className='addMessage-error-container'>
-            {errors.map((error, ind) => (
+            {errors?.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}
           </div>

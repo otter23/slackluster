@@ -27,7 +27,7 @@ export default function DeleteChannel({ closeModal, closeDetailsModal }) {
 
     try {
       const response = await dispatch(
-        channelsActions.deleteChannelThunk(sessionUser.id, channelId)
+        channelsActions.deleteChannelThunk(sessionUser?.id, channelId)
       );
       if (response.ok) {
         closeModal();
@@ -90,9 +90,9 @@ export default function DeleteChannel({ closeModal, closeDetailsModal }) {
             </div>
             <div className='editChannel-form-group'>
               <label className='editChannel-form-label' htmlFor='delete'>
-                {errors.length > 0 && (
+                {errors?.length > 0 && (
                   <div className='editChannel-error-container'>
-                    {errors.map((error, ind) => (
+                    {errors?.map((error, ind) => (
                       <div key={ind}>{error}</div>
                     ))}
                   </div>

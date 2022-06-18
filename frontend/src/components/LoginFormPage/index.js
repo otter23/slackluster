@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 
 //format for Create-react-app which uses SVGR under the hood:
-//import { ReactComponent as FlickrLogo } from './Flickr.svg';
+//import { ReactComponent as MyLogo } from './logo.svg';
 
 import MarkLogo from '../../images/Slack_Mark.svg';
 import NavBarSplash from '../NavBarSplash';
@@ -102,9 +102,9 @@ export default function LoginFormPage() {
             </div>
             <h6 className='login-header'>Sign in to Slackluster.</h6>
 
-            {errors.length > 0 && (
+            {errors?.length > 0 && (
               <ul className='login-error-container'>
-                {errors.map((error, idx) => (
+                {errors?.map((error, idx) => (
                   <li key={idx}>{error}</li>
                 ))}
               </ul>
@@ -122,7 +122,7 @@ export default function LoginFormPage() {
               >
                 <label
                   className={`login-label ${
-                    credential.length > 0 || credentialLabel
+                    credential?.length > 0 || credentialLabel
                       ? 'login-label-small'
                       : ''
                   } ${credentialLabel ? 'login-label-color' : ''}`}
@@ -135,15 +135,15 @@ export default function LoginFormPage() {
                   className={`login-input`}
                   type='text'
                   name='email'
-                  value={credential}
+                  value={credential ?? ''}
                   onClick={(e) => {
-                    let len = credential.length;
+                    let len = credential?.length;
                     e.target?.setSelectionRange(len, len);
                   }}
                   onChange={(e) => setCredential(e.target.value)}
                   onFocus={(e) => {
                     setCredentialLabel((prev) => !prev);
-                    let len = credential.length;
+                    let len = credential?.length;
                     e.target?.setSelectionRange(len, len);
                   }}
                   onBlur={() => setCredentialLabel((prev) => !prev)}
@@ -158,7 +158,7 @@ export default function LoginFormPage() {
               >
                 <label
                   className={`login-label ${
-                    password.length > 0 || passwordLabel
+                    password?.length > 0 || passwordLabel
                       ? 'login-label-small'
                       : ''
                   } ${passwordLabel ? 'login-label-color' : ''}`}
@@ -172,15 +172,15 @@ export default function LoginFormPage() {
                     className={`login-input`}
                     type={hidePassword ? 'password' : 'text'}
                     name='password'
-                    value={password}
+                    value={password ?? ''}
                     onClick={(e) => {
-                      let len = password.length;
+                      let len = password?.length;
                       e.target?.setSelectionRange(len, len);
                     }}
                     onChange={(e) => setPassword(e.target.value)}
                     onFocus={(e) => {
                       setPasswordLabel((prev) => !prev);
-                      let len = password.length;
+                      let len = password?.length;
                       e.target?.setSelectionRange(len, len);
                     }}
                     onBlur={() => setPasswordLabel((prev) => !prev)}
@@ -214,7 +214,7 @@ export default function LoginFormPage() {
                     checked={remember}
                     onChange={(e) => setRemember((prevVal) => !prevVal)}
                   />
-                  <span> Remember email address</span>
+                  <span> Remember username or email address</span>
                 </label>
               </div>
 

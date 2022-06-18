@@ -77,10 +77,10 @@ function SignupFormPage() {
               We suggest using the email address you use at work.
             </h6>
 
-            {errors.length > 0 && (
+            {errors?.length > 0 && (
               <ul className='signup-error-container'>
                 {/* <p className='signup-error-message'>Invalid email or password.</p> */}
-                {errors.map((error, idx) => (
+                {errors?.map((error, idx) => (
                   <li className='signup-error-message' key={idx}>
                     {error}
                   </li>
@@ -100,7 +100,7 @@ function SignupFormPage() {
               >
                 <label
                   className={`signup-label ${
-                    username.length > 0 || usernameLabel
+                    username?.length > 0 || usernameLabel
                       ? 'signup-label-small'
                       : ''
                   } ${usernameLabel ? 'signup-label-color' : ''}`}
@@ -113,15 +113,15 @@ function SignupFormPage() {
                   className={`signup-input`}
                   type='text'
                   name='username'
-                  value={username}
+                  value={username ?? ''}
                   onClick={(e) => {
-                    let len = username.length;
+                    let len = username?.length;
                     e.target?.setSelectionRange(len, len);
                   }}
                   onChange={(e) => setUsername(e.target.value)}
                   onFocus={(e) => {
                     setUsernameLabel((prev) => !prev);
-                    let len = username.length;
+                    let len = username?.length;
                     e.target?.setSelectionRange(len, len);
                   }}
                   onBlur={() => setUsernameLabel((prev) => !prev)}
@@ -140,7 +140,7 @@ function SignupFormPage() {
               >
                 <label
                   className={`signup-label ${
-                    email.length > 0 || emailLabel ? 'signup-label-small' : ''
+                    email?.length > 0 || emailLabel ? 'signup-label-small' : ''
                   } ${emailLabel ? 'signup-label-color' : ''}`}
                   htmlFor='email'
                 >
@@ -152,15 +152,15 @@ function SignupFormPage() {
                   className={`signup-input`}
                   type='text'
                   name='email'
-                  value={email}
+                  value={email ?? ''}
                   onClick={(e) => {
-                    let len = email.length;
+                    let len = email?.length;
                     e.target?.setSelectionRange(len, len);
                   }}
                   onChange={(e) => setEmail(e.target.value)}
                   onFocus={(e) => {
                     setEmailLabel((prev) => !prev);
-                    let len = email.length;
+                    let len = email?.length;
                     e.target?.setSelectionRange(len, len);
                   }}
                   onBlur={() => setEmailLabel((prev) => !prev)}
@@ -189,15 +189,15 @@ function SignupFormPage() {
                     className={`signup-input`}
                     type={hidePassword ? 'password' : 'text'}
                     name='password'
-                    value={password}
+                    value={password ?? ''}
                     onClick={(e) => {
-                      let len = password.length;
+                      let len = password?.length;
                       e.target?.setSelectionRange(len, len);
                     }}
                     onChange={(e) => setPassword(e.target.value)}
                     onFocus={(e) => {
                       setPasswordLabel((prev) => !prev);
-                      let len = password.length;
+                      let len = password?.length;
                       e.target?.setSelectionRange(len, len);
                     }}
                     onBlur={() => setPasswordLabel((prev) => !prev)}
@@ -232,7 +232,7 @@ function SignupFormPage() {
               >
                 <label
                   className={`signup-label ${
-                    confirmPassword.length > 0 || confirmPasswordLabel
+                    confirmPassword?.length > 0 || confirmPasswordLabel
                       ? 'signup-label-small'
                       : ''
                   } ${confirmPasswordLabel ? 'signup-label-color' : ''}`}
@@ -246,15 +246,15 @@ function SignupFormPage() {
                   className={`signup-input`}
                   type={'password'}
                   name='confirmPassword'
-                  value={confirmPassword}
+                  value={confirmPassword ?? ''}
                   onClick={(e) => {
-                    let len = confirmPassword.length;
+                    let len = confirmPassword?.length;
                     e.target?.setSelectionRange(len, len);
                   }}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   onFocus={(e) => {
                     setConfirmPasswordLabel((prev) => !prev);
-                    let len = confirmPassword.length;
+                    let len = confirmPassword?.length;
                     e.target?.setSelectionRange(len, len);
                   }}
                   onBlur={() => setConfirmPasswordLabel((prev) => !prev)}

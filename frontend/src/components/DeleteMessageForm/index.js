@@ -32,7 +32,7 @@ export default function DeleteMessage({
         // ownerId, messageId, channelId
         messagesActions.deleteMessageThunk(
           sessionUser?.id,
-          message.id,
+          message?.id,
           channelId
         )
       );
@@ -80,9 +80,9 @@ export default function DeleteMessage({
                 undone.
               </span>
             </div>
-            {errors.length > 0 && (
+            {errors?.length > 0 && (
               <div className='deleteMessage-error-container'>
-                {errors.map((error, ind) => (
+                {errors?.map((error, ind) => (
                   <div key={ind}>{error}</div>
                 ))}
               </div>
@@ -99,8 +99,8 @@ export default function DeleteMessage({
                     </div>
 
                     <div className={`deleteMessage-message-timestamp`}>
-                      {`${dayjs(message?.createdAt).format('MMMM D,')} at `}
-                      {`${dayjs(message?.createdAt).format('	h:mm A')}`}
+                      {`${dayjs(message?.createdAt)?.format('MMMM D,')} at `}
+                      {`${dayjs(message?.createdAt)?.format('	h:mm A')}`}
                     </div>
                   </div>
 

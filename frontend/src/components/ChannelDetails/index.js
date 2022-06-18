@@ -183,7 +183,7 @@ export default function ChannelDetails({ closeModal }) {
             <div className='channelDetails-card-spacer'></div>
 
             {sessionUser.id === channels[channelId]?.ownerId &&
-              channels[channelId].name !== 'general' && (
+              channels[channelId]?.name !== 'general' && (
                 <div
                   className={`channelDetails-card-field-container delete editable`}
                   onClick={() => {
