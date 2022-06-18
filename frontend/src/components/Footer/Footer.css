@@ -127,6 +127,8 @@
 @media screen and (max-width: 1000px) {
   .footer-container {
     flex-direction: column;
+    min-height: 125px;
+    /* flex-grow: 1; */
   }
 
   .footer-top-row {
@@ -166,5 +168,11 @@
 
   .footer-icon-container {
     gap: 40px;
+  }
+}
+
+@media screen and (max-width: 625px) {
+  .footer-container {
+    min-height: 160px;
   }
 }
