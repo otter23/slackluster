@@ -9,7 +9,7 @@ import AddMessage from '../AddMessage';
 import EditMessage from '../EditMessage';
 import DeleteMessage from '../DeleteMessageForm';
 import ChannelDetails from '../ChannelDetails';
-import hashIconWhite from '../../images/icons/hash-icon-white.svg';
+import hashIcon from '../../images/icons/hash-icon.svg';
 import FullPageModal from '../FullPageModal';
 
 const dayjs = require('dayjs');
@@ -232,7 +232,7 @@ export default function ChannelDisplay({
             onClick={openChannelInfoModal}
           >
             <img
-              src={hashIconWhite}
+              src={hashIcon}
               alt='hash'
               className='channelDisplay-hash-icon'
             ></img>

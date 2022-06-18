@@ -361,13 +361,14 @@ Challenges:
   mobile optimization
 
 
+
 TODO:
-  -readme
+  -README
   -hover over time - creates popup with full date/time OR REMOVE UNDERLINE/POINTER
-  add everyone in cohort as a user
+  -add everyone in cohort + ta's and ryan as a user
 
   -404 about page
-  -landing page - choose your workspace
+
 
   -add automatic messages when updating channel description or topic
   -add edited status boolean to a message table
@@ -380,7 +381,8 @@ TODO:
 
 
 Future work:
--loading all messages in history is not efficient, won't scale as a chanel's messages grow, need to learn infinite scale
+  -landing page - choose your workspace
+  -loading all messages in history is not efficient, won't scale as a chanel's messages grow, need to learn infinite scale
   -add state to hold a channel's current unsent message, would need to persist even if channel unmounts, could be in redux state, but not in db
   -add button for scroll to bottom of chat when new message
   -notify channel there are new messages (button)
