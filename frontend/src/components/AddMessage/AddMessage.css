@@ -104,6 +104,8 @@
 
 .addMessage-send-btn-container {
   all: unset;
+  margin: 0;
+  padding: 0;
 }
 
 .addMessage-send-btn-container {
