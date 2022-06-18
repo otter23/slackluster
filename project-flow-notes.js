@@ -386,22 +386,14 @@ Future work:
   -notify channel there are new messages (button)
   -add transition for deletion of message - http://reactcommunity.org/react-transition-group/transition
       -https://gist.github.com/Yarith/bcd7b715cff302fdf4512f538b769521
-
-TO FIX:
-  -FIX SPLASH PAGE FOR MOBILE
+  -change app load to be only depended on isLoaded, and then route specific waiting for other slices of redux state
 
 
 
-TO DO:
-change app load to be only depended on isLoaded, and then route specific waiting for other slices of redux state
+
 redux toolkit?
 react-images-uploading - npm
 rfdc - clone package npm
-
-
-
-
-
 
 
 //SPA where only clicks can navigate
