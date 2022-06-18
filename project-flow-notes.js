@@ -360,7 +360,10 @@ Challenges:
   dynamic resizing of chat/messages
   mobile optimization
 
-
+TOFIX
+-splash page github/linked in links to white
+-add a shout out to slack on the splash page
+-fix modals so dragged click doen't register
 
 TODO:
   -README

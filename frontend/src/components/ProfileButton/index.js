@@ -5,8 +5,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session';
 
-import defaultProfile from '../../images/slack-default-profile.png';
-
 export default function ProfileButton({ user }) {
   const dispatch = useDispatch();
 
@@ -52,13 +50,12 @@ export default function ProfileButton({ user }) {
   return (
     <div className='nav-user-image-container' onClick={openMenu}>
       <div
-        className='nav-user-image'
+        className={`nav-user-image
+        ${sessionUser?.profileImageUrl ? '' : 'default'}`}
         style={
-          sessionUser?.profileImageUrl
-            ? {
-                backgroundImage: `url(${sessionUser?.profileImageUrl})`,
-              }
-            : { backgroundImage: `url(${defaultProfile})` }
+          sessionUser?.profileImageUrl && {
+            backgroundImage: `url(${sessionUser?.profileImageUrl})`,
+          }
         }
       >
         {showMenu && (
@@ -98,7 +95,15 @@ export default function ProfileButton({ user }) {
                     {' '}
                   </a>
                   <a
-                    className='nav-user-dropdown-linked in'
+                    className='nav-user-dropdown-github-fork'
+                    href='https://github.com/otter23/slackluster'
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    {' '}
+                  </a>
+                  <a
+                    className='nav-user-dropdown-linkedIn'
                     href='https://www.linkedin.com/in/elankatz/'
                     target='_blank'
                     rel='noreferrer'
