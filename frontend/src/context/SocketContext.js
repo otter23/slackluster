@@ -5,6 +5,7 @@ import * as channelsActions from '../store/channels';
 import * as messagesActions from '../store/messages';
 
 //import client-side socket package
+//https://socket.io/docs/v4/client-initialization/
 import { io } from 'socket.io-client';
 
 //create context
@@ -23,8 +24,12 @@ export const SocketProvider = ({ children }) => {
     // create websocket
     if (sessionUser) {
       //defaults to trying to connect to the host that serves the page.
+      //the server URL will be deduced from the window.location object
+      //works because frontend is served on the same domain as the server on heroku or via a proxy(?)
       socket.current = io();
-      console.log('CONNECTED', socket);
+      //socket.id - each new socket is assigned a random 20 character unique and synced with server
+      //socket.connected - boolean describing whether socket is currently connected to server
+      console.log('Socket Connected');
 
       // socket.current.emit('join', sessionUser);
       // socket.current.on('welcome', (msg) => console.log(msg));
@@ -58,7 +63,7 @@ export const SocketProvider = ({ children }) => {
     return () => {
       if (sessionUser) {
         socket.current.disconnect();
-        console.log('DISCONNECTED', socket);
+        console.log('Socket disconnected');
       }
     };
   }, [dispatch, sessionUser]);

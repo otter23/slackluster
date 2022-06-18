@@ -342,7 +342,7 @@ export default function ChannelDisplay({
 
                       {/* {messageToolbox} */}
                       {/* Only show toolbox if user is owner */}
-                      {sessionUser?.id === message?.ownerId && (
+                      {sessionUser.id === message?.ownerId && (
                         <div className='channelDisplay-message-toolbox'>
                           <div
                             className='channelDisplay-message-toolbox-edit'

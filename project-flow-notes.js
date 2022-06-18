@@ -363,15 +363,16 @@ Challenges:
 
 TODO:
   -readme
-  -hover over time - creates popup with full date/time OR REMOVE UNDERLINE
+  -hover over time - creates popup with full date/time OR REMOVE UNDERLINE/POINTER
 
   -404 about page
+  -landing page - choose your workspace
+
   -add automatic messages when updating channel description or topic
   -add edited status boolean to a message table
 
   -link highlighting in message input
   -new message notification on side menu
-  -not rendering extra spaces in messages??
 
   -check all message submission error handling
 
@@ -386,7 +387,11 @@ Future work:
 TO FIX:
   -mapping over a fragment, it wants a unique key, best practice?
   -route protection? change main page path to exact ?
-
+  -remove socket connected socket object
+-remember credential
+-general topic edit not working
+-update the edit message form styling
+-FIX SPLASH PAGE FOR MOBILE
 
 
 TO DO:
@@ -401,8 +406,6 @@ rfdc - clone package npm
 
 
 
-
-
 //SPA where only clicks can navigate
     //represent userId with a UUID
     //each URL is just a reference to something else under the hood
@@ -410,10 +413,5 @@ rfdc - clone package npm
     //that or you don't have urls at all
     //click handler in the img map list and don't user url param, pass down imageUrl form image object as prop
 
-
-utilize context
-
-
-//updated user signup route  to include extra db fields
 
 */

@@ -70,7 +70,7 @@ export default function ProfileButton({ user }) {
                 <div className={`nav-user-message-right`}>
                   <div className={`nav-user-message-top`}>
                     <div className={`nav-user-message-displayName`}>
-                      {`${sessionUser.username}`}
+                      {`${sessionUser?.username}`}
                     </div>
                   </div>
                   <div className={'nav-user-message-content'}>

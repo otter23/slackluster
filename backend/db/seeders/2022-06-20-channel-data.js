@@ -41,7 +41,8 @@ module.exports = {
           ownerId: 2,
           name: 'bobarz',
           topic: null,
-          description: null,
+          description:
+            'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
           isPrivate: true,
         },
 
@@ -49,21 +50,24 @@ module.exports = {
           ownerId: 1,
           name: 'capstone-projects',
           topic: 'Post your project links here',
-          description: null,
+          description:
+            'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
           isPrivate: false,
         },
         {
           ownerId: 2,
           name: 'cbd-farm',
           topic: null,
-          description: null,
+          description:
+            'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
           isPrivate: false,
         },
         {
           ownerId: 2,
           name: 'cheesecake-is-not-a-pie',
           topic: null,
-          description: null,
+          description:
+            'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
           isPrivate: false,
         },
         // {
@@ -85,14 +89,16 @@ module.exports = {
           ownerId: 1,
           name: 'design',
           topic: 'all things design',
-          description: null,
+          description:
+            'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
           isPrivate: false,
         },
         {
           ownerId: 2,
           name: 'granof-the-grey',
           topic: 'never won a kahoot T.T',
-          description: null,
+          description:
+            'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
           isPrivate: false,
         },
         // {
@@ -155,28 +161,32 @@ module.exports = {
           ownerId: 2,
           name: 'novohort',
           topic: 'top secret company',
-          description: null,
+          description:
+            'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
           isPrivate: false,
         },
         {
           ownerId: 2,
           name: 'o-w-l',
           topic: 'the order',
-          description: null,
+          description:
+            'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
           isPrivate: false,
         },
         {
           ownerId: 2,
           name: 'reduce',
           topic: 'best array method',
-          description: null,
+          description:
+            'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
           isPrivate: false,
         },
         {
           ownerId: 2,
           name: 'touch-grass',
           topic: 'all things outdoors',
-          description: null,
+          description:
+            'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
           isPrivate: false,
         },
         {
@@ -197,21 +207,24 @@ module.exports = {
           ownerId: 2,
           name: 'wanderlust',
           topic: null,
-          description: null,
+          description:
+            'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
           isPrivate: false,
         },
         {
           ownerId: 2,
           name: 'when-in-doubt-print-it-out',
           topic: 'for all your debugging needs',
-          description: null,
+          description:
+            'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
           isPrivate: false,
         },
         {
           ownerId: 2,
           name: 'wordle',
           topic: "Please don't post wordles anywhere else",
-          description: null,
+          description:
+            'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
           isPrivate: false,
         },
 
