@@ -104,6 +104,11 @@ export default function ChannelDisplay({
     // channelScroll.scrollIntoView();
   };
 
+  //scroll to bottom after first render of app channel (fixes scroll when refresh page when already logged in)
+  useEffect(() => {
+    setTimeout(() => scrollToBottom(), 300);
+  }, []);
+
   //state management for resizing viewport and scroll container
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   // const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
@@ -279,7 +284,7 @@ export default function ChannelDisplay({
               </div>
 
               {messages[channelId]?.map((message, ind) => (
-                <>
+                <React.Fragment key={message.id}>
                   {displayDateDivider(ind, message) && (
                     <div
                       className='channelDisplay-message-day-divider'
@@ -303,7 +308,7 @@ export default function ChannelDisplay({
                          currentMessage?.id === message.id &&
                          'edit'
                        }`}
-                      key={message.id}
+                      // key={message.id}
                     >
                       <div
                         className={`channelDisplay-message-img default`}
@@ -390,7 +395,7 @@ export default function ChannelDisplay({
                          currentMessage?.id === message.id &&
                          'edit'
                        }`}
-                      key={message.id}
+                      // key={message.id}
                     >
                       <div
                         className={`channelDisplay-message-single-timestamp`}
@@ -454,7 +459,7 @@ export default function ChannelDisplay({
                       )}
                     </div>
                   )}
-                </>
+                </React.Fragment>
               ))}
             </div>
           </div>

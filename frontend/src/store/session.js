@@ -1,6 +1,7 @@
 //Redux state slice to hold the current session user's information
 
 import { csrfFetch } from './utils/csrf'; //restoreCSRF
+import { setCurrentChannel } from './channels';
 
 //Session Action Types:
 const SET_USER = 'session/setUser';
@@ -38,6 +39,7 @@ export const login = (user) => async (dispatch) => {
   // if (response.ok) {
   const resBody = await response.json();
   dispatch(setUser(resBody.user));
+  dispatch(setCurrentChannel(1));
   return response;
   // }
 };
@@ -56,6 +58,7 @@ export const signup = (user) => async (dispatch) => {
   });
   const data = await response.json();
   dispatch(setUser(data.user));
+  dispatch(setCurrentChannel(1));
   return response;
 };
 
