@@ -364,6 +364,7 @@ Challenges:
 TODO:
   -readme
   -hover over time - creates popup with full date/time OR REMOVE UNDERLINE/POINTER
+  add everyone in cohort as a user
 
   -404 about page
   -landing page - choose your workspace
@@ -387,7 +388,6 @@ Future work:
       -https://gist.github.com/Yarith/bcd7b715cff302fdf4512f538b769521
 
 TO FIX:
-  -update the edit message form styling
   -FIX SPLASH PAGE FOR MOBILE
   -upon page refresh it loads to top of chat instead of bottom of chat
 

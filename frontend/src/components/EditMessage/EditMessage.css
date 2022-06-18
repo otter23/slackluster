@@ -69,6 +69,9 @@
   resize: none;
   /* hide scrollbar on growth*/
   overflow: hidden;
+
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .editMessage-bottom-container {
@@ -117,4 +120,20 @@
 
 .editMessage-cancel-btn-container:hover {
   background-color: var(--darkBg2Hover);
+}
+
+/* mobile optimization, but until include icons style non-mobile as well */
+@media screen and (max-width: 3200px) {
+  .editMessage-container-inner {
+    min-height: 80px;
+  }
+
+  .editMessage-top-container {
+    display: none;
+  }
+
+  .editMessage-form-textarea-wrapper {
+    padding-top: 12px;
+    padding-bottom: 0px;
+  }
 }
