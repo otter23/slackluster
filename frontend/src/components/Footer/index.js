@@ -11,12 +11,39 @@ export default function Footer() {
     <footer className='footer-container'>
       <div className='footer-top-row'>
         <div className='footer-developer-container'>
-          <div className='footer-developer-name'>Developed by Elan Katz</div>
+          <div className='footer-developer-name'>
+            <span>
+              <span className='footer-float-left'>
+                Slackluster is a full-stack application clone of&nbsp;
+              </span>
+              <span>
+                <a
+                  className='footer-slack-link'
+                  href='https://slack.com/'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  slack.com
+                </a>
+              </span>
+              <span className='footer-float-right'>
+                &nbsp;developed by Elan Katz in 2022.
+              </span>
+            </span>
+          </div>
 
           <div className='footer-image-links'>
             <a
               className='footer-github-link'
               href='https://github.com/otter23'
+              target='_blank'
+              rel='noreferrer'
+            >
+              {' '}
+            </a>
+            <a
+              className='footer-github-fork-link'
+              href='https://github.com/otter23/slackluster'
               target='_blank'
               rel='noreferrer'
             >
@@ -33,11 +60,15 @@ export default function Footer() {
           </div>
         </div>
         <div className='footer-technologies'>
+          <div className='footer-technologies-tech'>Tech Used:</div>
           <div>Javascript</div>
-          <div>HTML5 / CSS3</div>
-          <div>React / Redux</div>
+          <div>HTML5</div>
+          <div>CSS3</div>
+          <div>React</div>
+          <div>Redux</div>
           <div>Express</div>
-          <div>Sequelize / PostgreSQL</div>
+          <div className='footer-technologies-seq'>Sequelize</div>
+          <div className='footer-technologies-post'>PostgreSQL</div>
         </div>
 
         {/* <div>Status</div>
