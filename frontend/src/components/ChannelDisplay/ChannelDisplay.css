@@ -8,7 +8,7 @@
   /* in media query when create side-panel modal, need to change back to 100% */
 
   background-color: var(--darkBg1);
-  /* position: relative; */
+  position: relative;
 }
 
 @media screen and (max-width: 600px) {
@@ -388,10 +388,35 @@
   color: var(--darkText4);
   font-size: 12px;
   font-weight: 400;
+  position: relative;
 }
 
 .channelDisplay-message-timestamp:hover {
   text-decoration: underline;
+}
+
+.channelDisplay-message-timestamp-popup {
+  display: flex;
+  flex-grow: 1;
+  position: absolute;
+  top: -38px;
+  transform: translateX(-50%);
+  left: 50%;
+  z-index: 4000;
+
+  padding: 10px;
+  border-radius: 4px;
+  background-color: black;
+  border: 1px solid var(--darkBorder1);
+  min-width: 150px;
+  visibility: hidden;
+
+  color: white;
+}
+
+.channelDisplay-message-timestamp:hover
+  .channelDisplay-message-timestamp-popup {
+  visibility: visible;
 }
 
 .channelDisplay-message-single-timestamp {
@@ -399,14 +424,52 @@
   font-size: 12px;
   font-weight: 400;
   color: var(--darkText4);
-  min-width: 36px;
+  min-width: 18px;
+  margin-left: 14px;
   text-align: right;
+  position: relative;
 }
 
 .channelDisplay-message-list-item-single:hover
   .channelDisplay-message-single-timestamp {
   visibility: visible;
 }
+
+.channelDisplay-message-single-timestamp-popup {
+  display: flex;
+  flex-grow: 1;
+  position: absolute;
+  top: -38px;
+  left: -20px;
+  z-index: 4000;
+
+  padding: 10px;
+  border-radius: 4px;
+  background-color: black;
+  border: 1px solid var(--darkBorder1);
+  min-width: 150px;
+  visibility: hidden;
+
+  color: white;
+}
+
+.channelDisplay-message-single-timestamp:hover
+  .channelDisplay-message-single-timestamp-popup {
+  visibility: visible;
+}
+/* prettier-ignore */
+/* .channelDisplay-message-single-timestamp:hover .channelDisplay-main-container,
+.channelDisplay-message-single-timestamp:hover .channelDisplay-message-container-wrapper,
+.channelDisplay-message-single-timestamp:hover .channelDisplay-message-container-inner,
+.channelDisplay-message-single-timestamp:hover .channelDisplay-message-container,
+.channelDisplay-message-single-timestamp:hover .channelDisplay-message-list-item,
+.channelDisplay-message-single-timestamp:hover .channelDisplay-message-list-item-single,
+.channelDisplay-message-single-timestamp:hover .channelDisplay-message-right,
+.channelDisplay-message-single-timestamp:hover .channelDisplay-message-top,
+.channelDisplay-message-single-timestamp:hover .channelDisplay-message-timestamp,
+.channelDisplay-message-single-timestamp:hover .channelDisplay-message-single-timestamp {
+  z-index: 5000;
+} */
 
 pre.channelDisplay-message-content {
   color: var(--darkText2);

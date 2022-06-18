@@ -14,7 +14,13 @@ import FullPageModal from '../FullPageModal';
 
 const dayjs = require('dayjs');
 const dayOfYear = require('dayjs/plugin/dayOfYear');
+const advancedFormat = require('dayjs/plugin/advancedFormat');
+const isToday = require('dayjs/plugin/isToday');
+const isYesterday = require('dayjs/plugin/isYesterday');
 dayjs.extend(dayOfYear);
+dayjs.extend(advancedFormat);
+dayjs.extend(isToday);
+dayjs.extend(isYesterday);
 
 export default function ChannelDisplay({
   isChannelsLoaded,
@@ -91,6 +97,18 @@ export default function ChannelDisplay({
     // } else {
     //   return true;
     // }
+  };
+
+  const formatDatePopup = (message) => {
+    let date;
+    if (dayjs(message.createdAt).isToday()) {
+      date = 'Today';
+    } else if (dayjs(message.createdAt).isYesterday()) {
+      date = 'Yesterday';
+    } else {
+      date = dayjs(message.createdAt).format('MMM Do');
+    }
+    return date + ' at ' + dayjs(message.createdAt).format('h:mm:ss A');
   };
 
   //Function to scroll to bottom (e.g. after submit)
@@ -292,7 +310,7 @@ export default function ChannelDisplay({
                     >
                       <div className='channelDisplay-message-day-divider-border'></div>
                       <div className='channelDisplay-message-day-divider-btn'>
-                        {dayjs(message.createdAt).format('dddd, MMMM D')}
+                        {dayjs(message.createdAt).format('dddd, MMMM Do')}
                       </div>
                     </div>
                   )}
@@ -301,13 +319,13 @@ export default function ChannelDisplay({
                   {messages[channelId][ind - 1]?.ownerId !== message.ownerId ||
                   displayDateDivider(ind, message) ? (
                     <div
-                      className={`channelDisplay-message-list-item
-                      current-${message.id}
-                       ${
-                         currentMessage &&
-                         currentMessage?.id === message.id &&
-                         'edit'
-                       }`}
+                      className={`channelDisplay-message-list-item current-${
+                        message.id
+                      } ${
+                        currentMessage && currentMessage?.id === message.id
+                          ? 'edit'
+                          : ''
+                      }`}
                       // key={message.id}
                     >
                       <div
@@ -336,6 +354,11 @@ export default function ChannelDisplay({
                                 className={`channelDisplay-message-timestamp`}
                               >
                                 {`${dayjs(message.createdAt).format('	h:mm A')}`}
+                                <div
+                                  className={`channelDisplay-message-timestamp-popup`}
+                                >
+                                  {formatDatePopup(message)}
+                                </div>
                               </div>
                             </div>
                             <pre className={'channelDisplay-message-content'}>
@@ -355,7 +378,7 @@ export default function ChannelDisplay({
                               setCurrentMessage(message);
                               setEditMEssageDisplay(true);
                               const mainView = document.querySelector(
-                                `.channelDisplay-message-list-item.current-${message.id} +div`
+                                `.channelDisplay-message-list-item.current-${message.id} + div`
                               );
                               mainView?.scrollIntoView({
                                 behavior: 'smooth',
@@ -388,19 +411,24 @@ export default function ChannelDisplay({
                     </div>
                   ) : (
                     <div
-                      className={`channelDisplay-message-list-item-single
-                      current-${message.id}
-                       ${
-                         currentMessage &&
-                         currentMessage?.id === message.id &&
-                         'edit'
-                       }`}
+                      className={`channelDisplay-message-list-item-single current-${
+                        message.id
+                      } ${
+                        currentMessage && currentMessage?.id === message.id
+                          ? 'edit'
+                          : ''
+                      }`}
                       // key={message.id}
                     >
                       <div
                         className={`channelDisplay-message-single-timestamp`}
                       >
                         {`${dayjs(message.createdAt).format('	h:mm')}`}
+                        <div
+                          className={`channelDisplay-message-single-timestamp-popup`}
+                        >
+                          {formatDatePopup(message)}
+                        </div>
                       </div>
                       <div className={`channelDisplay-message-right-single`}>
                         {/* toggle whether edit form is shown */}

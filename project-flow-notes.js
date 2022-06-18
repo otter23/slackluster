@@ -360,15 +360,13 @@ Challenges:
   dynamic resizing of chat/messages
   mobile optimization
 
-TO FIX:
--fix modals so dragged click doen't register
 
-TODO:
+TO FIX:
   -README
-  -hover over time - creates popup with full date/time OR REMOVE UNDERLINE/POINTER
+  -Fix modals so dragged click doesn't register outside
   -404 about page
 
-
+FUTURE TODO:
   -add automatic messages when updating channel description or topic
   -add edited status boolean to a message table
 
