@@ -389,7 +389,7 @@ Future work:
 
 TO FIX:
   -FIX SPLASH PAGE FOR MOBILE
-  -upon page refresh it loads to top of chat instead of bottom of chat
+
 
 
 TO DO:

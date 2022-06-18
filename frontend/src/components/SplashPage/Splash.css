@@ -8,9 +8,19 @@
   color: gray;
 }
 
+.splash-main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
 .splash-background {
   height: 100%;
   width: 100%;
+  min-height: 890px;
+
   background-position: center;
   background-size: cover;
   display: flex;
@@ -47,6 +57,12 @@
 @media screen and (max-width: 675px) {
   .splash-background {
     padding: 60px 30px;
+    min-height: 675px;
+  }
+
+  .splash-body-container {
+    padding-top: 0px;
+    padding-bottom: 0px;
   }
 
   .splash-header-image {
@@ -74,6 +90,7 @@
 @media screen and (max-width: 500px) {
   .splash-background {
     padding: 60px 30px;
+    min-height: 675px;
   }
 
   .splash-body-container {
