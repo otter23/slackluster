@@ -6,11 +6,11 @@ Inspired by slack.com, slackluster is a full-stack web app that allows Users to 
 https://slackluster.herokuapp.com/
 
 
-## Main Stack Technologies
+### Main Stack Technologies
 
 - Javascrtipt, React.js, Redux, Plain old vanilla CSS3, Express, Sequelize, PostgreSQL
 
-## Other Major Technologies / Packages used
+### Other Major Technologies / Packages used
 
 - dayjs (for manipulating dates)
 
@@ -24,16 +24,16 @@ https://slackluster.herokuapp.com/
 Create, view, edit, and delete Identifications with comments and a taxonomy typeahead with automated consensus calculation on Observations.
 Homempage grid view with My Observations, Observations waiting to be identified by the community, and recently verified observations.
 
-## Future Features
+### Future Features
 - add a profile photo via aws S3 upload
 - Channel notifications when a new message is posted
 
 
 
-## Getting Development Environment Up And Running
+### Getting Development Environment Up And Running
 
 - Clone this repository (only main branch) to your local machine:
-  - `bash git clone https://github.com/otter23/slackluster.git `
+  - run: `bash git clone https://github.com/otter23/slackluster.git `
 - Install Dependencies:
   - run: `npm install` in the root folder
 - In /backend folder
