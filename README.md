@@ -26,10 +26,10 @@ https://slackluster.herokuapp.com/
 - Fully mobile friendly and partially optimized
 
 ### Future Features
-- add a profile photo via AWS S3 upload
+- User profile - including profile photo CRUD via AWS S3 upload
 - Channel notifications when a new message is posted with scroll to bottom button
-- message reactions
-- direct messages and group messages
+- Message emoji reactions
+- Direct messages and group messages
 
 ### Getting your Development Environment Up And Running
 
