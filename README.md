@@ -2,6 +2,9 @@
 
 Inspired by slack.com, slackluster is a full-stack web app that allows Users to live chat with other users in a given channel on both dekptop and mobile.
 
+![slackluster-example](https://user-images.githubusercontent.com/8154112/174501167-33303e7a-b373-4ce7-98dd-ee584353d03e.gif)
+
+
 ### Live Site:
 https://slackluster.herokuapp.com/
 
