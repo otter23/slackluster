@@ -397,7 +397,10 @@
 
 .channelDisplay-message-timestamp-popup {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-grow: 1;
+
   position: absolute;
   top: -38px;
   transform: translateX(-50%);
@@ -405,13 +408,15 @@
   z-index: 4000;
 
   padding: 10px;
-  border-radius: 4px;
+  border-radius: 8px;
   background-color: black;
   border: 1px solid var(--darkBorder1);
-  min-width: 150px;
   visibility: hidden;
 
   color: white;
+  font-family: inherit;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .channelDisplay-message-timestamp:hover
@@ -437,20 +442,25 @@
 
 .channelDisplay-message-single-timestamp-popup {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-grow: 1;
+
   position: absolute;
   top: -38px;
   left: -20px;
   z-index: 4000;
 
   padding: 10px;
-  border-radius: 4px;
+  border-radius: 8px;
   background-color: black;
   border: 1px solid var(--darkBorder1);
-  min-width: 150px;
   visibility: hidden;
 
   color: white;
+  font-family: inherit;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .channelDisplay-message-single-timestamp:hover

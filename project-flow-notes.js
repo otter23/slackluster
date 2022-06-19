@@ -349,6 +349,12 @@ frontend: ~$ npm install socket.io-client
       -import { io } from 'socket.io-client' and instantiate it then can start using it
       -create context to house socket instance and protect instantiation with auth
 
+Make a gif:
+  http://www.highchairdesign.com/2018/11/animated-gif-from-mov-copy.html
+ ~$ brew install ffmpeg
+ ~$ brew install gifsicle
+ ~$ ffmpeg -i slackluster-example.mov -s 1200x1006 -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=8 > slackluster-example.gif
+
 */
 /*
 
@@ -362,9 +368,10 @@ Challenges:
 
 
 TO FIX:
-  -README
+  -scroll to bottom after submit message
   -Fix modals so dragged click doesn't register outside
   -404 about page
+
 
 FUTURE TODO:
   -add automatic messages when updating channel description or topic

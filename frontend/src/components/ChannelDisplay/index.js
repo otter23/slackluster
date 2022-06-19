@@ -357,7 +357,7 @@ export default function ChannelDisplay({
                                 <div
                                   className={`channelDisplay-message-timestamp-popup`}
                                 >
-                                  {formatDatePopup(message)}
+                                  <div>{formatDatePopup(message)}</div>
                                 </div>
                               </div>
                             </div>
@@ -427,7 +427,7 @@ export default function ChannelDisplay({
                         <div
                           className={`channelDisplay-message-single-timestamp-popup`}
                         >
-                          {formatDatePopup(message)}
+                          <div>{formatDatePopup(message)} </div>
                         </div>
                       </div>
                       <div className={`channelDisplay-message-right-single`}>
