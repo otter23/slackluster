@@ -364,16 +364,16 @@ Challenges:
   css - inline styling wrap, scroll bar
   dynamic message display based on user, date and time
   dynamic resizing of chat/messages
-  mobile optimization
+  mobile friendly and responsive
 
 
 TO FIX:
-  -scroll to bottom after submit message
   -Fix modals so dragged click doesn't register outside
   -404 about page
 
 
 FUTURE TODO:
+  -add REACT-quill (Wraps text in html elements, e.g. for bolding), use a parser packagehrt
   -add automatic messages when updating channel description or topic
   -add edited status boolean to a message table
 
@@ -393,13 +393,24 @@ Future work:
   -add transition for deletion of message - http://reactcommunity.org/react-transition-group/transition
       -https://gist.github.com/Yarith/bcd7b715cff302fdf4512f538b769521
   -change app load to be only depended on isLoaded, and then route specific waiting for other slices of redux state
+  -limit requests for socket repopen
+  - use is instance of Response in error handling alt is to check whether response is Json or not, could check if response.status exists
+  https://developer.mozilla.org/en-US/docs/Web/API/Response
 
 
 
 
-redux toolkit?
+npmtrends.com
+redux toolkit? - does deep cloning for you
 react-images-uploading - npm
 rfdc - clone package npm
+react-player
+react-swiper caurousel
+leaflet +  openmaps api + react-leaflet
+
+"...read more" for long strings
+google api has a location autocomplete api, also a directions package
+react-images-uploading - library
 
 
 //SPA where only clicks can navigate
@@ -408,6 +419,5 @@ rfdc - clone package npm
     //this gets parsed under the hood, so people can't just randomly peruse your site
     //that or you don't have urls at all
     //click handler in the img map list and don't user url param, pass down imageUrl form image object as prop
-
 
 */
