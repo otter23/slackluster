@@ -47,7 +47,7 @@ module.exports = {
         },
 
         {
-          ownerId: 1,
+          ownerId: 2,
           name: 'capstone-projects',
           topic: 'Post your project links here',
           description:
@@ -70,6 +70,13 @@ module.exports = {
             'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
           isPrivate: false,
         },
+        {
+          ownerId: 2,
+          name: 'cool-cool-cool',
+          topic: 'cool',
+          description: 'The coolest channel',
+          isPrivate: false,
+        },
         // {
         //   ownerId: 2,
         //   name: 'data-structures-algorithms ',
@@ -85,20 +92,36 @@ module.exports = {
           description: 'To discuss how to cultivate an inclusive environment',
           isPrivate: false,
         },
-        {
-          ownerId: 1,
-          name: 'design',
-          topic: 'all things design',
-          description:
-            'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
-          isPrivate: false,
-        },
+        // {
+        //   ownerId: 1,
+        //   name: 'design',
+        //   topic: 'all things design',
+        //   description:
+        //     'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
+        //   isPrivate: false,
+        // },
         {
           ownerId: 2,
           name: 'granof-the-grey',
           topic: 'never won a kahoot T.T',
           description:
             'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
+          isPrivate: false,
+        },
+        {
+          ownerId: 2,
+          name: 'hello',
+          topic: null,
+          description:
+            'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
+          isPrivate: false,
+        },
+        {
+          ownerId: 2,
+          name: 'hot-mic',
+          topic: null,
+          description:
+            'This channel is for all those who forgot to mute their mic.',
           isPrivate: false,
         },
         // {
@@ -109,8 +132,8 @@ module.exports = {
         //   isPrivate: false,
         // },
         {
-          ownerId: 1,
-          name: 'jan-cohort-2022',
+          ownerId: 2,
+          name: 'jan-cohort-2022-GOAT',
           topic: 'Best App Academy cohort',
           description: 'Great group of people',
           isPrivate: false,
@@ -122,13 +145,13 @@ module.exports = {
           description: 'The greatest friendship there ever was',
           isPrivate: false,
         },
-        {
-          ownerId: 1,
-          name: 'memes',
-          topic: 'Productivity zero',
-          description: 'Post your memes here',
-          isPrivate: false,
-        },
+        // {
+        //   ownerId: 1,
+        //   name: 'memes',
+        //   topic: 'Productivity zero',
+        //   description: 'Post your memes here',
+        //   isPrivate: false,
+        // },
         {
           ownerId: 2,
           name: 'memails',
@@ -151,7 +174,7 @@ module.exports = {
           isPrivate: false,
         },
         // {
-        //   ownerId: 2,
+        //   ownerId: 1,
         //   name: 'movies',
         //   topic: null,
         //   description: null,
@@ -183,6 +206,29 @@ module.exports = {
         },
         {
           ownerId: 2,
+          name: 'return-oof',
+          topic: 'If all else fails...',
+          description: 'If all else fails return "oof".',
+          isPrivate: false,
+        },
+        {
+          ownerId: 2,
+          name: 'shower-shirt',
+          topic: null,
+          description:
+            'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
+          isPrivate: false,
+        },
+        {
+          ownerId: 2,
+          name: 'sleeve-hotdog',
+          topic: 'always be prepared',
+          description:
+            "If things are not going well just pull out the ol' sleeve hotdog.",
+          isPrivate: false,
+        },
+        {
+          ownerId: 2,
           name: 'touch-grass',
           topic: 'all things outdoors',
           description:
@@ -203,14 +249,14 @@ module.exports = {
           description: 'Do not ever let anyone tell you otherwise',
           isPrivate: false,
         },
-        {
-          ownerId: 2,
-          name: 'wanderlust',
-          topic: null,
-          description:
-            'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
-          isPrivate: false,
-        },
+        // {
+        //   ownerId: 2,
+        //   name: 'wanderlust',
+        //   topic: null,
+        //   description:
+        //     'This channel is for working on a project. Hold meetings, share docs, and make decisions together with your team.',
+        //   isPrivate: false,
+        // },
         {
           ownerId: 2,
           name: 'when-in-doubt-print-it-out',

@@ -99,6 +99,18 @@ export default function ChannelDisplay({
     // }
   };
 
+  const formatDateDivider = (message) => {
+    let date;
+    if (dayjs(message.createdAt).isToday()) {
+      date = 'Today';
+    } else if (dayjs(message.createdAt).isYesterday()) {
+      date = 'Yesterday';
+    } else {
+      date = dayjs(message.createdAt).format('dddd, MMMM Do');
+    }
+    return date;
+  };
+
   const formatDatePopup = (message) => {
     let date;
     if (dayjs(message.createdAt).isToday()) {
@@ -310,7 +322,8 @@ export default function ChannelDisplay({
                     >
                       <div className='channelDisplay-message-day-divider-border'></div>
                       <div className='channelDisplay-message-day-divider-btn'>
-                        {dayjs(message.createdAt).format('dddd, MMMM Do')}
+                        {formatDateDivider(message)}
+                        {/* {dayjs(message.createdAt).format('dddd, MMMM Do')} */}
                       </div>
                     </div>
                   )}

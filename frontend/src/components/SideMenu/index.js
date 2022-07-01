@@ -112,7 +112,7 @@ export default function SideMenu({ showSideMenuModal, closeSideMenuModal }) {
         } `}
       >
         <div className='sideMenu-header-container'>
-          <div>WorkSpace</div>
+          <div>App Academy</div>
         </div>
 
         <div className='sideMenu-channel-title-btn-container'>
