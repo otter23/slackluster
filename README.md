@@ -16,7 +16,7 @@ https://slackluster.herokuapp.com/
 
 ### slackluster in Action
 
-![slackluster-example](https://user-images.githubusercontent.com/8154112/174501167-33303e7a-b373-4ce7-98dd-ee584353d03e.gif)
+![slackluster-example-final](https://user-images.githubusercontent.com/8154112/177660592-74e88e18-9214-4c87-ad01-2e8acc246f9b.gif)
 
 ### Features
 - Create an account and log out/sign in. or log in as a demo user
