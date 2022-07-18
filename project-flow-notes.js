@@ -420,4 +420,10 @@ react-images-uploading - library
     //that or you don't have urls at all
     //click handler in the img map list and don't user url param, pass down imageUrl form image object as prop
 
+channels:
+louissiana cdb
+jan-cohort-2022-GOAT
+
+fix username case sensitivity
+
 */
