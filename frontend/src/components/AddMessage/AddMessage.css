@@ -79,6 +79,10 @@
   /* bottom: 0px; */
 }
 
+#message {
+  font-size: 15px;
+}
+
 /* Properties are not supported */
 /* .addMessage-form-textarea::placeholder { */
 /* breakup extremely long single no space words*/
