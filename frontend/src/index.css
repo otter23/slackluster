@@ -72,6 +72,7 @@ Can update per page by adding a classname to the span and updating these setting
 :root {
   /* prettier-ignore */
   font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Tahoma, Arial,sans-serif;
+  /* font-family: 'Open Sans'; */
 
   --nav: #212124;
 

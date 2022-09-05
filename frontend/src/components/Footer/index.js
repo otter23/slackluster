@@ -64,8 +64,8 @@ export default function Footer() {
           <div>Javascript</div>
           <div>HTML5</div>
           <div>CSS3</div>
-          <div>React</div>
-          <div>Redux</div>
+          <div>React/Redux</div>
+          <div>Socket.io</div>
           <div>Express</div>
           <div className='footer-technologies-seq'>Sequelize</div>
           <div className='footer-technologies-post'>PostgreSQL</div>
