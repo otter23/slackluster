@@ -170,7 +170,7 @@
 @media screen and (max-width: 1155px) {
   .footer-container {
     flex-direction: column;
-    min-height: 125px;
+    min-height: 135px;
     /* flex-grow: 1; */
   }
 
