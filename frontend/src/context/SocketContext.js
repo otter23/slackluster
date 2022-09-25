@@ -30,7 +30,7 @@ export const SocketProvider = ({ children }) => {
       socket.current = io();
       //socket.id - each new socket is assigned a random 20 character unique and synced with server
       //socket.connected - boolean describing whether socket is currently connected to server
-      console.log('Socket Connected');
+      // console.log('Socket Connected');
 
       // socket.current.emit('join', sessionUser);
       // socket.current.on('welcome', (msg) => console.log(msg));
@@ -68,8 +68,11 @@ export const SocketProvider = ({ children }) => {
     // when component unmounts, disconnect from socket
     return () => {
       if (sessionUser) {
+        // if (socket.current.connected) {
+        //Manually disconnects the socket. In this case, the socket will not try to reconnect.
         socket.current.disconnect();
-        console.log('Socket disconnected');
+        // console.log('Socket disconnected');
+        // }
       }
     };
   }, [dispatch, sessionUser]);
